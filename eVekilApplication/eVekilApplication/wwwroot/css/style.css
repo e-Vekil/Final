@@ -1,0 +1,182 @@
+﻿*, *:after, *:before {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: lightgrey;
+    font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 400;
+}
+
+a{
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+.header {
+    position: fixed;
+    z-index: 10;
+    color: #fff;
+    display: block;
+    height: 109px;
+    width: 100%;
+}
+
+.headerContent {
+    padding: 0 238px;
+    position: relative;
+    top: 40px;
+}
+
+.logo {
+    padding: 14px 0;
+    display: inline-block;
+    color: rgba(255,255,255,0.6);
+    font-size: 26px;
+}
+
+.navToggle {
+    color: #fff;
+    left: 40px;
+    top: 40px;
+    position: absolute;
+    display: block;
+    padding: 20px;
+}
+
+.icon {
+    display: block;
+    position: relative;
+    transition-duration: .4s;
+    color: #fff;
+}
+
+.iconBurger {
+    color: #fff;
+    background: currentColor;
+    width: 30px;
+    height: 2px;
+    margin: 7px 0;
+}
+
+.iconBurger:before, .iconBurger:after {
+    position: absolute;
+    left: 0;
+    top: 0;
+    content: "";
+    height: 2px;
+    width: 100%;
+    background: currentColor;
+    transition-duration: .4s;
+}
+
+.iconBurger:before {
+    transform: translateY(-7px);
+}
+
+.iconBurger:after {
+    transform: translateY(7px);
+}
+
+.navToggle:hover .iconBurger:before{
+    transform: translateY(-12px);
+}
+
+.navToggle:hover .iconBurger:after {
+    transform: translateY(12px);
+}
+
+.hidden{
+    display: none!important;
+}
+
+.navPrimary {
+    display: block;
+    color: #221f1f;
+    position: fixed;
+    z-index: 11;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    transition-duration: .4s;
+}
+
+.navPrimaryContent {
+    width: 318px;
+    max-width: calc(100% - 30px);
+    position: absolute;
+    box-shadow: 0 100px 250px rgba(66,0,5,0.2);
+    background-color: #fff;
+    transition-duration: .4s;
+    padding: 115px 80px 57px 62px;
+}
+
+.navPrimary .navToggle {
+    margin: -5px 0 0 4px;
+    color: #221f1f;
+    left: 40px;
+    top: 40px;
+    position: absolute;
+    padding: 20px;
+}
+
+
+.iconClose {
+    color: #221f1f !important;
+    width: 22px;
+    height: 22px;
+}
+
+.iconClose:before, .iconClose:after {
+    content: "";
+    transform-origin: center;
+    position: absolute;
+    left: -5px;
+    top: 11px;
+    height: 2px;
+    width: 31.1124px;
+    background-color: currentColor;
+}
+
+.iconClose:before {
+    transform: rotate(45deg);
+}
+
+.iconClose:after {
+    transform: rotate(-45deg);
+}
+
+.navPrimary .navToggle:hover .iconClose {
+    color: red !important;
+}
+
+.navList {
+    font-size: 1.6rem;
+    line-height: 1.57692em;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-weight: 800;
+    padding-top: 14px;
+}
+
+ol.navList {
+    padding-bottom: 18px;
+}
+
+ul.navList {
+    padding-top: 14px;
+}
+
+.navList a {
+    display: block;
+    color: #221f1f;
+}
+
+.navList li:hover 
+a{
+    color: red;
+}

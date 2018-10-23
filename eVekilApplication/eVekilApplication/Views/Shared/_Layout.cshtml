@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>e-Vekil</title>
+    <link href="~/css/style.css" rel="stylesheet" />
+    
+
+</head>
+
+<body>
+
+    <main>
+
+        <nav class="navPrimary hidden">
+            <div class="navPrimaryContent">
+                <a class="navToggle">
+                    <span class="icon iconClose"></span>
+                </a>
+                <ol class="navList">
+                    <li> <a href="//www.intechnic.com/#strategy" class="strategy"> Strategy</a> </li>
+                    <li> <a href="//www.intechnic.com/#user-experience" class="ux"> UX</a> </li>
+                    <li> <a href="//www.intechnic.com/#web-design" class="webdesign"> Web Design</a> </li>
+                    <li> <a href="//www.intechnic.com/#marketing" class="marketing"> Marketing</a> </li>
+                    <li> <a href="//www.intechnic.com/#results"> Results</a> </li>
+                    <li> <a href="//www.intechnic.com/#about"> About</a> </li>
+                    <li> <a href="//www.intechnic.com/contact/"> Contact</a> </li>
+                </ol>
+                <ul class="navList">
+                    <li><a href="//www.intechnic.com/blog">Blog</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <header class="header">
+            <div class="headerContent">
+                <a href="#" class="logo" title="e-Vekil">e-Vekil</a>
+            </div>
+            <a class="navToggle">
+                <span class="icon iconBurger"></span>
+            </a>
+        </header>
+
+    </main>
+
+    @RenderBody()
+
+
+    <script src="~/js/jquery-3.3.1.min.js"></script>
+
+    <script>
+        $('.navToggle').click(function () {
+            $('.navPrimary').toggleClass('hidden');
+        });
+    </script>
+</body>
+</html>
