@@ -14,6 +14,9 @@ $('.navToggle').on('click', function () {
             box.addClass('hidden');
         });
     }
+    
+    
+
 });
 
 ////////////////MURAD END/////////////////
