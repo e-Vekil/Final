@@ -66,4 +66,17 @@ for (var icon of icons) {
         activeIcon = this.firstChild;
     })
 }
+
+window.addEventListener("scroll", function () {
+    if (document.documentElement.scrollTop >= window.innerHeight-400) {
+        for (var icon of icons) {
+            icon.firstChild.classList.add("change");
+        }
+    }
+    else {
+        for (var icon of icons) {
+            icon.firstChild.classList.remove("change");
+        }
+    }
+})
 ////////////////TERLAN END/////////////////
