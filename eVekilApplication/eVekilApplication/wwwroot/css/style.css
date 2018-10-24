@@ -91,6 +91,11 @@ a{
     display: none!important;
 }
 
+.navHidden{
+    transition: 2s;
+    left: -318px!important;
+}
+
 .navPrimary {
     display: block;
     color: #221f1f;
@@ -105,6 +110,7 @@ a{
 }
 
 .navPrimaryContent {
+    height: 100vh;
     width: 318px;
     max-width: calc(100% - 30px);
     position: absolute;
@@ -176,7 +182,13 @@ ul.navList {
     color: #221f1f;
 }
 
-.navList li:hover 
-a{
-    color: red;
-}
+.navList li:nth-child(1):hover a{ color: #636393; }
+.navList li:nth-child(2):hover a{ color: #B5222D; }
+.navList li:nth-child(3):hover a { color: #D4953C; }
+.navList li:nth-child(4):hover a { color: #609491; }
+.navList li:nth-child(5):hover a{ color: mediumvioletred; }
+.navList li:nth-child(6):hover a{ color: palegreen; }
+.navList li:nth-child(7):hover a { color: royalblue; }
+.navList li:nth-child(8):hover a { color: ThreeDDarkShadow; }
+
+

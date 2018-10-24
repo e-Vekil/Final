@@ -15,20 +15,20 @@
 
     <main>
 
-        <nav class="navPrimary hidden">
+        <nav id="navPrimary" class="navPrimary hidden navHidden">
             <div class="navPrimaryContent">
                 <a class="navToggle">
                     <span class="icon iconClose"></span>
                 </a>
                 <ol class="navList">
-                    <li> <a href="//www.intechnic.com/#strategy" class="strategy"> Strategy</a> </li>
-                    <li> <a href="//www.intechnic.com/#user-experience" class="ux"> UX</a> </li>
-                    <li> <a href="//www.intechnic.com/#web-design" class="webdesign"> Web Design</a> </li>
-                    <li> <a href="//www.intechnic.com/#marketing" class="marketing"> Marketing</a> </li>
-                    <li> <a href="//www.intechnic.com/#results"> Results</a> </li>
-                    <li> <a href="//www.intechnic.com/#about"> About</a> </li>
-                    <li> <a href="//www.intechnic.com/contact/"> Contact</a> </li>
-                </ol>
+                    <li> <a href="#" class="strategy"> Strategy</a> </li>
+                    <li> <a href="#" class="ux"> UX</a> </li>
+                    <li> <a href="#" class="webdesign"> Web Design</a> </li>
+                    <li> <a href="#" class="marketing"> Marketing</a> </li>
+                    <li> <a href="#"> Results</a> </li>
+                    <li> <a href="#"> About</a> </li>
+                    <li> <a href="#"> Contact</a> </li>
+                </ol><hr />
                 <ul class="navList">
                     <li><a href="//www.intechnic.com/blog">Blog</a></li>
                 </ul>
@@ -52,8 +52,32 @@
     <script src="~/js/jquery-3.3.1.min.js"></script>
 
     <script>
-        $('.navToggle').click(function () {
-            $('.navPrimary').toggleClass('hidden');
+      
+
+
+        var box = $('#navPrimary');
+
+        $('.navToggle').on('click', function () {
+
+            if (box.hasClass('hidden')) {
+
+                box.removeClass('hidden');
+                setTimeout(function () {
+                    box.removeClass('navHidden');
+                }, 20);
+
+            } else {
+
+                box.addClass('navHidden');
+
+                box.one('transitionend', function (e) {
+
+                    box.addClass('hidden');
+
+                });
+
+            }
+
         });
     </script>
 </body>
