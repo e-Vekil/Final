@@ -12,9 +12,9 @@
 </head>
 
 <body>
-
     <main>
 
+        @*//////////////MURAD START/////////////////*@
         <nav id="navPrimary" class="navPrimary hidden navHidden">
             <div class="navPrimaryContent">
                 <a class="navToggle">
@@ -43,6 +43,13 @@
                 <span class="icon iconBurger"></span>
             </a>
         </header>
+        @*//////////////MURAD END/////////////////*@
+
+        @*//////////////TERLAN START/////////////////*@
+
+        @*//////////////TERLAN END/////////////////*@
+
+
 
     </main>
 
@@ -51,34 +58,6 @@
 
     <script src="~/js/jquery-3.3.1.min.js"></script>
 
-    <script>
-      
-
-
-        var box = $('#navPrimary');
-
-        $('.navToggle').on('click', function () {
-
-            if (box.hasClass('hidden')) {
-
-                box.removeClass('hidden');
-                setTimeout(function () {
-                    box.removeClass('navHidden');
-                }, 20);
-
-            } else {
-
-                box.addClass('navHidden');
-
-                box.one('transitionend', function (e) {
-
-                    box.addClass('hidden');
-
-                });
-
-            }
-
-        });
-    </script>
+    <script src="~/js/main.js"></script>
 </body>
 </html>

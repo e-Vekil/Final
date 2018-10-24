@@ -1,4 +1,6 @@
-﻿*, *:after, *:before {
+﻿/*//////////////MURAD START////////////////*/
+
+*, *:after, *:before {
     box-sizing: border-box;
 }
 
@@ -192,3 +194,8 @@ ul.navList {
 .navList li:nth-child(8):hover a { color: ThreeDDarkShadow; }
 
 
+/*//////////////MURAD END////////////////*/
+
+
+
+/*//////////////TERLAN START////////////////*/
