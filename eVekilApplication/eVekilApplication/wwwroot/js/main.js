@@ -1,7 +1,9 @@
-﻿var box = $('#navPrimary');
+﻿////////////////MURAD END/////////////////
+
+var box = $('#navPrimary');
 
 $('.navToggle').on('click', function () {
-
+    
     if (box.hasClass('hidden')) {
 
         box.removeClass('hidden');
@@ -20,6 +22,8 @@ $('.navToggle').on('click', function () {
         });
 
     }
+    
+    
 
 });
 
