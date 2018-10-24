@@ -22,9 +22,21 @@ $('.navToggle').on('click', function () {
         });
 
     }
-    
-    
 
+});
+
+
+
+
+$(document).ready(function () {
+    $(window).scroll(function () {
+        if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+            $('#mainheader').addClass('headerScroll');
+        } else {
+            $('#mainheader').removeClass('headerScroll');
+        }
+        
+    });
 });
 
 ////////////////MURAD END/////////////////

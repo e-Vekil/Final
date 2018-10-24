@@ -8,6 +8,7 @@ body {
     background-color: lightgrey;
     font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 400;
+    height: 30000px;
 }
 
 a{
@@ -15,6 +16,14 @@ a{
     cursor: pointer;
 }
 
+.scroller{
+    left: 0;
+    top: 0;
+}
+
+.header{
+    left: 0;   /*//?????*/
+}
 
 .header {
     position: fixed;
@@ -23,6 +32,13 @@ a{
     display: block;
     height: 109px;
     width: 100%;
+    transition-duration: .4s;
+}
+
+.headerScroll {
+    background: #221f1f;
+    box-shadow: 0 0 120px rgba(0,0,0,0.24);
+    transform: translateY(-35px);
 }
 
 .headerContent {
