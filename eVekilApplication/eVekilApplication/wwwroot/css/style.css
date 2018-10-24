@@ -4,9 +4,11 @@
     box-sizing: border-box;
     font-family: 'Raleway', sans-serif;
 }
+
 li{
-    list-style-type:none;
+    list-style-type: none;
 }
+
 body {
     background-color: lightgrey;
     font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -20,16 +22,17 @@ a{
 }
 
 a:hover{
-    text-decoration:none;
+    text-decoration: none;
 }
 
 .scroller {
-    /*position: fixed;*/
+    position: fixed;
     left: 0;
     top: 0;
     width: 100%;
     height: 100vh;
 }
+
 
 .header {
     position: fixed;
@@ -48,9 +51,9 @@ a:hover{
 }
 
 .headerContent {
-    /*padding: 0 0 0 238px;*/
+    padding: 0 238px;
     position: relative;
-    /*top: 35px;*/
+    top: 40px;
 }
 
 .logo {
@@ -59,10 +62,7 @@ a:hover{
     color: rgba(255,255,255,0.6);
     font-size: 26px;
 }
-    .logo:hover {
-        text-decoration: none;
-        color: rgba(255,255,255,0.6);
-    }
+
 .navToggle {
     color: #fff;
     /*left: 40px;
