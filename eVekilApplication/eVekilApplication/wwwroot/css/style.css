@@ -18,8 +18,9 @@ a{
     text-decoration: none;
     cursor: pointer;
 }
-
-
+a:hover{
+    text-decoration:none;
+}
 .header {
     position: fixed;
     z-index: 10;
