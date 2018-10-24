@@ -30,7 +30,7 @@ $('.navToggle').on('click', function () {
 
 $(document).ready(function () {
     $(window).scroll(function () {
-        if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+        if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
             $('#mainheader').addClass('headerScroll');
         } else {
             $('#mainheader').removeClass('headerScroll');
