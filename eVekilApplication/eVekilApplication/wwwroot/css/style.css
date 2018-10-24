@@ -65,9 +65,9 @@ a:hover{
 
 .navToggle {
     color: #fff;
-    /*left: 40px;
+    left: 40px;
     top: 40px;
-    position: absolute;*/
+    position: absolute;
     display: block;
     padding: 20px;
 }
@@ -242,17 +242,18 @@ ul.navList {
 }*/
 .main-page {
     position: relative;
-    min-height: 100vh;
+    height: 350px;
+    /*min-height: 100vh;*/
 }
 .intro {
-    min-height:100vh;
+    /*min-height:100vh;*/
     padding-top:150px;
     padding-bottom:20px;
     background-image:url("../images/bg.jpg");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    position:relative;
+    /*position:relative;*/
 }
 .intro-title{
     padding-top:100px;
