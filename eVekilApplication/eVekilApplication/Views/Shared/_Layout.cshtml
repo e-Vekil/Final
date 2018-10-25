@@ -7,7 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>e-Vekil</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    @* <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">*@
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link href="~/css/style.css" rel="stylesheet" />
 </head>
 
@@ -45,11 +46,11 @@
         @*//////////////TERLAN START/////////////////*@
         <section class="intro">
             <div class="container">
-                <div class="col-12 intro-title"><h1>Ultimate <br /> Digital <br /> Experiences</h1></div>
+                <div class="col-12 intro-title"><h1>İstənilən Hüquqi Sənəd <br /> Hər Yerdə,Hər Zaman!</h1></div>
                 <div class="col-12 intro-desc mt-5">
                     <p>
-                        to acquire, retain, and
-                        delight your clients
+                       Tələbinizə uyğun sənədi hazırlayın və ya <br />
+                       yüzlərlə müxtəlif növ sənəd nümunələri arasından lazım olanını kompüterinizə yükləyin.
                     </p>
                 </div>
                 <div class="isotop col-lg-12">
@@ -67,12 +68,12 @@
             </div>
         </section>
         <div class="container documents-wrapper">
-            <section class="strategy col-lg-10">
+            <section class="strategy col-lg-10" data-section="1" id="Test">
                 <h1 class="title">Startegy</h1>
                 <div class="content col-12" style="background-color:red;">
                 </div>
             </section>
-            <section class="about col-lg-10 mx-auto">
+            <section class="about col-lg-10 mx-auto" data-section="2">
                 <h1 class="title">Startegy</h1>
                 <div class="content col-12" style="background-color:green;">
                 </div>
@@ -81,15 +82,16 @@
 
         <div class="slider-wrapper">
             <ul class="text-center">
-                <li><span class="slider active"></span></li>
-                <li><span class="slider"></span></li>
-                <li><span class="slider"></span></li>
-                <li><span class="slider"></span></li>
-                <li><span class="slider"></span></li>
-                <li><span class="slider"></span></li>
-                <li><span class="slider"></span></li>
-                <li><span class="slider"></span></li>
-                <li><span class="slider"></span></li>
+                <li data-id="1"><span class="slider active"></span></li>
+                <li data-id="2"><a href="#Test" id="link"><span class="slider"></span></a></li>
+                <li data-id="3"><span class="slider"></span></li>
+                <li data-id="3"><span class="slider"></span></li>
+                <li data-id="4"><span class="slider"></span></li>
+                <li data-id="5"><span class="slider"></span></li>
+                <li data-id="6"><span class="slider"></span></li>
+                <li data-id="7"><span class="slider"></span></li>
+                <li data-id="8"><span class="slider"></span></li>
+                <li data-id=""><span class="slider"></span></li>
             </ul>
         </div>
         @*//////////////TERLAN END/////////////////*@

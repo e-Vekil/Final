@@ -30,6 +30,12 @@ $(document).ready(function () {
         }
 
     });
+    //Scroll
+    $("#link").click(function () {
+        $path = $("#Test").offset().top-200;
+        console.log($path);
+        $("body").animate({ "scrollTop": $path},2000);
+    })
 });
 
 ////////////////MURAD END/////////////////
@@ -79,4 +85,28 @@ window.addEventListener("scroll", function () {
         }
     }
 })
+
+
+//Scroll Transition
+if (window.addEventListener) window.addEventListener('DOMMouseScroll', wheel, false);
+window.onmousewheel = document.onmousewheel = wheel;
+
+function wheel(event) {
+    var delta = 0;
+    if (event.wheelDelta) delta = event.wheelDelta / 120;
+    else if (event.detail) delta = -event.detail / 3;
+
+    handle(delta);
+    if (event.preventDefault) event.preventDefault();
+    event.returnValue = false;
+}
+
+function handle(delta) {
+    var time = 450;
+    var distance = 300;
+
+    $('html, body').stop().animate({
+        scrollTop: $(window).scrollTop() - (distance * delta)
+    }, time);
+}
 ////////////////TERLAN END/////////////////
