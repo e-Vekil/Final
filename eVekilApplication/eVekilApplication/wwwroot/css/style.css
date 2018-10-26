@@ -1,5 +1,9 @@
 ﻿/*//////////////MURAD START////////////////*/
 
+html {
+    scroll-behavior: smooth;
+}
+
 *, *:after, *:before {
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
@@ -273,7 +277,7 @@ ul.navList {
     display: inline-block;
     width: 13px;
     height: 13px;
-    border: 1.8px solid white;
+    border: 1.8px solid black;
     background-color: transparent;
     transition: all 0.4s ease-in-out;
 }

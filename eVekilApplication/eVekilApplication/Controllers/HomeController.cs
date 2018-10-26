@@ -8,6 +8,9 @@ namespace eVekilApplication.Controllers
 {
     public class HomeController : Controller
     {
+        public int fefe;
+        public String fef;
+        public string fawe;
         public IActionResult Index()
         {
             return View();
