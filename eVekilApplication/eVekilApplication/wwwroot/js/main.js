@@ -5,10 +5,12 @@ var box = $('#navPrimary');
 $('.navToggle').on('click', function () {
     if (box.hasClass('hidden')) {
         box.removeClass('hidden');
+        box.addClass('navOpen');
         setTimeout(function () {
             box.removeClass('navHidden');
         }, 20);
     } else {
+        box.removeClass('navOpen');
         box.addClass('navHidden');
         box.one('transitionend', function (e) {
             box.addClass('hidden');
@@ -36,6 +38,19 @@ $(document).ready(function () {
         console.log($path);
         $("body").animate({ "scrollTop": $path},2000);
     })
+});
+
+
+//Close Navbar On Windows Click
+
+$(document).ready(function () {
+    $(document).click(function (event) {
+        var clickover = $(event.target);
+        var _opened = $(".navPrimary").hasClass("navPrimary navOpen");
+        if (_opened === true && !clickover.hasClass("navPrimaryContent")) {
+            $(".navToggle").click();
+        }
+    });
 });
 
 ////////////////MURAD END/////////////////
