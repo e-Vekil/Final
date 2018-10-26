@@ -88,6 +88,20 @@ for (var icon of icons) {
     })
 }
 
+$(document).ready(function () {
+    $("li:has(a.slider)").on('click', function (event) {
+        if (this.firstElementChild.hash !== "") {
+            event.preventDefault();
+            var hash = this.firstElementChild.hash;
+            $('html, body').animate({
+                scrollTop: $(hash).offset().top
+            }, 800, function () {
+                window.location.hash = hash;
+            });
+        }
+    });
+});
+
 window.addEventListener("scroll", function () {
     if (document.documentElement.scrollTop >= window.innerHeight-400) {
         for (var icon of icons) {
