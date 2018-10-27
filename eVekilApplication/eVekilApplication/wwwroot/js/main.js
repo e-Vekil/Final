@@ -1,150 +1,51 @@
-﻿////////////////MURAD END/////////////////
+﻿// ON SCROLL NAVBAR FIXED
+var navBarWrapper = document.querySelector(".nav-bar-wrapper");
+var navBarHeader = document.querySelector(".nav-bar-wrapper .header");
+window.addEventListener("scroll", function () {
 
-var box = $('#navPrimary');
-
-$('.navToggle').on('click', function () {
-    if (box.hasClass('hidden')) {
-        box.removeClass('hidden');
-        box.addClass('navOpen');
-        setTimeout(function () {
-            box.removeClass('navHidden');
-        }, 20);
-    } else {
-        box.removeClass('navOpen');
-        box.addClass('navHidden');
-        box.one('transitionend', function (e) {
-            box.addClass('hidden');
-        });
+    if (document.body.scrollTop > 20 || this.document.documentElement.scrollTop > 20) {
+        navBarWrapper.classList.add("scroll-design");
+        navBarHeader.classList.add("scroll-design");
     }
-    
-    
+    else {
+        navBarWrapper.classList.remove("scroll-design");
+        navBarHeader.classList.remove("scroll-design");
+    }
 
-});
+})
+//SIDE BAR OPEN-CLOSE
+var sideBar = document.querySelector(".side-bar")
+var closeIcon = document.querySelector(".close-icon");
+var iconBurger = document.querySelector(".icon-burger-wrapper")
 
-
-
-$(document).ready(function () {
-    $(window).scroll(function () {
-        if (document.body.scrollTop > 40 || document.documentElement.scrollTop > 40) {
-            $('#mainheader').addClass('headerScroll');
-        } else {
-            $('#mainheader').removeClass('headerScroll');
-        }
-
-    });
-    //Scroll
-    $("#link").click(function () {
-        $path = $("#Test").offset().top-200;
-        console.log($path);
-        $("body").animate({ "scrollTop": $path},2000);
-    })
-});
+iconBurger.addEventListener("click", function () {
+    sideBar.classList.add("open");
+})
+closeIcon.addEventListener("click", function () {
+    sideBar.classList.remove("open");
+})
 
 
-//Close Navbar On Windows Click
+                                                                //Close Navbar On Windows Click
 
 $(document).ready(function () {
     $(document).click(function (event) {
         var clickover = $(event.target);
-        var _opened = $(".navPrimary").hasClass("navPrimary navOpen");
-        if (_opened === true && !clickover.hasClass("navPrimaryContent")) {
-            $(".navToggle").click();
+        var clicked = event.target.tagName.toUpperCase();
+        var _opened = $(".side-bar").hasClass("side-bar open");
+        //console.log(clickover);
+        if (_opened === true && !clickover.hasClass("side-bar-content") && !clickover.hasClass("icon-burger-wrapper") && !clickover.hasClass("close-icon") && clicked != 'LI' && clicked != 'UL') {
+            $(".close-icon").click();
         }
     });
 });
 
-////////////////MURAD END/////////////////
-
-////////////////TERLAN START/////////////////
-//var navbar = document.querySelector(".header");
-//var headerContent = document.querySelector(".headerContent");
-//var iconBurger = document.querySelector(".navToggle");
-//window.addEventListener("scroll", function () {
-//    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-//        navbar.style.backgroundColor = "black";
-//        navbar.style.height = 70 + "px";
-//        navbar.style.transition = "all 0.3s ease-in-out";
-//        headerContent.style.top = "5px";
-//        headerContent.style.transition = "all 0.3s ease-in-out";
-//        iconBurger.style.top = "13px"
-//    }
-//    else {
-//        navbar.style.backgroundColor = "transparent";
-//        navbar.style.height = 109 + "px";
-//        navbar.style.transition = "all 0.3s ease-in-out";
-//        headerContent.style.top = "36px";
-//    }
-//})
-
-//SLIDER
-
-var icons = document.querySelectorAll(".slider-wrapper li");
-var activeIcon = document.querySelector(".slider-wrapper li .slider.active");
-for (var icon of icons) {
-    icon.addEventListener("click", function () {
-        activeIcon.classList.remove("active");
-        this.firstChild.classList.add("active");
-        activeIcon = this.firstChild;
-    })
-}
-
-$(document).ready(function () {
-    $("li:has(a.slider)").on('click', function (event) {
-        if (this.firstElementChild.hash !== "") {
-            event.preventDefault();
-            var hash = this.firstElementChild.hash;
-            $('html, body').animate({
-                scrollTop: $(hash).offset().top
-            }, 800, function () {
-                window.location.hash = hash;
-            });
-        }
-    });
-});
-
-window.addEventListener("scroll", function () {
-    if (document.documentElement.scrollTop >= window.innerHeight-400) {
-        for (var icon of icons) {
-            icon.firstChild.classList.add("change");
-        }
-    }
-    else {
-        for (var icon of icons) {
-            icon.firstChild.classList.remove("change");
-        }
-    }
-})
-
-
-//Scroll Transition
-
-
-//if (window.addEventListener) window.addEventListener('DOMMouseScroll', wheel, false);
-//window.onmousewheel = document.onmousewheel = wheel;
-
-//function wheel(event) {
-//    var delta = 0;
-//    if (event.wheelDelta) delta = event.wheelDelta / 120;
-//    else if (event.detail) delta = -event.detail / 3;
-
-//    handle(delta);
-//    if (event.preventDefault) event.preventDefault();
-//    event.returnValue = false;
-//}
-
-//function handle(delta) {
-//    var time = 450;
-//    var distance = 300;
-
-//    $('html, body').stop().animate({
-//        scrollTop: $(window).scrollTop() - (distance * delta)
-//    }, time);
-//}
-
+    
+                                                                 //Scroll Transition
 
 
 function init() {
-    new SmoothScroll(document, 280, 32)
+    new SmoothScroll(document, 220, 12)
 }
 
 function SmoothScroll(target, speed, smooth) {
@@ -193,4 +94,145 @@ function SmoothScroll(target, speed, smooth) {
         );
     }()
 }
-////////////////TERLAN END/////////////////
+
+
+                                                //ScrollDown ScrollUp
+
+//$(document).ready(function () {
+    $(window).scroll(function () {
+        if (document.body.scrollTop > 40 || document.documentElement.scrollTop > 40) {
+            $('#navHelperADown').addClass('hidden');
+            $('#navHelperAUp').removeClass('hidden');
+        } else {
+            $('#navHelperAUp').addClass('hidden');
+            $('#navHelperADown').removeClass('hidden');
+        }
+
+    });
+//});
+
+
+//$(document).ready(function () {
+//    $("#scrollUp").click(function (event) {
+//        $("body").off("init");
+//        event.preventDefault();
+//        $("html, body").animate({ scrollTop: 0 }, "slow");
+//        return false;
+//    });
+
+//});
+
+
+$(document).ready(function () {
+    $("#navHelperADown").on('click', function (event) {
+        if (this.hash !== "") {
+            event.preventDefault();
+            var hash = this.hash;
+            $('html, body').animate({
+                scrollTop: $(hash).offset().top - 100
+            }, 800, function () {
+                window.location.hash = hash;
+            });
+        }
+    });
+});
+
+$(document).ready(function () {
+    $("#navHelperAUp").on('click', function (event) {
+        if (this.hash !== "") {
+            event.preventDefault();
+            var hash = this.hash;
+            $('html, body').animate({
+                scrollTop: $(hash).offset().top
+            }, 800, function () {
+                window.location.hash = hash;
+            });
+        }
+    });
+});
+
+                                                //ScrollRight
+
+$(document).ready(function () {
+    $("li:has(a.slider)").on('click', function (event) {
+        if (this.firstElementChild.hash !== "") {
+            event.preventDefault();
+            var hash = this.firstElementChild.hash;
+            $('html, body').animate({
+                scrollTop: $(hash).offset().top - 100
+            }, 800, function () {
+                window.location.hash = hash;
+            });
+        }
+    });
+});
+
+                                                //Dynamic ScrollRight
+$(window).scroll(function () {
+    var icons = [].slice.call(document.querySelectorAll(".sect"), 0).reverse();
+    var activeIcon = document.querySelector(".slider-wrapper li .slider.active");
+    //console.log(activeIcon);
+    for (var icon of icons) {
+        if (icon.offsetTop-50 < $(window).scrollTop()) {
+            if (icon.id != activeIcon.attributes[2].value) {
+                activeIcon.classList.remove("active");
+                activeIcon.classList.remove("active");
+                document.querySelector(".slider." + icon.id).classList.add("active");
+            }
+            break;
+        }
+    }
+});
+
+
+
+
+// Slider Click
+var icons = document.querySelectorAll(".slider-wrapper li");
+var activeIcon = document.querySelector(".slider-wrapper li .slider.active");
+for (var icon of icons) {
+    icon.addEventListener("click", function () {
+        activeIcon.classList.remove("active");
+        this.firstElementChild.classList.add("active");
+        activeIcon = this.firstElementChild;
+    })
+}
+
+// Change Slider Color
+
+window.addEventListener("scroll", function () {
+    if (document.documentElement.scrollTop >= window.innerHeight - 400) {
+        for (var icon of icons) {
+            icon.firstElementChild.classList.add("change");
+        }
+    }
+    else {
+        for (var icon of icons) {
+            icon.firstElementChild.classList.remove("change");
+        }
+    }
+})
+
+// ACCORDION
+$(document).ready(function () {
+    $(".category-name").click(function () {
+        $(this).next().toggleClass("active");
+    })
+})
+    // var acc = document.getElementsByClassName("category-name");
+    // var i;
+
+    // for (i = 0; i < acc.length; i++) {
+    //   acc[i].addEventListener("click", function() {
+    //     var panel = this.nextElementSibling;
+    //     if (panel.style.maxHeight){
+    //       panel.style.maxHeight = null;
+    //     } else {
+    //       panel.style.maxHeight = panel.scrollHeight + "px";
+    //       panel.style.paddingTop = 40 + "px";
+    //       panel.style.overflow = "inherit"
+    //     } 
+    //   });
+    // }
+
+
