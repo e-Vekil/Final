@@ -39,17 +39,39 @@ li{
 }
 
 
+/* START MAIN VIDEO */
+.page-cover {
+    width: 100%;
+    position: absolute;
+    height: 120%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    overflow: hidden;
+}
+.page-cover:after {
+    content: "";
+    background-image: linear-gradient(to right, rgba(255,0,0,0.5), rgba(255,0,0,0));
+    background-image: -webkit-gradient(linear-gradient(to right, rgba(255,0,0,0.5), rgba(255,0,0,0)));
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    opacity: 0.7;
+}
+
+
 /* START NAVBAR */
 .nav-bar-wrapper {
-                                                    /*height: 109px;
+    /*height: 109px;
                                                     transition: all 0.2s ease-in-out;
                                                     width: 100%;
                                                     position: absolute;
                                                     top: 0;
                                                     left: 0;
                                                     z-index: 10;*/
-
-
     position: fixed;
     z-index: 10;
     color: #fff;
@@ -281,7 +303,7 @@ li{
 /* Intro Section */
 .intro{
     position: relative;
-    background-color:brown;
+                                                          /*background-color:brown;*/
     padding-top:109px;
     height: 100vh;
 }

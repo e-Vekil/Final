@@ -45,7 +45,7 @@ $(document).ready(function () {
 
 
 function init() {
-    new SmoothScroll(document, 220, 12)
+    new SmoothScroll(document, 220, 42)
 }
 
 function SmoothScroll(target, speed, smooth) {
@@ -67,18 +67,28 @@ function SmoothScroll(target, speed, smooth) {
 
         pos += -delta * speed
         pos = Math.max(0, Math.min(pos, target.scrollHeight - target.clientHeight)) // limit scrolling
+        //console.log(5);
 
-        if (!moving) update()
+        if (!moving) {
+            update();
+            //console.log(6);
+        }
     }
 
     function update() {
         moving = true
         var delta = (pos - target.scrollTop) / smooth
         target.scrollTop += delta
-        if (Math.abs(delta) > 0.5)
-            requestFrame(update)
-        else
-            moving = false
+        if (Math.abs(delta) > 2) {
+            //console.log("delta value: " + Math.abs(delta));
+            requestFrame(update);
+            //console.log(1);
+        }
+        else {
+            //console.log("delta value: " + Math.abs(delta));
+            moving = false;
+            //console.log(2);
+        }
     }
 
     var requestFrame = function () { // requestAnimationFrame cross browser
@@ -129,7 +139,7 @@ $(document).ready(function () {
             event.preventDefault();
             var hash = this.hash;
             $('html, body').animate({
-                scrollTop: $(hash).offset().top - 100
+                scrollTop: $(hash).offset().top
             }, 800, function () {
                 window.location.hash = hash;
             });
@@ -159,7 +169,7 @@ $(document).ready(function () {
             event.preventDefault();
             var hash = this.firstElementChild.hash;
             $('html, body').animate({
-                scrollTop: $(hash).offset().top - 100
+                scrollTop: $(hash).offset().top
             }, 800, function () {
                 window.location.hash = hash;
             });
