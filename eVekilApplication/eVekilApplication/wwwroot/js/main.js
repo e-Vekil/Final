@@ -191,7 +191,7 @@ $(window).scroll(function () {
                 //window.location.hash = icon.id;
                 //location.replace('https://localhost:44343/#' + icon.id);
                 //parent.location.hash = icon.id;
-                history.replaceState('', 'https://localhost:44343/#main2', icon.id);
+                history.replaceState('', 'https://localhost:44343/#main2', '#'+icon.id);
                 //setTimeout(function (e) { e.preventDefault();window.location.hash = icon.id; return false }, 700);
             }
             break;
