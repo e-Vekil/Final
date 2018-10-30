@@ -61,6 +61,13 @@ li{
     bottom: 0;
     opacity: 0.7;
 }
+.page-cover video {
+    height: 1064px;
+    width: 1536px;
+    margin-top: -189px;
+    margin-left: 0px;
+    /*object-fit: fill;*/
+}
 
 
 /* START NAVBAR */
