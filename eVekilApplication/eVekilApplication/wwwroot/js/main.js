@@ -199,9 +199,6 @@ $(window).scroll(function () {
     }
 });
 
-
-
-
 // Slider Click
 var icons = document.querySelectorAll(".slider-wrapper li");
 var activeIcon = document.querySelector(".slider-wrapper li .slider.active");
@@ -249,5 +246,37 @@ $(document).ready(function () {
     //     } 
     //   });
     // }
+
+//ABOUT SLIDER
+var articles = document.querySelectorAll("section.about article");
+var articleWrapper = document.querySelector("#about-slider .about-slider-wrapper");
+var aboutList = document.querySelectorAll(".about-nav li");
+var activeListItem = document.querySelector(".about-nav li span.active")
+var dataId;
+var oldId = 1;
+var res = 0;
+for (var item of aboutList) {
+    item.addEventListener("click", function () {
+        activeListItem.classList.remove("active");
+        this.firstElementChild.classList.add("active");
+        activeListItem = this.firstElementChild;
+        dataId = this.firstElementChild.getAttribute("data-id");
+        for (var article of articles) {
+            article.classList.remove("active");
+            if (article.getAttribute("data-name") == dataId) {
+                console.log(article)
+                article.classList.add("active");
+                if (oldId < dataId) {
+                    articleWrapper.style.transform = `translateY(${res + ((oldId * 500) - (dataId * 500))}px)`;
+                    res = (oldId * 500) - (dataId * 500);
+                }
+                else if (oldId > dataId) {
+                    articleWrapper.style.transform = `translateY(${res + ((dataId * 500) - (oldId * 500))}px)`;
+                }
+                oldId = dataId;
+            }
+        }
+    })
+}
 
 

@@ -19,12 +19,12 @@
         width: 300px;
     }
     .icon-burger-wrapper{
-                                                      /*margin:0px 50px 0px 45px!important;*/
+        /*margin:0px 50px 0px 45px!important;*/
         margin:auto 50px auto 45px!important;
     }
-                                                        .side-bar-content {
-                                                            width: 100%;                            /*????????????????????*/
-                                                        }
+    .side-bar-content {
+        width: 100%; 
+    }
     /* SECTIONS ACCORDION */
     .category-name{
         display: block!important;
@@ -35,6 +35,22 @@
     }
     article.category.active{
         display: block;
+    }
+    section.about h1{
+        font-size:3em!important;
+    }
+    #about-slider{
+        overflow:visible;
+        height:100%!important;
+    }
+        #about-slider .accordion{
+            display:block!important;
+        }
+        section.about article {
+            display: none;
+        }
+    .about-nav{
+        display:none!important;
     }
 }
                                                
@@ -62,12 +78,14 @@
     .category-text p{
         text-align: center;
     }
+    .download-button {
+        justify-content: center;
+    }
     .category-features{
         position: static!important;
         margin-top:-43px;
         width:70%!important;
         margin:-53px auto 40px auto;
-
     }
 
 }

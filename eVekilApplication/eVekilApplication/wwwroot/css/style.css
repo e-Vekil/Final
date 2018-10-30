@@ -54,6 +54,7 @@ li{
     content: "";
     background-image: linear-gradient(to right, rgba(255,0,0,0.5), rgba(255,0,0,0));
     background-image: -webkit-gradient(linear-gradient(to right, rgba(255,0,0,0.5), rgba(255,0,0,0)));
+    height:100vh;
     position: absolute;
     left: 0;
     right: 0;
@@ -61,7 +62,11 @@ li{
     bottom: 0;
     opacity: 0.7;
 }
-
+    .page-cover video{
+        object-fit:fill;
+        object-position:center;
+        margin-top:-100px!important;
+    }
 
 /* START NAVBAR */
 .nav-bar-wrapper {
@@ -313,6 +318,7 @@ li{
 .intro-title h1{
     color:white;
     font-size:3rem;
+    text-transform:uppercase;
 }
 .intro-desc{
     padding-top:30px;
@@ -438,3 +444,107 @@ li{
     cursor: pointer;
     display: none;
 }
+.download-button span {
+    display:inline-block;
+    border-radius:100%;
+    width: 43px;
+    height: 43px;
+    background-color: #d82533;
+    position:relative;
+}
+.download-button span::before {
+    content: "";
+    width: 20px;
+    border:1px solid #d82533;
+    display: inline-block;
+    position: absolute;
+    top: 48%;
+    transform: translateY(-50%);
+    left: -43%;
+}
+.download-button span::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 14px;
+    width: 25px;
+    height: 13px;
+    background: url(https://cdn2.hubspot.net/hubfs/439788/intechnic_2017/assets/images/btn-promo-icon.png?t=1511794280898);
+}
+.download-button p {
+    color: #d82533;
+    font-weight:bold;
+    margin:0;
+    display:inline-block;   
+    margin-left:15px;
+}
+/*Categories End*/
+
+/*About Section*/
+section.about{
+    height:100%;
+    width:100%;
+    padding:100px 0px;
+    background:white;
+}
+section.about ul li {
+    padding: 5px 0px;
+    cursor: pointer;
+}
+    section.about ul li span.active{
+        color:black!important;
+    }
+    section.about ul li span{
+        color: rgba(34,31,31,0.22);
+        font-size: 30px;
+        font-weight: bold;
+    }
+section.about ul li:hover span{
+    color: black;
+    transition:all 0.2s ease-in-out;
+}
+section.about h1{
+    color:black;
+    font-size:5em;
+    font-weight:bold;
+}
+section.about span {
+    color: #d82533;
+}
+section.about .about-us p{
+    color:black;
+    font-size:18px;
+}
+#about-slider {
+    height: 500px;
+    overflow:hidden;
+}
+#about-slider article{
+    height:500px;
+}
+    #about-slider .about-slider-wrapper {
+        width: 100%;
+        transition: all 1s ease-in-out;
+    }
+#about-slider .accordion{
+    display:none;
+}
+    #about-slider .accordion{
+        cursor:pointer;
+    }
+    #about-slider .accordion h3 {
+        font-weight: bold;
+        color: rgba(34,31,31,0.22);
+    }
+#about-slider .accordion:hover h3{
+    color:black;
+    transition:all 0.1s ease-in-out;
+}
+    #about-slider .accordion.active h3 {
+        color:black;
+    }
+    #about-slider .accordion.active:hover h3{
+        color:black;
+    }
+
+
