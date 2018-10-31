@@ -46,6 +46,7 @@ $(document).ready(function () {
 
 function init() {
     new SmoothScroll(document, 220, 42)
+            setTimeout(function () { return; }, 1000);
 }
 
 function SmoothScroll(target, speed, smooth) {
@@ -55,8 +56,10 @@ function SmoothScroll(target, speed, smooth) {
     var pos = target.scrollTop
     target.addEventListener('mousewheel', scrolled, false)
     target.addEventListener('DOMMouseScroll', scrolled, false)
+    setTimeout(function () { return; }, 1000);
 
     function scrolled(e) {
+    setTimeout(function () { moving = false; console.log(moving); }, 1000);
         e.preventDefault(); // disable default scrolling
         var delta = e.delta || e.wheelDelta;
         if (delta === undefined) {
@@ -79,18 +82,38 @@ function SmoothScroll(target, speed, smooth) {
         moving = true
         var delta = (pos - target.scrollTop) / smooth
         target.scrollTop += delta
-        if (Math.abs(delta) > 2) {
-            //console.log("delta value: " + Math.abs(delta));
-            requestFrame(update);
-            //console.log(1);
+        if (window.document.documentElement.scrollTop < 100) {
+            //console.log("Here you are: " + target.scrollHeight)
+            if (Math.abs(delta) > 0) {
+                //console.log("delta value: " + Math.abs(delta));
+                //console.log(1);
+                requestFrame(update);
+            }
+            else {
+                moving = false;
+                //console.log("delta value: " + Math.abs(delta));
+                //console.log(2);
+            }
         }
-        else {
-            //console.log("delta value: " + Math.abs(delta));
-            moving = false;
-            //console.log(2);
+        else if (target.scrollHeight - window.document.documentElement.scrollTop < 1000) {
+            if (Math.abs(delta) > 0) {
+                requestFrame(update);
+                //console.log(target.scrollHeight - window.document.documentElement.scrollTop);
+            }
+            else {
+                moving = false;
+            }
+        } else {
+            if (Math.abs(delta) > 2) {
+                requestFrame(update);
+            }
+            else {
+                moving = false;
+            }
         }
+        
     }
-
+    
     var requestFrame = function () { // requestAnimationFrame cross browser
         return (
             window.requestAnimationFrame ||
