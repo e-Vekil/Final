@@ -54,6 +54,7 @@ li{
     content: "";
     background-image: linear-gradient(to right, rgba(255,0,0,0.5), rgba(255,0,0,0));
     background-image: -webkit-gradient(linear-gradient(to right, rgba(255,0,0,0.5), rgba(255,0,0,0)));
+    height:100vh;
     position: absolute;
     left: 0;
     right: 0;
@@ -61,14 +62,11 @@ li{
     bottom: 0;
     opacity: 0.7;
 }
-.page-cover video {
-    height: 1064px;
-    width: 1536px;
-    margin-top: -189px;
-    margin-left: 0px;
-    /*object-fit: fill;*/
-}
-
+    .page-cover video{
+        object-fit:fill;
+        object-position:center;
+        margin-top:-100px!important;
+    }
 
 /* START NAVBAR */
 .nav-bar-wrapper {
@@ -168,16 +166,16 @@ li{
                              z-index: 101;
     transition: all 0.3s ease-in-out;
 }
-                        .side-bar-content{
-                            height: 100vh;
-                            width: 318px;
-                            max-width: calc(100% - 30px);
-                            background-color: #fff;
-                            position: absolute;
-                            padding: 40px 0px 0px 60px;
-                            box-shadow: 0 100px 250px rgba(66,0,5,0.2);
-                            transition-duration: .4s;
-                        }
+.side-bar-content{
+    height: 100vh;
+    width: 318px;
+    max-width: calc(100% - 30px);
+    background-color: #fff;
+    position: absolute;
+    padding: 40px 0px 0px 60px;
+    box-shadow: 0 100px 250px rgba(66,0,5,0.2);
+    transition-duration: .4s;
+}
 .side-bar.open{
     left:0;
     transition: all 0.3s ease-in-out;
@@ -240,52 +238,51 @@ li{
 
 /*Scroll Helper Start*/
 
-                                            .navHelper {
-                                                position: fixed;
-                                                color: #fff;
-                                                left: 60px;
-                                                bottom: 60px;
-                                                z-index: 9;
-                                                display: block;
-                                            }
+.navHelper {
+    position: fixed;
+    color: #fff;
+    left: 60px;
+    bottom: 60px;
+    z-index: 9;
+    display: block;
+}
 
-                                            #navHelperADown,
-                                            #navHelperAUp{
-                                                display: block;
-                                                color: #fff;
-                                                position: relative;
-                                                transition-duration: .4s;
-                                            }
+#navHelperADown,
+#navHelperAUp{
+    display: block;
+    color: #fff;
+    position: relative;
+    transition-duration: .4s;
+}
 
-                                            #navHelperAUp{
-                                                color: black!important;
-                                            }
+#navHelperAUp{
+    color: black!important;
+}
 
-                                            #navHelperADown span:first-child,
-                                            #navHelperAUp span:first-child{
-                                                bottom: 60px;
-                                                white-space: nowrap;
-                                                position: absolute;
-                                                left: 6px;
-                                                transform-origin: 0 50%;
-                                                transform: rotate(-90deg);
-                                            }
+#navHelperADown span:first-child,
+#navHelperAUp span:first-child{
+    bottom: 60px;
+    white-space: nowrap;
+    position: absolute;
+    left: 6px;
+    transform-origin: 0 50%;
+    transform: rotate(-90deg);
+}
 
-                                            #navHelperADown span:nth-child(2),
-                                            #navHelperAUp span:nth-child(2){
-                                                background: url(https://cdn2.hubspot.net/hubfs/439788/intechnic_2017/assets/images/landing/arrow-icons.png?t=1511794280898) 0 0 no-repeat;
-                                                display: block;
-                                                width: 13px;
-                                                height: 40px;
+#navHelperADown span:nth-child(2),
+#navHelperAUp span:nth-child(2){
+    background: url(https://cdn2.hubspot.net/hubfs/439788/intechnic_2017/assets/images/landing/arrow-icons.png?t=1511794280898) 0 0 no-repeat;
+    display: block;
+    width: 13px;
+    height: 40px;
 
-                                            }
-                                            #navHelperADown span:nth-child(2){
-                                                background-position: 0 -40px;
-                                            }
-                                            #navHelperAUp span:nth-child(2){
-                                                background-position: 0 -80px;
-                                            }
-
+}
+#navHelperADown span:nth-child(2){
+    background-position: 0 -40px;
+}
+#navHelperAUp span:nth-child(2){
+    background-position: 0 -80px;
+}
 
 /* Hover Colors Of Side List Items */
 .side-bar li a{
@@ -320,6 +317,7 @@ li{
 .intro-title h1{
     color:white;
     font-size:3rem;
+    text-transform:uppercase;
 }
 .intro-desc{
     padding-top:30px;
@@ -443,5 +441,115 @@ li{
 }
 .category-name{
     cursor: pointer;
+    position:relative;
     display: none;
+}
+.category-name i{
+    font-size:1.2em;
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    right:5%;
+}
+.download-button span {
+    display:inline-block;
+    border-radius:100%;
+    width: 43px;
+    height: 43px;
+    background-color: #d82533;
+    position:relative;
+}
+.download-button span::before {
+    content: "";
+    width: 20px;
+    border:1px solid #d82533;
+    display: inline-block;
+    position: absolute;
+    top: 48%;
+    transform: translateY(-50%);
+    left: -43%;
+}
+.download-button span::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 14px;
+    width: 25px;
+    height: 13px;
+    background: url(https://cdn2.hubspot.net/hubfs/439788/intechnic_2017/assets/images/btn-promo-icon.png?t=1511794280898);
+}
+.download-button p {
+    color: #d82533;
+    font-weight:bold;
+    margin:0;
+    display:inline-block;   
+    margin-left:15px;
+}
+/*Categories End*/
+
+/*About Section*/
+section.about{
+    height:100%;
+    width:100%;
+    padding:100px 0px;
+    background:white;
+}
+section.about ul li {
+    padding: 5px 0px;
+    cursor: pointer;
+}
+section.about ul li span.active{
+    color:black!important;
+}
+section.about ul li span{
+    color: rgba(34,31,31,0.22);
+    font-size: 30px;
+    font-weight: bold;
+}
+section.about ul li:hover span{
+    color: black;
+    transition:all 0.2s ease-in-out;
+}
+section.about h1{
+    color:black;
+    font-size:5em;
+    font-weight:bold;
+}
+section.about span {
+    color: #d82533;
+}
+section.about .about-us p{
+    color:black;
+    font-size:18px;
+}
+#about-slider {
+    height: 500px;
+    overflow:hidden;
+}
+#about-slider article{
+    height:500px;
+}
+#about-slider .about-slider-wrapper {
+    width: 100%;
+    transition: all 1s ease-in-out;
+}
+#about-slider .accordion{
+    display:none;
+}
+#about-slider .accordion{
+    cursor:pointer;
+}
+#about-slider .accordion h3 {
+    font-weight: bold;
+    color: rgba(34,31,31,0.22);
+}
+#about-slider .accordion:hover h3{
+    color:black;
+    transition:all 0.1s ease-in-out;
+}
+#about-slider .accordion.active h3 {
+        color:black;
+}
+#about-slider .accordion.active:hover h3{
+    color:black;
 }
