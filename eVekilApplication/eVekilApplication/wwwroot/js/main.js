@@ -1,4 +1,7 @@
-﻿// ON SCROLL NAVBAR FIXED
+﻿var w = $(window).width();
+$('#mainVideo').css('width', w);
+
+// ON SCROLL NAVBAR FIXED
 var navBarWrapper = document.querySelector(".nav-bar-wrapper");
 var navBarHeader = document.querySelector(".nav-bar-wrapper .header");
 window.addEventListener("scroll", function () {
@@ -285,3 +288,6 @@ for (var item of aboutList) {
 }
 
 
+
+
+//console.log(screen.width);
