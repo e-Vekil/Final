@@ -68,9 +68,9 @@ li{
     margin-top: -65px;
     margin-left: 0px;
 
-    /*object-fit:fill;
-    object-position:center;
-    margin-top:-100px!important;*/
+    object-fit: fill;
+    /*object-position:center;*/
+    /*margin-top:-100px!important;*/
 }
 
 /* START NAVBAR */
@@ -530,9 +530,24 @@ section.about .about-us p{
 #about-slider {
     height: 500px;
     overflow:hidden;
+    position: relative;
 }
 #about-slider article{
     height:500px;
+    position: absolute;
+    top: 1000px;
+    transition:all 1s ease-in-out;
+    /*visibility: hidden;*/
+}
+#about-slider article.active{
+    /*visibility: visible;*/
+    display: block!important;   
+    top: 10px;
+    transition:all 1s ease-in-out;
+
+}
+section.about hr{
+    display: none;
 }
 #about-slider .about-slider-wrapper {
     width: 100%;

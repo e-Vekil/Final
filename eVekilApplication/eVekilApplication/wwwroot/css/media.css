@@ -47,7 +47,12 @@
             display:block!important;
         }
         section.about article {
+            position: relative!important;
             display: none;
+            height: 100%!important;
+        }
+        section.about hr{
+            display: block!important;
         }
     .about-nav{
         display:none!important;

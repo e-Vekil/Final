@@ -290,4 +290,27 @@ for (var item of aboutList) {
 
 
 
+
+var articles = document.querySelectorAll("section.about article");
+var articleWrapper = document.querySelector("#about-slider .about-slider-wrapper");
+var aboutList = document.querySelectorAll(".about-slider-wrapper div.accordion");
+var activeListItem = document.querySelector(".about-slider-wrapper div.accordion.active")
+var dataId;
+var oldId = 1;
+var res = 0;
+for (var item of aboutList) {
+    item.addEventListener("click", function () {
+        activeListItem.classList.remove("active");
+        this.classList.add("active");
+        activeListItem = this;
+        dataId = this.getAttribute("data-id");
+        for (var article of articles) {
+            article.classList.remove("active");
+            if (article.getAttribute("data-name") == dataId) {
+                article.classList.add("active");
+            }
+        }
+    })
+}
+
 //console.log(screen.width);
