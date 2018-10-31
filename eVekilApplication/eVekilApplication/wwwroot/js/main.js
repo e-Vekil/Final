@@ -44,66 +44,66 @@ $(document).ready(function () {
                                                                  //Scroll Transition
 
 
-function init() {
-    new SmoothScroll(document, 220, 42)
-}
+//function init() {
+//    new SmoothScroll(document, 220, 42)
+//}
 
-function SmoothScroll(target, speed, smooth) {
-    if (target == document)
-        target = (document.documentElement || document.body.parentNode || document.body) // cross browser support for document scrolling
-    var moving = false
-    var pos = target.scrollTop
-    target.addEventListener('mousewheel', scrolled, false)
-    target.addEventListener('DOMMouseScroll', scrolled, false)
+//function SmoothScroll(target, speed, smooth) {
+//    if (target == document)
+//        target = (document.documentElement || document.body.parentNode || document.body) // cross browser support for document scrolling
+//    var moving = false
+//    var pos = target.scrollTop
+//    target.addEventListener('mousewheel', scrolled, false)
+//    target.addEventListener('DOMMouseScroll', scrolled, false)
 
-    function scrolled(e) {
-        e.preventDefault(); // disable default scrolling
-        var delta = e.delta || e.wheelDelta;
-        if (delta === undefined) {
-            //we are on firefox
-            delta = -e.detail;
-        }
-        delta = Math.max(-1, Math.min(1, delta)) // cap the delta to [-1,1] for cross browser consistency
+//    function scrolled(e) {
+//        e.preventDefault(); // disable default scrolling
+//        var delta = e.delta || e.wheelDelta;
+//        if (delta === undefined) {
+//            //we are on firefox
+//            delta = -e.detail;
+//        }
+//        delta = Math.max(-1, Math.min(1, delta)) // cap the delta to [-1,1] for cross browser consistency
 
-        pos += -delta * speed
-        pos = Math.max(0, Math.min(pos, target.scrollHeight - target.clientHeight)) // limit scrolling
-        //console.log(5);
+//        pos += -delta * speed
+//        pos = Math.max(0, Math.min(pos, target.scrollHeight - target.clientHeight)) // limit scrolling
+//        //console.log(5);
 
-        if (!moving) {
-            update();
-            //console.log(6);
-        }
-    }
+//        if (!moving) {
+//            update();
+//            //console.log(6);
+//        }
+//    }
 
-    function update() {
-        moving = true
-        var delta = (pos - target.scrollTop) / smooth
-        target.scrollTop += delta
-        if (Math.abs(delta) > 2) {
-            //console.log("delta value: " + Math.abs(delta));
-            requestFrame(update);
-            //console.log(1);
-        }
-        else {
-            //console.log("delta value: " + Math.abs(delta));
-            moving = false;
-            //console.log(2);
-        }
-    }
+//    function update() {
+//        moving = true
+//        var delta = (pos - target.scrollTop) / smooth
+//        target.scrollTop += delta
+//        if (Math.abs(delta) > 2) {
+//            //console.log("delta value: " + Math.abs(delta));
+//            requestFrame(update);
+//            //console.log(1);
+//        }
+//        else {
+//            //console.log("delta value: " + Math.abs(delta));
+//            moving = false;
+//            //console.log(2);
+//        }
+//    }
 
-    var requestFrame = function () { // requestAnimationFrame cross browser
-        return (
-            window.requestAnimationFrame ||
-            window.webkitRequestAnimationFrame ||
-            window.mozRequestAnimationFrame ||
-            window.oRequestAnimationFrame ||
-            window.msRequestAnimationFrame ||
-            function (func) {
-                window.setTimeout(func, 1000 / 50);
-            }
-        );
-    }()
-}
+//    var requestFrame = function () { // requestAnimationFrame cross browser
+//        return (
+//            window.requestAnimationFrame ||
+//            window.webkitRequestAnimationFrame ||
+//            window.mozRequestAnimationFrame ||
+//            window.oRequestAnimationFrame ||
+//            window.msRequestAnimationFrame ||
+//            function (func) {
+//                window.setTimeout(func, 1000 / 50);
+//            }
+//        );
+//    }()
+//}
 
 
                                                 //ScrollDown ScrollUp
@@ -177,6 +177,21 @@ $(document).ready(function () {
     });
 });
 
+//ISOTOP DYNAMIC
+$(document).ready(function () {
+    $(".isotop a").on('click', function (event) {
+        if (this.hash !== "") {
+            event.preventDefault();
+            var hash = this.hash;
+            $('html, body').animate({
+                scrollTop: $(hash).offset().top
+            }, 800, function () {
+                window.location.hash = hash;
+            });
+        }
+    });
+});
+
                                                 //Dynamic ScrollRight
 $(window).scroll(function () {
     var icons = [].slice.call(document.querySelectorAll(".sect"), 0).reverse();
@@ -184,8 +199,7 @@ $(window).scroll(function () {
     //console.log(activeIcon);
     for (var icon of icons) {
         if (icon.offsetTop-50 < $(window).scrollTop()) {
-            if (icon.id != activeIcon.attributes[2].value) {
-                activeIcon.classList.remove("active");
+            if (icon.id != activeIcon.attributes[2].value){
                 activeIcon.classList.remove("active");
                 document.querySelector(".slider." + icon.id).classList.add("active");
                 //window.location.hash = icon.id;
@@ -264,16 +278,7 @@ for (var item of aboutList) {
         for (var article of articles) {
             article.classList.remove("active");
             if (article.getAttribute("data-name") == dataId) {
-                console.log(article)
                 article.classList.add("active");
-                if (oldId < dataId) {
-                    articleWrapper.style.transform = `translateY(${res + ((oldId * 500) - (dataId * 500))}px)`;
-                    res = (oldId * 500) - (dataId * 500);
-                }
-                else if (oldId > dataId) {
-                    articleWrapper.style.transform = `translateY(${res + ((dataId * 500) - (oldId * 500))}px)`;
-                }
-                oldId = dataId;
             }
         }
     })
