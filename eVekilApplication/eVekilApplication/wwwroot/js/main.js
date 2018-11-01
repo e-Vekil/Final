@@ -216,6 +216,24 @@ $(window).scroll(function () {
     }
 });
 
+                                        //Scroll Left(NAVBAR)
+
+$(document).ready(function () {
+    $(".side-bar-content li").on('click', function (event) {
+        var sideBar = document.querySelector(".side-bar")
+        if (this.firstElementChild.hash !== "") {
+            event.preventDefault();
+            sideBar.classList.remove("open");
+            var hash = this.firstElementChild.hash;
+            $('html, body').animate({
+                scrollTop: $(hash).offset().top
+            }, 800, function () {
+                window.location.hash = hash;
+            });
+        }
+    });
+});
+
 // Slider Click
 var icons = document.querySelectorAll(".slider-wrapper li");
 var activeIcon = document.querySelector(".slider-wrapper li .slider.active");
