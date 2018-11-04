@@ -1,4 +1,7 @@
 ﻿@media only screen  and (max-width:650px){
+    .navHelper{
+        display: none!important;
+    }
     .isotop{
         display: none;
     }
@@ -30,11 +33,18 @@
         display: block!important;
     }
     article.category{
-       display: none;
-       padding-top:20px!important;
+       /*display: none;*/
+       max-height: 0px!important;
+       padding-top:0px!important;
+       /*overflow: hidden!important;*/
+       opacity: 0!important;
+       transition-duration: 1s!important;
     }
     article.category.active{
+        max-height: 2000px!important;
+        opacity: 1!important;
         display: block;
+        padding-top:20px!important;
     }
     section.about h1{
         font-size:3em!important;
@@ -43,17 +53,22 @@
         overflow:visible;
         height:100%!important;
     }
-        #about-slider .accordion{
-            display:block!important;
-        }
-        section.about article {
-            position: relative!important;
-            display: none;
-            height: 100%!important;
-        }
-        section.about hr{
-            display: block!important;
-        }
+    #about-slider .accordion{
+        display:block!important;
+    }
+    section.about article {
+        position: relative!important;
+        /*display: none;*/
+        max-height: 0px!important;
+        top: 0px!important;
+        overflow: hidden!important;
+    }
+    section.about article.active{
+        max-height: 500px!important;
+    }
+    section.about hr{
+        display: block!important;
+    }
     .about-nav{
         display:none!important;
     }
