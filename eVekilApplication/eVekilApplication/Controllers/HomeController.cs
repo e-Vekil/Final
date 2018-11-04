@@ -12,5 +12,10 @@ namespace eVekilApplication.Controllers
         {
             return View();
         }
+
+        public IActionResult Document()
+        {
+            return View();
+        }
     }
 }

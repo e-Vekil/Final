@@ -1,6 +1,41 @@
 ﻿var w = $(window).width();
 $('#mainVideo').css('width', w);
 
+
+
+
+var i = 0;
+var count = 0;
+var previcon;
+$(window).scroll(function () {
+    var icons = [].slice.call(document.querySelectorAll(".sect"), 0).reverse();
+    for (var icon of icons) {
+        if (icon.offsetTop - 450 < $(window).scrollTop()) {
+            //console.log("Now: " + $(window).scrollTop());
+            //console.log("Previous: " + count);
+
+            if (icon != previcon) {
+                i = 0;
+            }
+
+            if (count < $(window).scrollTop()) {
+                i--;
+            } else {
+                i++;
+            }
+
+            $("#" + icon.id + " h1.category-title").css("transform", "translateY(" + i + "px)");
+
+            count = $(window).scrollTop();
+            previcon = icon;
+            break;
+        }
+    }
+});
+
+
+
+
 // ON SCROLL NAVBAR FIXED
 var navBarWrapper = document.querySelector(".nav-bar-wrapper");
 var navBarHeader = document.querySelector(".nav-bar-wrapper .header");
