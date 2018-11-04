@@ -34,11 +34,13 @@ closeIcon.addEventListener("click", function () {
 $(document).ready(function () {
     $(document).click(function (event) {
         var clickover = $(event.target);
+        console.log(clickover);
         var clicked = event.target.tagName.toUpperCase();
         var _opened = $(".side-bar").hasClass("side-bar open");
         //console.log(clickover);
-        if (_opened === true && !clickover.hasClass("side-bar-content") && !clickover.hasClass("icon-burger-wrapper") && !clickover.hasClass("close-icon") && clicked != 'LI' && clicked != 'UL') {
-            $(".close-icon").click();
+        if (_opened === true && !clickover.hasClass("side-bar-content") && !clickover.hasClass("icon-burger-wrapper") && !clickover.hasClass("icon-burger") && !clickover.hasClass("close-icon") && clicked != 'LI' && clicked != 'UL') {
+            $(".side-bar").removeClass("open");
+            //console.log("Hello");
         }
     });
 });
