@@ -418,9 +418,9 @@ li{
     left:5%;
     font-weight: bold;
 }
-.category-text{
-    margin-top:100px;
-    padding-right:485px;
+.main-page-wrapper .category-text {
+    margin-top: 100px;
+    padding-right: 485px;
 }
 .category-text p{
     font-size:20px;
@@ -439,21 +439,21 @@ li{
 .category-features a{
     color:black;
 }
-.category-name h3{
-    color:brown;
+.main-page-wrapper .category-name h3 {
+    color: brown;
     font-weight: bold;
 }
-.category-name{
+.main-page-wrapper .category-name {
     cursor: pointer;
-    position:relative;
+    position: relative;
     display: none;
 }
-.category-name i{
-    font-size:1.2em;
-    position:absolute;
-    top:50%;
-    transform:translateY(-50%);
-    right:5%;
+.main-page-wrapper .category-name i {
+    font-size: 1.2em;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 5%;
 }
 .download-button span {
     display:inline-block;
