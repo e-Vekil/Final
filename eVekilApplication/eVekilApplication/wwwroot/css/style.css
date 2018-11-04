@@ -25,7 +25,6 @@ li{
                                                     /*height: 100%;
                                                     width: 100%;*/                              
 
-    width: 100%;
     min-height: 100vh;
     overflow: hidden;
 }
@@ -533,7 +532,7 @@ section.about .about-us p{
     position: relative;
 }
 #about-slider article{
-    height:500px;
+    max-height:500px;
     position: absolute;
     top: 1000px;
     transition:all 1s ease-in-out;

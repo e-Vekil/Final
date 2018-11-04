@@ -262,8 +262,20 @@ window.addEventListener("scroll", function () {
 
 // ACCORDION
 $(document).ready(function () {
+    var old;
     $(".category-name").click(function () {
-        $(this).next().toggleClass("active");
+        if (old == null) old = $(this);
+        if ($(this).next().hasClass("active")) {
+            $("article.category.active").removeClass("active");
+            old.children('i').css("transform", "rotate(0deg)");
+        }
+        else {
+            old.children('i').css("transform", "rotate(0deg)");
+            $(this).children('i').css("transform", "rotate(180deg)");
+            $("article.category.active").removeClass("active");
+            $(this).next().toggleClass("active");
+        }
+        old = $(this);
     })
 })
     // var acc = document.getElementsByClassName("category-name");
@@ -286,13 +298,13 @@ $(document).ready(function () {
 var articles = document.querySelectorAll("section.about article");
 var articleWrapper = document.querySelector("#about-slider .about-slider-wrapper");
 var aboutList = document.querySelectorAll(".about-nav li");
-var activeListItem = document.querySelector(".about-nav li span.active")
+//var activeListItem = document.querySelector(".about-nav li span.active");
 var dataId;
 var oldId = 1;
 var res = 0;
 for (var item of aboutList) {
     item.addEventListener("click", function () {
-        activeListItem.classList.remove("active");
+        $(".about-nav li span.active").removeClass("active");
         this.firstElementChild.classList.add("active");
         activeListItem = this.firstElementChild;
         dataId = this.firstElementChild.getAttribute("data-id");
@@ -312,13 +324,13 @@ for (var item of aboutList) {
 var articles = document.querySelectorAll("section.about article");
 var articleWrapper = document.querySelector("#about-slider .about-slider-wrapper");
 var aboutList = document.querySelectorAll(".about-slider-wrapper div.accordion");
-var activeListItem = document.querySelector(".about-slider-wrapper div.accordion.active")
+//var activeListItem = document.querySelector(".about-slider-wrapper div.accordion.active");
 var dataId;
 var oldId = 1;
 var res = 0;
 for (var item of aboutList) {
     item.addEventListener("click", function () {
-        activeListItem.classList.remove("active");
+        $(".about-slider-wrapper div.accordion.active").removeClass("active");
         this.classList.add("active");
         activeListItem = this;
         dataId = this.getAttribute("data-id");
