@@ -227,11 +227,21 @@ $(document).ready(function () {
             event.preventDefault();
             sideBar.classList.remove("open");
             var hash = this.firstElementChild.hash;
-            $('html, body').animate({
-                scrollTop: $(hash).offset().top
-            }, 800, function () {
-                window.location.hash = hash;
-            });
+            if ($(window).width() > 650) {
+                $('html, body').animate({
+                    scrollTop: $(hash).offset().top
+                }, 800, function () {
+                    window.location.hash = hash;
+                });
+            } else {
+                $('html, body').animate({
+                    scrollTop: $(hash).offset().top-80
+                }, 800, function () {
+                    //window.location.hash = hash;
+                    history.replaceState('', 'https://localhost:44343/#main2', + hash);
+                });
+            }
+           
         }
     });
 });
