@@ -72,6 +72,9 @@
     .about-nav{
         display:none!important;
     }
+    .contact-content{
+        padding:20px!important;
+    }
 }
                                                
 @media only screen  and (max-width:420px){

@@ -572,3 +572,26 @@ section.about hr{
 #about-slider .accordion.active:hover h3{
     color:black;
 }
+
+/*SECTION CONTACT US*/
+#ContactUs{
+    height:100vh;
+    padding:50px 0px;
+}
+.contact-header h1 {
+    color: black;
+    font-size: 5em;
+    font-weight: bold;
+}
+.contact-header span {
+    color: #d82533;
+}
+.contact-content input{
+    padding:10px 5px;
+}
+.contact-content{
+    padding:20px 100px;
+}
+.contact-content label{
+    font-size:18px;
+}
