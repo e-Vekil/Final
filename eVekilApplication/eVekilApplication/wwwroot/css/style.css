@@ -595,3 +595,85 @@ section.about hr{
 .contact-content label{
     font-size:18px;
 }
+/*REGISTIRATION PAGE*/
+.registiration-wrapper{
+    margin-top:159px;
+}
+.form-wrapper > div{
+    display:none;
+    border-right: 1px solid black;
+    padding-right:30px;
+}
+.form-wrapper > div input{
+    border-radius:0px;
+}
+.form-wrapper div.active{
+    display:block!important;
+}
+.form-wrapper .form-button {
+    width: 100%;
+    border: 2px solid black;
+    background: white;
+    text-align: center;
+    color: black;
+    font-size: 15px;
+    padding: 7px 0px;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+.form-wrapper .form-button:hover{
+    background:black;
+    color:white;
+    transition:all 0.3s ease-in-out;
+}
+.login-form span{
+    font-size:13px;
+}
+.login-form .forget-password {
+    font-size: 13px;
+    color: black;
+}
+.login-form .forget-password:hover {
+    color: #179a94;
+    transition: all 0.3s ease-in-out;
+}
+.login-form .social-register{
+    width:50%;
+    padding:10px 10px;
+    font-size:15px;
+    color:white;
+}
+.social-register{
+    position:relative;
+    text-align:center;
+}
+.social-register i {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 10%;
+    color: white;
+    font-size: 15px;
+}
+
+.social-register.facebook {
+    background: #3B5998;
+    margin-right:2.5%;
+}
+.social-register.google {
+    background: #ea4235;
+    margin-left:2.5%;
+}
+.register-wrapper .buttons a{
+    width:25%;
+    color:white;
+    background:black;
+    font-size:15px;
+    text-align:center;
+    padding:10px 10px;
+    display:none;
+}
+.register-wrapper .buttons a.active{
+    display:block;
+}

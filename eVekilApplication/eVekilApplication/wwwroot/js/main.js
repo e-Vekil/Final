@@ -36,7 +36,6 @@ closeIcon.addEventListener("click", function () {
 $(document).ready(function () {
     $(document).click(function (event) {
         var clickover = $(event.target);
-        console.log(clickover);
         var clicked = event.target.tagName.toUpperCase();
         var _opened = $(".side-bar").hasClass("side-bar open");
         //console.log(clickover);
@@ -396,3 +395,28 @@ $(window).scroll(function () {
 });
 
 
+//REGISTIRATION DYNAMIC FADE
+var forms = document.querySelectorAll(".form-wrapper > div");
+var buttons = document.querySelectorAll(".registiration-wrapper .buttons a");
+
+for (var button of buttons) {
+    button.addEventListener("click", function () {
+        if (this.nextElementSibling) {
+            this.nextElementSibling.classList.add("active");
+            this.classList.remove("active");
+        }
+        else {
+            this.previousElementSibling.classList.add("active");
+            this.classList.remove("active");
+        }
+       
+        var dataId = this.getAttribute("data-id");
+        for (var form of forms) {
+            form.classList.remove("active");
+            if (form.getAttribute("data-name") == dataId) {
+                form.classList.add("active");
+            }
+        }
+
+    })
+}

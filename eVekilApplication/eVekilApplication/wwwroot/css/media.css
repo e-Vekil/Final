@@ -119,3 +119,14 @@
     }
 
 }
+@media only screen and (max-width:991px){
+    .registiration-wrapper .login-form{
+        border-right:0px!important;
+        border-bottom:1px solid black;
+        padding-bottom:50px;
+        padding-right:0px;
+    }
+    .registiration-wrapper .register-wrapper{
+        margin-top:20px;
+    }
+}
