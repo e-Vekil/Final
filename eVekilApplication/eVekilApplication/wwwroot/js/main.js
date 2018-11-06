@@ -420,3 +420,15 @@ for (var button of buttons) {
 
     })
 }
+
+//BASKET SIDE BAR
+var basket = document.querySelector(".basket-wrapper");
+var sideBarProduct = document.querySelector(".side-bar-product");
+basket.addEventListener("click", function () {
+    sideBarProduct.classList.add("open");
+})
+
+var sideBarProductCloseIcon = document.querySelector(".side-bar-product .close-icon-product");
+sideBarProductCloseIcon.addEventListener("click", function () {
+    sideBarProduct.classList.remove("open");
+})

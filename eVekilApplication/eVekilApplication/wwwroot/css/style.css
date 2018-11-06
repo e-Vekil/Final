@@ -11,6 +11,7 @@ a{
 }
 a:hover{
     text-decoration: none;
+    color:inherit;
 }
 li{
     list-style-type: none;
@@ -94,14 +95,36 @@ li{
     line-height: 109px;
     transition: all 0.2s ease-in-out;
 }
-.nav-bar-wrapper.scroll-design{
-    height:80px;
+.basket-wrapper {
+    width: 150px;
+    height: 70px;
+    position: absolute;
+    top: 50%;
+    right: 5%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+.nav-bar-wrapper .basket {
+    color: white;
+    font-size: 1.2em;
+}
+.nav-bar-wrapper .product-count {
+    color: white;
+    font-size: 9px;
+    position: absolute;
+    top: 37%;
+    left: 11%;
+    cursor:pointer;
+    transform: translateY(-50%);
+}
+.nav-bar-wrapper.scroll-design {
+    height: 80px;
     background-color: black;
     transition: all 0.2s ease-in-out;
     position: fixed;
-    top:0;
-    left:0;
-                                    box-shadow: 0 0 120px rgba(0,0,0,0.24);
+    top: 0;
+    left: 0;
+    box-shadow: 0 0 120px rgba(0,0,0,0.24);
 }
 .header.scroll-design{
     line-height: 80px;
@@ -153,6 +176,7 @@ li{
 }
 .logo-brand{
     color:white;
+    position:relative;
 }
 
 
@@ -240,8 +264,92 @@ li{
     transition: all 0.3s ease-in-out;
 }
 
+/*PRODUCT SIDE BAR*/
+.side-bar-product {
+    width: 340px;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    background: white;
+    z-index: 120;
+    transition: all 0.3s ease-in-out;
+}
+.side-bar-product.open{
+    right:0;
+    transition:all 0.3s ease-in-out;
+}
+.side-bar-title {
+    background: #000;
+    color: white;
+}
+.close-icon-product{
+    color: white;
+    font-size: 13px;
+    margin-left: 60px;
+    margin-top: 3px;
+}
+.close-icon-product::after,
+.close-icon-product::before {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 2px;
+    background: white;
+    position: absolute;
+    top: 43%;
+    right: 4%;
+}
+.close-icon-product:hover .close-icon-product::after{
+    transform: rotate(50deg);
+    transition: all 0.3s ease-in-out;
+}
+.close-icon-product:hover .close-icon-product::before{
+    transform: rotate(-50deg);
+    transition: all 0.3s ease-in-out;
+}
+.product-info a{
+    color:black;
+    font-size:12px;
+    margin:0!important;
+}
+.product-info{
+    position:relative;
+}
+.product-info i{
+    position:absolute;
+    top:7%;
+    right:3%;
+    font-size:14px;
+    cursor:pointer;
+}
+.product-desc .count span {
+    color: #179a94;
+}
+.product-info span{
+    color: black;
+    font-size: 9px;
+}
+.side-bar-product-content .subtotal p {
+    font-weight: bold;
+    margin: 0;
+    margin-top: 1px;
+}
+.side-bar-product-content .subtotal span {
+    padding-left: 117px;
+    font-size: 1.2em;
+    color: #179a94;
+}
+.side-bar-product-content .checkout a{
+    width: 100%;
+    padding: 10px 10px;
+    text-align: center;
+    background: #179a94;
+    color:white;
+    display:inline-block;
+    cursor: pointer;
+}
 /*Scroll Helper Start*/
-
 .navHelper {
     position: fixed;
     color: #fff;
