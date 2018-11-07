@@ -785,3 +785,64 @@ section.about hr{
 .register-wrapper .buttons a.active{
     display:block;
 }
+/*SPECIFIC DOCUMENT*/
+.document-desc-wrapper{
+    margin-top:160px;
+}
+.document-desc-wrapper .document-desc-img img{
+    height:250px;
+}
+.document-desc-wrapper .add-button {
+    padding: 10px 10px;
+    display: inline-block;
+    background: black;
+    border: 2px solid black;
+    color: white;
+    transition: all 0.3s ease-in-out;
+}
+.document-desc-wrapper .add-button:hover {
+    background: white;
+    color: black;
+    transition: all 0.3s ease-in-out;
+}
+.description-wrapper.active{
+    display:block;
+}
+.review-wrapper.active{
+    display:block;
+}
+.description-wrapper{
+    display:none;
+    background:white;
+    box-shadow:5px 5px 10px rgba(0,0,0,0.3);
+}
+.review-wrapper {
+    background: white;
+    display: none;
+    box-shadow: 5px 5px 10px rgba(0,0,0,0.3);
+}
+.document-desc-wrapper .description.active,
+.document-desc-wrapper .review.active{
+    background:white;
+    color:black;
+    border-bottom-color:white;
+}
+.document-desc-wrapper .description,
+.document-desc-wrapper .review {
+    display: inline-block;
+    margin-bottom: -2px;
+    font-size:18px;
+    font-weight:normal;
+    padding: 10px 10px;
+    color: white;
+    background: black;
+    cursor: pointer;
+}
+.send-review #UserName{
+    width:200px;
+}
+.reviews img {
+    height: 150px;
+    display: inline-block;
+    width: 150px;
+}

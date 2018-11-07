@@ -432,3 +432,27 @@ var sideBarProductCloseIcon = document.querySelector(".side-bar-product .close-i
 sideBarProductCloseIcon.addEventListener("click", function () {
     sideBarProduct.classList.remove("open");
 })
+
+
+//Document Description Reviews and Descriptions
+
+var descriptionAndReview = document.querySelectorAll(".document-desc-features .features");
+var changeButtons = document.querySelectorAll(".document-desc-features span");
+
+for (var button of changeButtons) {
+    button.addEventListener("click", function () {
+        for (var button of changeButtons) {
+            button.classList.remove("active");
+        }
+        this.classList.add("active");
+
+        var dataId = this.getAttribute("data-id");
+        console.log(dataId)
+        for (var div of descriptionAndReview) {
+            div.classList.remove("active");
+            if (div.getAttribute("data-name") == dataId) {
+                div.classList.add("active");
+            }
+        }
+    })
+}

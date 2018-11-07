@@ -17,5 +17,10 @@ namespace eVekilApplication.Controllers
         {
             return View();
         }
+
+        public IActionResult DocumentDesc()
+        {
+            return View();
+        }
     }
 }
