@@ -370,9 +370,17 @@ $(window).scroll(function () {
         if (icon.offsetTop - 450 < $(window).scrollTop()) {
             //console.log("Now: " + $(window).scrollTop());
             //console.log("Previous: " + count);
-
+           
             if (icon != previcon) {
+                //console.log($("#" + icon.id + " h1.category-title"));
                 i = 0;
+            }
+            //console.log(Math.abs(i))
+            //console.log(i)
+            if (i == -40) {
+                i++;
+            } else if (i == 40) {
+                i--;
             }
 
             if (count < $(window).scrollTop()) {
