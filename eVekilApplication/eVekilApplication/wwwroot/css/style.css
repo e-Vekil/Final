@@ -96,30 +96,97 @@ li{
     transition: all 0.2s ease-in-out;
 }
 .basket-wrapper {
-    width: 150px;
+    width: 30px;
     height: 70px;
+    position: absolute;
+    top: 50%;
+    right: 10%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+.search-wrapper{
+    min-width: 30px;
+    height: 70px;
+    position:relative;
     position: absolute;
     top: 50%;
     right: 5%;
     transform: translateY(-50%);
     cursor: pointer;
 }
+.login-register-wrapper{
+    min-width: 250px;
+    height: 70px;
+    position: relative;
+    position: absolute;
+    top: 50%;
+    right: 5%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+.login-register-wrapper a{
+    color:white;
+}
 .nav-bar-wrapper .basket {
     color: white;
-    font-size: 1.2em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 1.4em;
+}
+.search-wrapper i{
+    opacity: 0;
+    color: white;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 1.4em;
+    transition: all 0.3s ease-in-out;
+}
+.search-wrapper i.out{
+    top: -10%;
+    transition: all 0.3s ease-in-out;
+}
+.search-wrapper i.in{
+    top: 50%;
+    opacity:1;
+    transition: all 0.3s ease-in-out;
+}
+.search-wrapper .search{
+    width: 250px;
+    height: 50px;
+    background: white;
+    border-radius: 20px;
+    position: absolute;
+    top: 120%;
+    opacity:0;
+    right: 0;
+    outline:none;
+    border:none;
+    padding:15px 15px;
+    transition:all 0.3s ease-in-out;
+}
+.ogin-register-wrapper{
+    min-width:250px;
+}
+.search-wrapper .search.active {
+    top: 107%;
+    opacity: 1;
+    transition: all 0.2s ease-in-out;
 }
 .nav-bar-wrapper .product-count {
     color: white;
     font-size: 9px;
     position: absolute;
     top: 37%;
-    left: 11%;
-    cursor:pointer;
+    left: 50%;
+    cursor: pointer;
     transform: translateY(-50%);
 }
 .nav-bar-wrapper.scroll-design {
     height: 80px;
-    background-color: black;
+    background-color: #8a1919;
     transition: all 0.2s ease-in-out;
     position: fixed;
     top: 0;
@@ -266,7 +333,7 @@ li{
 
 /*PRODUCT SIDE BAR*/
 .side-bar-product {
-    width: 340px;
+    width: 346px;
     height: 100%;
     position: fixed;
     top: 0;
@@ -280,8 +347,11 @@ li{
     transition:all 0.3s ease-in-out;
 }
 .side-bar-title {
-    background: #000;
+    background: #8a1919;
     color: white;
+    padding: 22px 10px;
+    /*background: #000;
+    color: white;*/
 }
 .close-icon-product{
     color: white;
@@ -300,13 +370,11 @@ li{
     top: 43%;
     right: 4%;
 }
-.close-icon-product:hover .close-icon-product::after{
-    transform: rotate(50deg);
-    transition: all 0.3s ease-in-out;
+.close-icon-product::after{
+    transform: rotate(45deg);
 }
-.close-icon-product:hover .close-icon-product::before{
-    transform: rotate(-50deg);
-    transition: all 0.3s ease-in-out;
+.close-icon-product::before{
+    transform: rotate(-45deg);
 }
 .product-info a{
     color:black;
@@ -720,20 +788,15 @@ section.about hr{
 }
 .form-wrapper .form-button {
     width: 100%;
-    border: 2px solid black;
-    background: white;
+    border: 2px solid #8a1919;
+    background: #8a1919;
     text-align: center;
-    color: black;
+    color: white;
     font-size: 15px;
     padding: 7px 0px;
     margin-top: 20px;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
-}
-.form-wrapper .form-button:hover{
-    background:black;
-    color:white;
-    transition:all 0.3s ease-in-out;
 }
 .login-form span{
     font-size:13px;
@@ -773,14 +836,14 @@ section.about hr{
     background: #ea4235;
     margin-left:2.5%;
 }
-.register-wrapper .buttons a{
-    width:25%;
-    color:white;
-    background:black;
-    font-size:15px;
-    text-align:center;
-    padding:10px 10px;
-    display:none;
+.register-wrapper .buttons a {
+    width: 25%;
+    color: white;
+    background: #8a1919;
+    font-size: 15px;
+    text-align: center;
+    padding: 10px 10px;
+    display: none;
 }
 .register-wrapper .buttons a.active{
     display:block;
@@ -795,14 +858,9 @@ section.about hr{
 .document-desc-wrapper .add-button {
     padding: 10px 10px;
     display: inline-block;
-    background: black;
-    border: 2px solid black;
+    background: #8a1919;
+    border: 2px solid #8a1919;
     color: white;
-    transition: all 0.3s ease-in-out;
-}
-.document-desc-wrapper .add-button:hover {
-    background: white;
-    color: black;
     transition: all 0.3s ease-in-out;
 }
 .description-wrapper.active{
@@ -831,11 +889,11 @@ section.about hr{
 .document-desc-wrapper .review {
     display: inline-block;
     margin-bottom: -2px;
-    font-size:18px;
-    font-weight:normal;
+    font-size: 18px;
+    font-weight: normal;
     padding: 10px 10px;
     color: white;
-    background: black;
+    background: #8a1919;
     cursor: pointer;
 }
 .send-review #UserName{
