@@ -464,3 +464,34 @@ for (var button of changeButtons) {
         }
     })
 }
+
+//SEARCH
+var iconsOfSearch = document.querySelectorAll(".search-wrapper i");
+var searchBox = document.querySelector(".search-wrapper .search");
+
+for (var icon of iconsOfSearch) {
+    icon.addEventListener("click", function () {
+        console.log("clicked");
+        if (this.nextElementSibling && this.nextElementSibling.classList.contains("searchIcon") && this.classList.contains("in")) {
+            console.log("girdi")
+            this.classList.remove("in");
+            console.log("1den kecdi");
+            this.classList.add("out");
+            this.nextElementSibling.classList.add("in");
+            this.nextElementSibling.classList.remove("out");
+        }
+        else {
+            this.classList.remove("in");
+            this.classList.add("out");
+            this.previousElementSibling.classList.add("in");
+            this.previousElementSibling.classList.remove("out");
+        }
+
+        if (this.classList.contains("open-search-box")) {
+            this.nextElementSibling.nextElementSibling.classList.add("active");
+        }
+        else {
+            this.nextElementSibling.classList.remove("active");
+        }
+    })
+}

@@ -82,6 +82,13 @@
         float: none !important;
         width: 100% !important;
     }
+
+    .search-wrapper{
+        display:none!important;
+    }
+    .login-register-wrapper{
+        display:none!important;
+    }
 }
                                                
 @media only screen  and (max-width:420px){
@@ -90,6 +97,9 @@
     }
     .intro{
        padding-top:140px!important;
+    }
+    .contact-content{
+        padding:20px 30px!important;
     }
 }
 @media only screen and (max-width:868px){
@@ -128,5 +138,20 @@
     }
     .registiration-wrapper .register-wrapper{
         margin-top:20px;
+    }
+    .search-wrapper{
+        right:0%!important;
+    }
+    .login-register-wrapper{
+        width:150px!important;
+        right:-4%!important;
+    }
+}
+@media only screen and (max-width:320px){
+    .side-bar-product{
+        width:320px!important;
+    }
+    .close-icon-product{
+        margin-left:46px!important;
     }
 }

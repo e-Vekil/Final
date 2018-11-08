@@ -27,9 +27,17 @@
                 </div>
                 <div class="col-lg-10 d-flex logo-brand align-items-center">
                     <p class="m-0"> E-VEKIL.AZ</p>
+                    <div class="login-register-wrapper d-flex align-items-center">
+                        <a asp-action="Registiration" asp-controller="Account">Login/Register</a>
+                    </div>
                     <div class="basket-wrapper d-flex align-items-center">
-                        <span href="#" class="basket text-right"><i class="fas fa-shopping-cart"></i> / 0.00 AZN</span>
+                        <span href="#" class="basket text-right"><i class="fas fa-shopping-cart"></i></span>
                         <span class="badge badge-dark product-count">0</span>
+                    </div>
+                    <div class="search-wrapper d-flex align-items-center">
+                        <i class="fas fa-search active searchIcon in open-search-box"></i>
+                        <i class="fas fa-times searchIcon out"></i>
+                        <input class="search" type="text" name="name" value="" placeholder="Search..."/>
                     </div>
                 </div>
             </header>
@@ -74,7 +82,7 @@
         <aside class="side-bar-product">
             <div class="side-bar-product-content">
                 @* Title *@
-                <header class="col-lg-12 py-4 d-flex side-bar-title">
+                <header class="col-lg-12 d-flex side-bar-title">
                     <h4>SHOPPING CART</h4>
                     <a href="#" class="close-icon-product">Close</a>
                 </header>
