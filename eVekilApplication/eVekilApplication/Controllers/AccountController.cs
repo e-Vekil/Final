@@ -8,7 +8,12 @@ namespace eVekilApplication.Controllers
 {
     public class AccountController:Controller
     {
-        public IActionResult Registiration()
+        public IActionResult Registration()
+        {
+            return View();
+        }
+
+        public IActionResult Home()
         {
             return View();
         }

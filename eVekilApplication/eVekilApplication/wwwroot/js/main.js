@@ -393,6 +393,9 @@ $(window).scroll(function () {
             }
 
             $("#" + icon.id + " h1.category-title").css("transform", "translateY(" + i + "px)");
+            $("#" + icon.id + " div.category-features").css("transform", "translate(" + i + "px,"+i+"px)");
+
+            //$("#" + icon.id + " div.category-features").css("transform", "translateY(" + i + "px)");
 
             count = $(window).scrollTop();
             previcon = icon;
@@ -404,7 +407,7 @@ $(window).scroll(function () {
 
 //REGISTIRATION DYNAMIC FADE
 var forms = document.querySelectorAll(".form-wrapper > div");
-var buttons = document.querySelectorAll(".registiration-wrapper .buttons a");
+var buttons = document.querySelectorAll(".registration-wrapper .buttons a");
 
 for (var button of buttons) {
     button.addEventListener("click", function () {
@@ -513,5 +516,18 @@ for (var icon of iconsOfSearch) {
         else {
             this.nextElementSibling.classList.remove("active");
         }
+    })
+}
+
+
+//ACCOUNT PAGE NAV CLICK
+
+var navlist = document.querySelectorAll(".account-nav-content li");
+for (var nl of navlist) {
+    nl.addEventListener("click", function () {
+        var navlistactive = document.querySelector(".account-nav-content li.active");
+        navlistactive.classList.remove("active");
+        this.classList.add("active");
+        navlistactive = this.firstElementChild;
     })
 }
