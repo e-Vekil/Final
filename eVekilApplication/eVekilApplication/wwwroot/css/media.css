@@ -73,12 +73,12 @@
         display:none!important;
     }
 
-    .documents-page-wrapper .document-item{
+   .documents .document-item{
         float:none!important;
         width: 100%!important;
     }
 
-    .documents-page-wrapper .document-item:nth-child(2n) {
+   .documents .document-item:nth-child(2n) {
         float: none !important;
         width: 100% !important;
     }

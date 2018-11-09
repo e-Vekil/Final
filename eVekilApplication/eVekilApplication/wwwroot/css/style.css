@@ -776,7 +776,7 @@ section.about hr{
 
 /*SECTION CONTACT US*/
 #ContactUs{
-    height:100vh;
+                                                 /*height:100vh;*/
     padding:50px 0px;
 }
 .contact-header h1 {
@@ -932,9 +932,17 @@ section.about hr{
 
 
 /**************ALL DOCUMENTS****************/
+section.documents{
+    overflow: hidden;
+}
+
+section.documents .container{
+    overflow: hidden;
+}
+                                                                                              
 .all-documents-header {
     margin-top: 100px;
-        position: relative;
+    position: relative;
 }
 
 .all-category-title {
@@ -1095,3 +1103,35 @@ section.about hr{
 }
 
 /**************ALL DOCUMENTS END****************/
+
+/**************FOOTER****************/
+footer{
+    margin-top: 50px;
+}
+.footer-header {
+    background-color: #8A1919;
+    color: white;
+}
+
+.footer-content {
+    background-color: #1C2331;
+    color: white;
+}
+
+.footer-content hr{
+    width: 60px; 
+    background-color: #8A1919;
+}
+
+.footer-footer {
+    background-color: #161C27;
+    color: white;
+}
+
+/*footer a{
+    font-size: 13px;
+}
+
+footer p{
+    margin-bottom: 0!important;
+}*/
