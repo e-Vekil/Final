@@ -2,7 +2,6 @@
 var w = $(window).width();
 $('#mainVideo').css('width', w);
 
-
 // ON SCROLL NAVBAR FIXED
 var navBarWrapper = document.querySelector(".nav-bar-wrapper");
 var navBarHeader = document.querySelector(".nav-bar-wrapper .header");
@@ -431,15 +430,36 @@ for (var button of buttons) {
 
 //BASKET SIDE BAR
 var basket = document.querySelector(".basket-wrapper");
-var sideBarProduct = document.querySelector(".side-bar-product");
+var sideBarProduct = document.querySelector(".side-bar-product-wrapper");
+var bodywrapper = document.querySelector(".body-wrapper");
 basket.addEventListener("click", function () {
+    bodywrapper.style.opacity = "1";
+    bodywrapper.style.visibility = "visible";
     sideBarProduct.classList.add("open");
 })
 
 var sideBarProductCloseIcon = document.querySelector(".side-bar-product .close-icon-product");
 sideBarProductCloseIcon.addEventListener("click", function () {
+    bodywrapper.style.opacity = "0";
+    bodywrapper.style.visibility = "hidden";
     sideBarProduct.classList.remove("open");
 })
+
+
+    
+                                         //Close BASKET On Windows Click
+
+$(document).ready(function () {
+    $(document).click(function (event) {
+        var clickover = $(event.target);
+        var _opened = $(".side-bar-product-wrapper").hasClass("side-bar-product-wrapper open");
+        if (_opened === true && clickover.hasClass("side-bar-product-wrapper")) {
+            bodywrapper.style.opacity = "0";
+            bodywrapper.style.visibility = "hidden";
+            $(".side-bar-product-wrapper").removeClass("open");
+        }
+    });
+});
 
 
 //Document Description Reviews and Descriptions

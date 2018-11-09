@@ -1,13 +1,26 @@
 ﻿/* DEFAULTS */
+.body-wrapper {
+    z-index: 110;
+    background-color: rgba(0,0,0,.7);
+    /*width: 0%;*/
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+    position: fixed;
+    height: 100%;
+    transition:all 0.4s ease-in-out;
+}
+
 *{
     margin:0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Muli', sans-serif;
 }
-a{
+a {
     text-decoration: none;
-                                                            cursor: pointer;
+    color: inherit;
+    cursor: pointer;
 }
 a:hover{
     text-decoration: none;
@@ -258,7 +271,7 @@ li{
     left:-100%;
     /*padding: 40px 0px 0px 60px;*/
     /*z-index: 100;*/
-                             z-index: 101;
+                             z-index: 121;
     transition: all 0.3s ease-in-out;
 }
 .side-bar-content{
@@ -332,17 +345,29 @@ li{
 }
 
 /*PRODUCT SIDE BAR*/
-.side-bar-product {
-    width: 346px;
+.side-bar-product-wrapper {
+    width: 100%;
     height: 100%;
+    /*background-color: rgba(0,0,0,.7);*/
     position: fixed;
     top: 0;
     right: -100%;
+    z-index: 121;
+    transition: all 0.3s ease-in-out;
+}
+.side-bar-product {
+    width: 346px;
+    height: 100%;
+    right: 0;
+    position: absolute;
+    /*position: fixed;*/
+    top: 0;
+    /*right: -100%;*/
     background: white;
     z-index: 120;
     transition: all 0.3s ease-in-out;
 }
-.side-bar-product.open{
+.side-bar-product-wrapper.open{
     right:0;
     transition:all 0.3s ease-in-out;
 }
@@ -904,3 +929,169 @@ section.about hr{
     display: inline-block;
     width: 150px;
 }
+
+
+/**************ALL DOCUMENTS****************/
+.all-documents-header {
+    margin-top: 100px;
+        position: relative;
+}
+
+.all-category-title {
+    color: black;
+    font-size: 4.5rem;
+    position: absolute;
+    top: -7%;
+    left: 5%;
+    font-weight: bold;
+}
+
+.documents-page-wrapper{
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.documents-page-wrapper section{
+    position: relative;
+}
+
+.all-category-text{
+    margin-top: 70px!important;
+}
+
+.all-category-text p{
+    font-size: 20px;
+}
+
+.all-category-content {
+    margin-top: 100px !important;
+    padding: 50px;
+    width: 100%;
+    position: relative;
+    box-shadow: 20px 20px 400px rgba(0, 0, 0, 0.4);
+}
+
+.document-item {
+    width: 46% !important;
+    display: block !important;
+    float: left !important;
+}
+
+.document-item:nth-child(2n){
+    float: right!important;
+    clear: none;
+}
+
+.document-info {
+    position: relative;
+    border-radius: 4px;
+    padding-left: 60px;
+    padding-bottom: 10px;
+}
+
+.document-icon {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+.document-icon a {
+    position: relative;
+    display: block;
+    width: 50px;
+    height: 70px;
+    text-align: center;
+    background: #FFFFFF;
+    border-radius: 4px;
+    padding: 0px;
+    border: #848484 solid 1px;
+    color: #6284c3;
+    box-shadow: 3px 2px 5px 1px rgba(50, 50, 50, 0.4);
+}
+
+.document-icon a:hover{
+    background-color
+}
+
+.document-icon a i {
+    font-size: 40px;
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    color: black;
+}
+
+.document-icon a span{
+    position: absolute;
+    bottom: 5px;
+    left: 10px;
+    font-size: 13px;
+    line-height: 13px;
+    color: #848484;
+}
+
+.document-icon a:hover{
+    background-color: #35538a;
+}
+
+.document-icon a:hover span,
+.document-icon a:hover i{
+    color: white;
+}
+
+.document-header h3 {
+    line-height: 1.4;
+    font-weight: 600;
+    font-size: 16px;
+    font-family: 'Lato', "Open Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    padding: 5px 10px 10px;
+    margin-bottom: 0px;
+    width: 100%;
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.document-header h3 a{
+     color: #35538a;
+}
+
+.document-price{
+    margin-top: 5px;
+}
+
+.document-price a:nth-child(1):hover{
+    background-color:#ec301c;
+    color: white;
+}
+
+.document-price a:nth-child(1) {
+    border-radius: 4px;
+    display: inline-block;
+    color: #35538a;
+    border: #35538a solid 1px;
+    font-size: 12px;
+}
+
+.document-price a:nth-child(1) span{
+    display: inline-block;
+    padding: 4px 10px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.document-price a:nth-child(2) span{
+    background: none;
+    padding: 0px;
+    font-size: 14px;
+    color: #000000;
+    font-weight: 600;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+
+.documents-filter{
+    margin: 20px;
+}
+
+/**************ALL DOCUMENTS END****************/
