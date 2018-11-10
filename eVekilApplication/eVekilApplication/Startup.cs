@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using eVekilApplication.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -24,6 +26,11 @@ namespace eVekilApplication
 
         public void ConfigureServices(IServiceCollection services)
         {
+            //services.AddDbContext<EvekilDb>(options =>
+            //{
+            //    options.UseSqlServer(Configuration["ConnectionString:DefaultConnection"]);
+            //});
+
             services.AddMvc();
         }
 
