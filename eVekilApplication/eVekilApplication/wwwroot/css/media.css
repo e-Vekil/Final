@@ -155,3 +155,15 @@
         margin-left:46px!important;
     }
 }
+
+
+@media only screen and (max-width:575px) {
+    section.about .people {
+        text-align: center;
+    }
+
+    section.about .people-img-wrapper {
+        width: 154px !important;
+        display: inline-block !important;
+    }
+}
