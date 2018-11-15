@@ -56,7 +56,6 @@ li{
 .page-cover {
     width: 100%;
     position: absolute;
-    height: 120%;
     height: 100vh;
     top: 0;
     left: 0;
@@ -611,12 +610,12 @@ li{
     position: relative;
     box-shadow: 20px 20px 400px rgba(0, 0, 0, 0.4);
 }
-.category-title{
-    color:black;
-    font-size:4.5rem;
+.category-title {
+    color: white;
+    font-size: 4.5rem;
     position: absolute;
-    top:-7%;
-    left:5%;
+    top: -7%;
+    left: 5%;
     font-weight: bold;
 }
 .main-page-wrapper .category-text {
@@ -650,11 +649,17 @@ li{
     position: relative;
     display: none;
 }
+.main-page-wrapper .category-name i.rotate {
+    transform: rotate(180deg);
+    transition: all 0.4s ease-in-out;
+}
 .main-page-wrapper .category-name i {
     font-size: 1.2em;
     position: absolute;
     top: 50%;
+    transform: rotate(0deg);
     transform: translateY(-50%);
+    transition: all 0.4s ease-in-out;
     right: 5%;
 }
 .download-button span {
@@ -892,7 +897,7 @@ section.about hr{
     margin-left:2.5%;
 }
 .register-wrapper .buttons a {
-    width: 25%;
+    width: 30%;
     color: white;
     background: #8a1919;
     font-size: 15px;
@@ -904,6 +909,11 @@ section.about hr{
     display:block;
 }
 /*SPECIFIC DOCUMENT*/
+.similar-document-item{
+box-shadow:0px 0px 10px rgba(0,0,0,0.4);
+width:100%;
+padding:10px 10px;
+}
 .document-desc-wrapper{
     margin-top:160px;
 }
@@ -1265,3 +1275,10 @@ footer {
 footer p{
     margin-bottom: 0!important;
 }*/
+
+
+.category-bg{
+    background-position: center;
+    background-size: cover;
+    background-repeat:no-repeat;    
+}

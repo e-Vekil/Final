@@ -273,21 +273,28 @@ window.addEventListener("scroll", function () {
 })
 
 // ACCORDION
+//$(document).ready(function () {
+//    var old;
+//    $(".category-name").click(function () {
+//        if (old == null) old = $(this);
+//        if ($(this).next().hasClass("active")) {
+//            $("article.category.active").removeClass("active");
+//            old.children('i').css("transform", "rotate(0deg)");
+//        }
+//        else {
+//            old.children('i').css("transform", "rotate(0deg)");
+//            $(this).children('i').css("transform", "rotate(180deg)");
+//            $("article.category.active").removeClass("active");
+//            $(this).next().toggleClass("active");
+//        }
+//        old = $(this);
+//    })
+//})
+
 $(document).ready(function () {
-    var old;
     $(".category-name").click(function () {
-        if (old == null) old = $(this);
-        if ($(this).next().hasClass("active")) {
-            $("article.category.active").removeClass("active");
-            old.children('i').css("transform", "rotate(0deg)");
-        }
-        else {
-            old.children('i').css("transform", "rotate(0deg)");
-            $(this).children('i').css("transform", "rotate(180deg)");
-            $("article.category.active").removeClass("active");
-            $(this).next().toggleClass("active");
-        }
-        old = $(this);
+        $(this).next().slideToggle(600);
+        $(this).children().last().toggleClass("rotate")
     })
 })
     // var acc = document.getElementsByClassName("category-name");
@@ -364,7 +371,7 @@ var i = 0;
 var count = 0;
 var previcon;
 $(window).scroll(function () {
-    var icons = [].slice.call(document.querySelectorAll(".sect"), 0).reverse();
+    var icons = [].slice.call(document.querySelectorAll(".sect"), 0).reverse(); 
     for (var icon of icons) {
         if (icon.offsetTop - 450 < $(window).scrollTop()) {
             //console.log("Now: " + $(window).scrollTop());
