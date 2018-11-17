@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using eVekilApplication.Data;
+using eVekilApplication.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,9 +28,32 @@ namespace eVekilApplication
 
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddDbContext<EvekilDb>(options =>
-            //{
-            //    options.UseSqlServer(Configuration["ConnectionString:DefaultConnection"]);
+            services.AddDbContext<EvekilDb>(options =>
+            {
+                options.UseSqlServer(Configuration["ConnectionString:DefaultConnection"]);
+            });
+
+            services.AddDistributedMemoryCache();
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromMinutes(15);//You can set Time   
+            });
+
+            //services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<EvekilDb>()
+                .AddDefaultTokenProviders();
+
+
+            //services.Configure<IdentityOptions>(options => {
+
+            //    options.Password.RequireLowercase = true;
+            //    options.Password.RequireUppercase = true;
+            //    options.Password.RequireDigit = true;
+
+            //    options.User.AllowedUserNameCharacters = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM";
+            //    options.User.RequireUniqueEmail = true;
+
             //});
 
             services.AddMvc();
@@ -45,7 +70,9 @@ namespace eVekilApplication
             else
                 app.UseExceptionHandler("/Home/error");
 
+            app.UseSession();
             app.UseStaticFiles();
+            app.UseAuthentication();
 
             app.UseMvc(routes => {
 
