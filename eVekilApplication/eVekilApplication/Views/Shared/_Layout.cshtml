@@ -154,127 +154,131 @@
                 </div>
             </div>
         </aside>
-        <nav class="navHelper">
-            <a id="navHelperADown" href="#InsanResurslari">
-                <span>Scroll Down</span>
-                <span id="scrollDown" class="scrollDown"></span>
-            </a>
-            <a id="navHelperAUp" class="hidden" href="#main2">
-                <span>Scroll Up</span>
-                <span id="scrollUp" class="scrollUp"></span>
-            </a>
-        </nav>
-        <!-- Side Bar End -->
-        @RenderBody()
 
-        <!-- Footer -->
-        <footer id="Footer">
-            <div class="footer-header">
-                <div class="container">
-                    <div class="row py-4 align-items-center">
-                        <div class="col-md-6 col-lg-5 text-center text-md-left mb-md-0">
-                            <h6 class="mb-0">Get connected with us on social networks!</h6>
-                        </div>
-                        <div class="col-md-6 col-lg-7 text-center text-md-right">
-                            <!-- Facebook -->
-                            <a class="fb-ic">
-                                <i class="fab fa-facebook-f mr-4"> </i>
-                            </a>
-                            <!--Instagram-->
-                            <a class="ins-ic">
-                                <i class="fab fa-instagram"> </i>
-                            </a>
+        @if (ViewBag.Title == "Index")
+        {
+            <nav class="navHelper">
+                <a id="navHelperADown" href="#InsanResurslari">
+                    <span>Scroll Down</span>
+                    <span id="scrollDown" class="scrollDown"></span>
+                </a>
+                <a id="navHelperAUp" class="hidden" href="#main2">
+                    <span>Scroll Up</span>
+                    <span id="scrollUp" class="scrollUp"></span>
+                </a>
+            </nav>
+        }
+            <!-- Side Bar End -->
+            @RenderBody()
+
+            <!-- Footer -->
+            <footer id="Footer">
+                <div class="footer-header">
+                    <div class="container">
+                        <div class="row py-4 align-items-center">
+                            <div class="col-md-6 col-lg-5 text-center text-md-left mb-md-0">
+                                <h6 class="mb-0">Get connected with us on social networks!</h6>
+                            </div>
+                            <div class="col-md-6 col-lg-7 text-center text-md-right">
+                                <!-- Facebook -->
+                                <a class="fb-ic">
+                                    <i class="fab fa-facebook-f mr-4"> </i>
+                                </a>
+                                <!--Instagram-->
+                                <a class="ins-ic">
+                                    <i class="fab fa-instagram"> </i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <div class="footer-content">
-                 <div class="container text-center text-md-left pt-5">
-                     <div class="row">
 
-                         <div class="col-md-3 col-lg-3 mx-auto mb-4">
-                             <h6 class="text-uppercase font-weight-bold">İNSAN RESURSLARI</h6>
-                             <hr class="mb-4 mt-0 d-inline-block mx-auto"">
-                             <p>
-                                 <a href="#!">Əmək müqavilələri</a>
-                             </p>
-                             <p>
-                                 <a href="#!">Əmr formaları</a>
-                             </p>
-                             <p>
-                                 <a href="#!">Təlimatlar</a>
-                             </p>
-                             <p>
-                                 <a href="#!">Sair sənədlər</a>
-                             </p>
-                         </div>
-                         <div class="col-md-3 col-lg-3 mx-auto mb-4">
-                             <h6 class="text-uppercase font-weight-bold">MÜQAVİLƏLƏR</h6>
-                             <hr class="mb-4 mt-0 d-inline-block mx-auto">
-                             <p>
-                                 <a href="#!">Alğı-satqı müqavilələri</a>
-                             </p>
-                             <p>
-                                 <a href="#!">Podrat / xidmət müqavilələri</a>
-                             </p>
-                             <p>
-                                 <a href="#!">İcarə / kirayə müqavilələri</a>
-                             </p>
-                             <p>
-                                 <a href="#!">Sair müqavilələr</a>
-                             </p>
-                         </div>
-                         <div class="col-md-3 col-lg-3 mx-auto mb-4">
-                             <h6 class="text-uppercase font-weight-bold">MƏHKƏMƏ SƏNƏDLƏRİ </h6>
-                             <hr class="mb-4 mt-0 d-inline-block mx-auto">
-                             <p>
-                                 <a href="#!">İddia ərizələri</a>
-                             </p>
-                             <p>
-                                 <a href="#!">Apellyasiya şikayətləri</a>
-                             </p>
-                             <p>
-                                 <a href="#!">Kassasiya şikayətləri</a>
-                             </p>
-                             <p>
-                                 <a href="#!">Vəsatətlər</a>
-                             </p>
-                             <p>
-                                 <a href="#!">Sair sənədlər</a>
-                             </p>
-                         </div>
-                         <div class="col-md-3 col-lg-3 mx-auto mb-md-0 mb-4">
-                             <h6 class="text-uppercase font-weight-bold">Contact</h6>
-                             <hr class="mb-4 mt-0 d-inline-block mx-auto">
-                             <p>
-                                 <i class="fa fa-home mr-3"></i> Azerbaijan, Baku, Nasimi
-                             </p>
-                             <p>
-                                 <i class="fa fa-envelope mr-3"></i> e-vekil@hotmail.com
-                             </p>
-                             <p>
-                                 <i class="fa fa-phone mr-3"></i> +994(51) 923 11 44
-                             </p>
-                             <p>
-                                 <i class="fa fa-print mr-3"></i> +994(51) 923 11 44
-                             </p>
-                         </div>
-                     </div>
-                 </div>
-            </div>
+                <div class="footer-content">
+                    <div class="container text-center text-md-left pt-5">
+                        <div class="row">
 
-            <div class="footer-footer">
-                <!-- Copyright -->
-                <div class="footer-copyright text-center py-3">
-                    © 2018 Copyright:
-                    <a href="e-vekil.az">e-Vekil.az</a>
+                            <div class="col-md-3 col-lg-3 mx-auto mb-4">
+                                <h6 class="text-uppercase font-weight-bold">İNSAN RESURSLARI</h6>
+                                <hr class="mb-4 mt-0 d-inline-block mx-auto" ">
+                                <p>
+                                    <a href="#!">Əmək müqavilələri</a>
+                                </p>
+                                <p>
+                                    <a href="#!">Əmr formaları</a>
+                                </p>
+                                <p>
+                                    <a href="#!">Təlimatlar</a>
+                                </p>
+                                <p>
+                                    <a href="#!">Sair sənədlər</a>
+                                </p>
+                            </div>
+                            <div class="col-md-3 col-lg-3 mx-auto mb-4">
+                                <h6 class="text-uppercase font-weight-bold">MÜQAVİLƏLƏR</h6>
+                                <hr class="mb-4 mt-0 d-inline-block mx-auto">
+                                <p>
+                                    <a href="#!">Alğı-satqı müqavilələri</a>
+                                </p>
+                                <p>
+                                    <a href="#!">Podrat / xidmət müqavilələri</a>
+                                </p>
+                                <p>
+                                    <a href="#!">İcarə / kirayə müqavilələri</a>
+                                </p>
+                                <p>
+                                    <a href="#!">Sair müqavilələr</a>
+                                </p>
+                            </div>
+                            <div class="col-md-3 col-lg-3 mx-auto mb-4">
+                                <h6 class="text-uppercase font-weight-bold">MƏHKƏMƏ SƏNƏDLƏRİ </h6>
+                                <hr class="mb-4 mt-0 d-inline-block mx-auto">
+                                <p>
+                                    <a href="#!">İddia ərizələri</a>
+                                </p>
+                                <p>
+                                    <a href="#!">Apellyasiya şikayətləri</a>
+                                </p>
+                                <p>
+                                    <a href="#!">Kassasiya şikayətləri</a>
+                                </p>
+                                <p>
+                                    <a href="#!">Vəsatətlər</a>
+                                </p>
+                                <p>
+                                    <a href="#!">Sair sənədlər</a>
+                                </p>
+                            </div>
+                            <div class="col-md-3 col-lg-3 mx-auto mb-md-0 mb-4">
+                                <h6 class="text-uppercase font-weight-bold">Contact</h6>
+                                <hr class="mb-4 mt-0 d-inline-block mx-auto">
+                                <p>
+                                    <i class="fa fa-home mr-3"></i> Azerbaijan, Baku, Nasimi
+                                </p>
+                                <p>
+                                    <i class="fa fa-envelope mr-3"></i> e-vekil@hotmail.com
+                                </p>
+                                <p>
+                                    <i class="fa fa-phone mr-3"></i> +994(51) 923 11 44
+                                </p>
+                                <p>
+                                    <i class="fa fa-print mr-3"></i> +994(51) 923 11 44
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <!-- Copyright -->
-            </div>
-        </footer>
-        <!-- Footer -->
-    </main>
+
+                <div class="footer-footer">
+                    <!-- Copyright -->
+                    <div class="footer-copyright text-center py-3">
+                        © 2018 Copyright:
+                        <a href="e-vekil.az">e-Vekil.az</a>
+                    </div>
+                    <!-- Copyright -->
+                </div>
+            </footer>
+            <!-- Footer -->
+        </main>
 
     <script src="~/js/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
