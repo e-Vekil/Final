@@ -70,7 +70,7 @@ namespace eVekilApplication.Controllers
             else if (rvm.Register != null)
             {
                 if (ModelState.IsValid)
-                {
+                { 
                     User user = new User()
                     {
                         UserName = rvm.Register.Surname.ToLower(),                 /*!!!!!1!!!*/
