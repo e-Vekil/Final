@@ -10,6 +10,7 @@
     <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Components\" />
     <Folder Include="Views\Shared\Components\" />
+    <Folder Include="wwwroot\uploads\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -82,7 +82,7 @@ namespace eVekilApplication.Controllers
                     if (identityResult.Succeeded)
                     {
                         HttpContext.Session.SetString("id", user.Id);
-                        HttpContext.Session.SetString("name", user.Name);
+                        HttpContext.Session.SetString("name", user.UserName);
                         await _userManager.AddToRoleAsync(user, "user");
                         var signInResult = await _signInManager.PasswordSignInAsync(user, rvm.Register.Password, true, true);
                         if (signInResult.Succeeded)
@@ -111,6 +111,13 @@ namespace eVekilApplication.Controllers
             return View();
         }
 
+
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Home", new { area = "" });
+        }
 
     }
 }

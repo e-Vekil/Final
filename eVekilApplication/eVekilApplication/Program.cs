@@ -23,16 +23,21 @@ namespace eVekilApplication
             {
                 using (EvekilDb dbContext = scopedService.ServiceProvider.GetRequiredService<EvekilDb>())
                 {
-                    //if (!dbContext.Users.Any())
-                    //{
-                    //    //#region Admins
+                    if (!dbContext.Advocates.Any())
+                    {
+                        #region Advocates
+                        Advocate NihadAliyev = new Advocate()
+                        {
+                            Name = "Nihad",
+                            Surname = "Əliyev",
+                            Email = "nihad@hgn.az",
+                            Phone = 0502503575
+                        };
+                        #endregion
 
-
-                    //    //#endregion
-
-                    //    //dbContext.Games.AddRange();
-                    //    //dbContext.SaveChanges();
-                    //}
+                        dbContext.Advocates.Add(NihadAliyev);
+                        dbContext.SaveChanges();
+                    }
 
                     UserAndRoleCreater.CreateAsync(scopedService, dbContext).Wait();
 
