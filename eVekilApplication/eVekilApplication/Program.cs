@@ -35,8 +35,32 @@ namespace eVekilApplication
                         };
                         #endregion
 
+                        #region Categories
+                        Category IR = new Category()
+                        {
+                            Name = "Insan Resurslari",
+                            Description = "numune"
+
+                            
+                        };
+                        #endregion
+
                         dbContext.Advocates.Add(NihadAliyev);
+                        dbContext.Categories.Add(IR);
                         dbContext.SaveChanges();
+
+                        #region Subcategories
+                        Subcategory ER = new Subcategory()
+                        {
+                            Name = "Emr formalari",
+                            Category = IR
+                        };
+                        #endregion
+
+                        dbContext.Subcategories.Add(ER);
+                        dbContext.SaveChanges();
+
+
                     }
 
                     UserAndRoleCreater.CreateAsync(scopedService, dbContext).Wait();

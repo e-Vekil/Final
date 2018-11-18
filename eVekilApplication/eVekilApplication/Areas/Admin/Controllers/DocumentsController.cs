@@ -66,6 +66,7 @@ namespace eVekilApplication.Areas.Admin.Controllers
                 var categoryid = Int32.Parse(Request.Form["categories"].ToString());
                 Subcategory subc = await _db.Subcategories.Where(x => x.Id == categoryid).FirstOrDefaultAsync();
 
+                document.Subcategory = subc;
                 document.Advocate = advocate;
                 document.FileName = filename;
                 document.Date = DateTime.Now;

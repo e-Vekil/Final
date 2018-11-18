@@ -259,6 +259,7 @@ namespace eVekilApplication.Migrations
                     SubcategoryId = table.Column<int>(nullable: false),
                     TermsOfUse = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
+                    Date = table.Column<DateTime>(nullable: false),
                     FileName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
