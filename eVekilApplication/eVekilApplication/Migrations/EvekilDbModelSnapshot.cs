@@ -113,6 +113,8 @@ namespace eVekilApplication.Migrations
 
                     b.Property<int>("AdvocateId");
 
+                    b.Property<DateTime>("Date");
+
                     b.Property<string>("Description");
 
                     b.Property<string>("FileName");

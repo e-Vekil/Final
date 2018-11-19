@@ -38,7 +38,7 @@ namespace eVekilApplication
                 options.IdleTimeout = TimeSpan.FromMinutes(15);//You can set Time   
             });
 
-            //services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<EvekilDb>()

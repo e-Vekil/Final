@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -17,6 +20,12 @@ namespace eVekilApplication.Models
         public int SubcategoryId { get; set; }
         public string TermsOfUse { get; set; }
         public string Description { get; set; }
+        public DateTime Date { get; set; }
         public string FileName { get; set; }
+
+        [Required]
+        [DataType(DataType.Upload)]
+        [NotMapped]
+        public IFormFile File { get; set; }
     }
 }
