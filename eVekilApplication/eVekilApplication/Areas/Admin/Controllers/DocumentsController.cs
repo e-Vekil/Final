@@ -25,10 +25,9 @@ namespace eVekilApplication.Areas.Admin.Controllers
         public IActionResult List()
         {
             List<Document> Documents;
-
             using (_db)
             {
-                Documents = _db.Documents.OrderBy(x => x.Date).ToList();
+                Documents = _db.Documents.Include(x=>x.Advocate).OrderBy(x => x.Date).ToList();
             }
 
             return View(Documents);
@@ -58,8 +57,6 @@ namespace eVekilApplication.Areas.Admin.Controllers
                     }
 
                 }
-
-
                 var advocatename = Request.Form["advocates"].ToString();
                 Advocate advocate = await _db.Advocates.Where(x => x.Email == advocatename).FirstOrDefaultAsync();
 
@@ -78,6 +75,75 @@ namespace eVekilApplication.Areas.Admin.Controllers
             }
             else
                 return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            Document document;
+            using (_db)
+            {
+                document = await _db.Documents.Include(x=>x.Advocate).Where(d => d.Id == id).FirstOrDefaultAsync();
+            }
+            return View(document);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(Document doc)
+        {
+            int id = doc.Id;
+            Document document;
+            if (ModelState.IsValid)
+            {
+                using (_db)
+                {
+                    document = await _db.Documents.FindAsync(id);
+                    if(document != null)
+                    {
+                        document.Name = doc.Name;
+                        document.TermsOfUse = doc.TermsOfUse;
+                        document.FileName = doc.FileName;
+                        document.File = doc.File;
+
+                       await  _db.SaveChangesAsync();
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "This document is not exists!");
+                    }
+
+                }
+
+                return RedirectToAction(nameof(List));
+            }
+            else
+            {
+                ModelState.AddModelError("", "Something is wrong");
+                return View();
+            }
+
+            
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            Document doc;
+            using (_db)
+            {
+                doc =  await _db.Documents.Include(x=>x.Advocate).Where(d => d.Id == id).FirstOrDefaultAsync();
+                if (doc != null)
+                {
+                    //string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroots", "uploads", doc.FileName);
+                    //if (System.IO.File.Exists(path))
+                    //{
+                    //    System.IO.File.Delete(path);
+                    //}
+                    _db.Remove(doc);
+                }
+                await _db.SaveChangesAsync();
+            }
+            return RedirectToAction(nameof(List));
         }
 
     }

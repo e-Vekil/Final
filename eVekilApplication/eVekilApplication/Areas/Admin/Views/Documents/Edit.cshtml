@@ -1,15 +1,14 @@
 ﻿@model Document
            <!-- Row -->
 <div class="row">
-
     <div class="col-lg-8 col-xlg-9 col-md-7">
         <div class="card">
             <div class="card-block">
-                <form asp-action="Add" asp-controller="Documents" method="post" enctype="multipart/form-data" class="form-horizontal form-material">
+                <form asp-action="Edit" asp-controller="Documents" method="post" enctype="multipart/form-data" class="form-horizontal form-material">
                     <div class="form-group">
                         <label asp-for="Name" class="col-md-12"></label>
                         <div class="col-md-12">
-                            <input asp-for="Name" class="form-control form-control-line">
+                            <input asp-for="Name" class="form-control form-control-line" value="@Model.Name">
                             <span asp-validation-for="Name"></span>
                         </div>
                     </div>
@@ -31,8 +30,7 @@
                         <label class="col-md-12">Advocates</label>
                         <div class="col-md-12">
                             <select name="advocates" class="form-control form-control-line">
-                                @* <option value="@Model.Advocate.Email">@Model.Advocate.Name</option>*@
-                                <option value="nihad@hgn.az">Nihad Eliyev</option>
+                                <option value="@Model.Advocate.Email">@Model.Advocate.Name</option>
                             </select>
                         </div>
                     </div>
