@@ -4,34 +4,28 @@ using System.Linq;
 using System.Threading.Tasks;
 using eVekilApplication.Data;
 using eVekilApplication.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace eVekilApplication.Controllers
+namespace eVekilApplication.Areas.Admin.Controllers
 {
-    public class HomeController : Controller
+    [Area("Admin")]
+    [Authorize(Roles = "Admin")]
+    public class CommentController : Controller
     {
         private readonly EvekilDb _db;
-        public HomeController(EvekilDb db)
+        public CommentController(EvekilDb db)
         {
             _db = db;
         }
-        public IActionResult Index()
-        {
-            return View();
-        }
 
-        public IActionResult Document()
-        {
-            return View();
-        }
-
-        public async Task<IActionResult> DocumentDesc()
+        public async Task<IActionResult> List()
         {
             List<Comment> comments;
             using (_db)
             {
-                comments = await _db.Comments.Include(c=>c.User).Include(c=>c.Document).ToListAsync();
+                comments = await _db.Comments.Include(x=>x.User).Include(x=>x.Document).ToListAsync();
             }
             return View(comments);
         }

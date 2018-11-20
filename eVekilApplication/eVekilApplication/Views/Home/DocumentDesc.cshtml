@@ -1,4 +1,5 @@
-﻿<section class="document-desc-wrapper">
+﻿@model List<Comment>
+<section class="document-desc-wrapper">
     <div class="container">
         <div class="row">
             @* DOCUMENT INFO *@
@@ -59,27 +60,31 @@
                             <hr />
                         </div>
                         @* END SEND REVIEW *@
-                              
+
 
                         @* USER REVIEWS *@
-                        <div class="col-lg-8 reviews">
-                            <div class="row">
-                                <div class="col-lg-3">
-                                    <img src="~/images/review.png" alt="Alternate Text" />
-                                </div>
-                                <div class="col-lg-9">
-                                    <div class="col-lg-12 review-owner">
-                                        <h4>Murad İbrahimkhanli</h4>
+                        @foreach (Comment comment in Model)
+                        {
+                            <div class="col-lg-12 reviews">
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <img src="~/images/review.png" alt="Alternate Text" />
                                     </div>
-                                    <div class="col-lg-12 review-date">
-                                        <p>07.11.2018 14:53</p>
-                                    </div>
-                                    <div class="col-lg-12 review-content">
-                                        <p>Şablon borc müqaviləsi forması. Əlavə edilmiş müqavilə formasında əcnəbi hüquqi şəxs tərəfindən Azərbaycan Respublikasının vətəndaşına borc verilir. Borc müqaviləsinin Azərbaycan Respublikasının notariusu tərəfindən təsdiq edilməsi nəzərdə tutulmuşdur. Bu məqsədlə hüquqi şəxsin təsis və qeydiyyat sənədlərinin notarius tərəfindən təsdiq edilmiş nüsxələri laqallaşdırılaraq və ya appostil vasitəsilə təsdiq edilməli və Azərbaycan dilinə tərcümə edilərək müqaviləni təsdiq edəcək notariusa təqdim edilməlidir.</p>
+                                    <div class="col-lg-9">
+                                        <div class="col-lg-12 review-owner">
+                                            <h4>@comment.User.Name  @comment.User.Surname</h4>
+                                        </div>
+                                        <div class="col-lg-12 review-date">
+                                            <p>@DateTime.Now.ToString("MM-dd-yyyy hh:mm")</p>
+                                        </div>
+                                        <div class="col-lg-12 review-content">
+                                            <p>@comment.Text</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        }
+                            
                         @* END USER REVIEWS *@
                     </div>
                 </div>
