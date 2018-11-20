@@ -91,18 +91,36 @@ namespace eVekilApplication.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(Document doc)
         {
-            int id = doc.Id;
             Document document;
             if (ModelState.IsValid)
             {
                 using (_db)
                 {
-                    document = await _db.Documents.FindAsync(id);
-                    if(document != null)
+                    document = await _db.Documents.FindAsync(doc.Id);
+                    document.File = doc.File;
+                    if (document != null)
                     {
+                        if (document.File.ContentType == "application/vnd.openxmlformats-officedocument.wordprocessingml.document" || document.File.ContentType == "application/msword")
+                        {
+                            string deletedFileName = Path.Combine(Directory.GetCurrentDirectory(),"wwwroot","uploads", Request.Form["DeletedFile"].ToString());
+                            if (System.IO.File.Exists(deletedFileName))
+                            {
+                                System.IO.File.Delete(deletedFileName);
+                            }
+                            string newfilename = Guid.NewGuid() + doc.File.FileName;
+
+                            string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", newfilename);
+
+                            using (FileStream fs = new FileStream(path, FileMode.Create))
+                            {
+                                await document.File.CopyToAsync(fs);
+                            }
+
+                        }
+                        
                         document.Name = doc.Name;
                         document.TermsOfUse = doc.TermsOfUse;
-                        document.FileName = doc.FileName;
+                        document.FileName = doc.File.FileName;
                         document.File = doc.File;
 
                        await  _db.SaveChangesAsync();
@@ -134,11 +152,11 @@ namespace eVekilApplication.Areas.Admin.Controllers
                 doc =  await _db.Documents.Include(x=>x.Advocate).Where(d => d.Id == id).FirstOrDefaultAsync();
                 if (doc != null)
                 {
-                    //string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroots", "uploads", doc.FileName);
-                    //if (System.IO.File.Exists(path))
-                    //{
-                    //    System.IO.File.Delete(path);
-                    //}
+                    string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", doc.FileName);
+                    if (System.IO.File.Exists(path))
+                    {
+                        System.IO.File.Delete(path);
+                    }
                     _db.Remove(doc);
                 }
                 await _db.SaveChangesAsync();
