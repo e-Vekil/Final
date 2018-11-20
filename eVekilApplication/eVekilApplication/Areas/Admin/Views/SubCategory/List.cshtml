@@ -1,10 +1,10 @@
-﻿@model List<Document>
+﻿@model List<Subcategory>
 <!-- ============================================================== -->
 <!-- Bread crumb and right sidebar toggle -->
 <!-- ============================================================== -->
 <div class="row page-titles">
-    <div class="col-md-7 d-flex justify-content-start my-2 col-4 align-self-center">
-        <a asp-action="Add" asp-controller="Documents" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down">ADD DOCUMENT</a>
+    <div class="col-md-7 my-3 col-4 align-self-center d-flex jsutify-content-start">
+        <a asp-action="Add" asp-controller="SubCategory" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down">ADD SUBCATEGORY</a>
     </div>
 </div>
 <!-- ============================================================== -->
@@ -29,10 +29,7 @@
                                     Category
                                 </th>
                                 <th>
-                                    Subcategory
-                                </th>
-                                <th>
-                                    Added date
+                                    Edit/Delete
                                 </th>
                                 <th></th>
                             </tr>
@@ -40,24 +37,18 @@
                         <tbody>
                             @foreach (var item in Model)
                             {
-                            <tr id="id_@item.Id" style="cursor: pointer;">
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Name)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Subcategory.CategoryId)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.SubcategoryId)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Date)
-                                </td>
-                                <td>
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "delete" })
-                                </td>
-                            </tr>
+                                <tr id="id_@item.Id" style="cursor: pointer;">
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Category.Name)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "delete" })
+                                    </td>
+                                </tr>
                             }
                         </tbody>
                     </table>
@@ -72,14 +63,3 @@
 
 <script src="~/js/jquery.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
-<script>
-
-    $(function () {
-        //Confirm page deletion
-        $("a.delete").click(function () {
-            if (!confirm("Confirm page deletion")) return false;
-        });
-
-    });
-
-</script>

@@ -72,7 +72,8 @@ namespace eVekilApplication.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true)
+                    Description = table.Column<string>(nullable: true),
+                    Visibilty = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {

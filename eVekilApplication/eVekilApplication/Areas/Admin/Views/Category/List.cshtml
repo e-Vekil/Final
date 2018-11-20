@@ -3,8 +3,8 @@
 <!-- Bread crumb and right sidebar toggle -->
 <!-- ============================================================== -->
 <div class="row page-titles">
-    <div class="col-md-7 col-4 align-self-center">
-        <a asp-action="Add" asp-controller="Pages" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down"> New Page</a>
+    <div class="col-md-7 my-3 col-4 align-self-center d-flex jsutify-content-start">
+        <a asp-action="Add" asp-controller="Category" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down">ADD CATEGORY</a>
     </div>
 </div>
 <!-- ============================================================== -->
@@ -29,10 +29,10 @@
                                     Category
                                 </th>
                                 <th>
-                                    Subcategory
+                                    Visibilty
                                 </th>
                                 <th>
-                                    Added date
+                                    Edit/Delete
                                 </th>
                                 <th></th>
                             </tr>
@@ -48,8 +48,15 @@
                                         @Html.DisplayFor(modelItem => item.Description)
                                     </td>
                                     <td>
-                                        <span class="badge badge-success">Active</span>
-                                        @*<span class="badge badge-success">Deactive</span>*@
+                                        @if (item.Visibilty)
+                                        {
+                                            <span class="badge badge-success">Active</span>
+
+                                        }
+                                        else
+                                        {
+                                            <span class="badge badge-danger">Deactive</span>
+                                        }
                                     </td>
                                     <td>
                                         @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |

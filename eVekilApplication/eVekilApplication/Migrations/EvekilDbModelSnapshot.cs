@@ -48,6 +48,8 @@ namespace eVekilApplication.Migrations
 
                     b.Property<string>("Name");
 
+                    b.Property<bool>("Visibilty");
+
                     b.HasKey("Id");
 
                     b.ToTable("Categories");

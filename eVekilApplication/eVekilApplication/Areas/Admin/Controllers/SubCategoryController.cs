@@ -12,21 +12,22 @@ namespace eVekilApplication.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize(Roles = "Admin")]
-    public class CategoryController : Controller
+    public class SubCategoryController : Controller
     {
         private readonly EvekilDb _db;
-        public CategoryController(EvekilDb db)
+        public SubCategoryController(EvekilDb db)
         {
             _db = db;
         }
+
         public async Task<IActionResult> List()
         {
-            List<Category> categories;
+            List<Subcategory> subcategories;
             using (_db)
             {
-                categories =  await _db.Categories.OrderBy(x=>x.Visibilty).ToListAsync();
+                subcategories = await _db.Subcategories.Include(x=>x.Category).OrderBy(x => x.Name).ToListAsync();
             }
-            return View(categories);
+            return View(subcategories);
         }
 
         [HttpGet]
@@ -36,17 +37,20 @@ namespace eVekilApplication.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(Category cat)
+        public async Task<IActionResult> Add(Subcategory subcat)
         {
             if (ModelState.IsValid)
             {
                 using (_db)
                 {
-                    Category category = new Category();
-                    category.Name = cat.Name;
-                    category.Description = cat.Description;
-                    category.Visibilty = cat.Visibilty;
-                    await _db.AddAsync(category);
+                    string categoryName = Request.Form["CategoryName"].ToString();
+                    Category category = await _db.Categories.Where(c => c.Name == categoryName).FirstOrDefaultAsync();
+
+                    Subcategory subcategory = new Subcategory();
+                    subcategory.Name = subcat.Name;
+                    subcategory.Category = category;
+                    subcategory.CategoryId = category.Id;
+                    await _db.AddAsync(subcategory);
                     await _db.SaveChangesAsync();
                 }
                 return RedirectToAction(nameof(List));
@@ -60,27 +64,31 @@ namespace eVekilApplication.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            Category category;
+            Subcategory subcategory;
             using (_db)
             {
-                category = await _db.Categories.Where(c => c.Id == id).FirstOrDefaultAsync();
+                subcategory = await _db.Subcategories.Where(c => c.Id == id).FirstOrDefaultAsync();
             }
-            return View(category);
+            return View(subcategory);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(Category cat)
+        public async Task<IActionResult> Edit(Subcategory subcat)
         {
-            Category category;
-            int id = cat.Id;
+            Subcategory subcategory;
+            int id = subcat.Id;
             if (ModelState.IsValid)
             {
                 using (_db)
                 {
-                    category = await _db.Categories.FindAsync(id);
-                    category.Name = cat.Name;
-                    category.Description = cat.Description;
-                    category.Visibilty = cat.Visibilty;
+                    subcategory = await _db.Subcategories.Include(x=>x.Category).Where(x => x.Id == id).FirstOrDefaultAsync();
+                    string categoryName = Request.Form["CategoryName"].ToString();
+                    Category category = await _db.Categories.Where(c => c.Name == categoryName).FirstOrDefaultAsync();
+
+                    subcategory.Name = subcat.Name;
+                    subcategory.Category = category;
+                    subcategory.CategoryId = category.Id;
+
                     await _db.SaveChangesAsync();
                 }
                 return RedirectToAction(nameof(List));
@@ -89,21 +97,17 @@ namespace eVekilApplication.Areas.Admin.Controllers
             {
                 return View();
             }
-           
         }
-
         public async Task<IActionResult> Delete(int id)
         {
-            Category category;
+            Subcategory subcategory;
             using (_db)
             {
-                category = await _db.Categories.FindAsync(id);
-                _db.Remove(category);
+                subcategory = await _db.Subcategories.FindAsync(id);
+                _db.Remove(subcategory);
                 await _db.SaveChangesAsync();
-
             }
             return RedirectToAction(nameof(List));
         }
-
     }
 }
