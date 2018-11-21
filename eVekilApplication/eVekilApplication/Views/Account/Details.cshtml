@@ -1,0 +1,101 @@
+﻿@model RegisterModel
+<section class="account">
+    <header class="account-header">
+        <div class="container text-center">
+            <h1>Update account information</h1>
+        </div>
+    </header>
+
+    <div class="account-content">
+        <div class="account-content-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <nav class="account-nav">
+                            <h3 class="account-nav-title">MY ACCOUNT</h3>
+                            <ul class="account-nav-content">
+                                <li class="active"><a href="javascript:void(0)">Dashboard</a></li>
+                                <li><a href="javascript:void(0)">Downloads</a></li>
+                                <li><a href="javascript:void(0)">Addresses</a></li>
+                                <li><a asp-controller="Account" asp-action="Details">Account Details</a></li>
+                                <li><a href="javascript:void(0)">Wishlist</a></li>
+                                <li><a asp-controller="Account" asp-action="Logout">Logout</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="account-details">
+                            <div class="container">
+                                <form asp-action="Details" asp-controller="Account">
+                                    <div asp-validation-summary="ModelOnly"></div>
+                                    <div class="form-group row">
+                                        <label asp-for="Name" class="col-sm-2 col-form-label">Ad:</label>
+                                        <div class="col-sm-10">
+                                            <input asp-for="Name" class="form-control" value="@Model.Name">
+                                            <span asp-validation-for="Name"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label asp-for="Surname" class="col-sm-2 col-form-label">Soyad:</label>
+                                        <div class="col-sm-10">
+                                            <input asp-for="Surname" class="form-control" id="inputEmail3" value="@Model.Surname">
+                                            <span asp-validation-for="Surname"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label asp-for="Email" class="col-sm-2 col-form-label">Elektron ünvan:</label>
+                                        <div class="col-sm-10">
+                                            <input asp-for="Email" class="form-control" value="@Model.Email">
+                                            <span asp-validation-for="Email"></span>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="changepassword" value="false" />
+                                    <input asp-for="Password" type="hidden" class="form-control" value="@Model.Name">
+                                    <input asp-for="ConfirmPassword" type="hidden" class="form-control" value="@Model.Name">
+                                    <div class="form-group row">
+                                        <div class="col-sm-10">
+                                            <button type="submit" class="btn btn-primary">Yenilə</button>
+                                        </div>
+                                    </div>
+                                </form><br />
+                                <form asp-action="Details" asp-controller="Account">
+                                    <div asp-validation-summary="ModelOnly"></div>
+                                    @*<div class="form-group row">
+                                        <label asp-for="Email" class="col-sm-2 col-form-label">Köhnə şifrə:</label>
+                                        <div class="col-sm-10">
+                                            <input asp-for="Email" class="form-control" value="Email">
+                                        </div>
+                                    </div>*@
+                                    <div class="form-group row">
+                                        <label asp-for="Password" class="col-sm-2 col-form-label">Yeni şifrə:</label>
+                                        <div class="col-sm-10">
+                                            <input asp-for="Password" class="form-control">
+                                            <span asp-validation-for="Password"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label asp-for="ConfirmPassword" class="col-sm-2 col-form-label">Yeni şifrəni təsdiq edin:</label>
+                                        <div class="col-sm-10">
+                                            <input asp-for="ConfirmPassword" class="form-control">
+                                            <span asp-validation-for="ConfirmPassword"></span>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="changepassword" value="true" />
+                                    <input asp-for="Name" type="hidden" class="form-control" value="@Model.Name">
+                                    <input asp-for="Surname" type="hidden" class="form-control" id="inputEmail3" value="@Model.Surname">
+                                    <input asp-for="Email" type="hidden" class="form-control" value="@Model.Email">
+                                    <div class="form-group row">
+                                        <div class="col-sm-10">
+                                            <button type="submit" class="btn btn-primary">Şifrəni dəyiş</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

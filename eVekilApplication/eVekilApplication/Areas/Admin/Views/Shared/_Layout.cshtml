@@ -25,6 +25,11 @@
     <link rel="stylesheet" href="~/assets/css/responsive.css">
     <!-- modernizr css -->
     <script src="~/assets/js/vendor/modernizr-2.8.3.min.js"></script>
+    <style>
+        body{
+            overflow: hidden;
+        }
+    </style>
 </head>
 
 <body>
@@ -50,7 +55,7 @@
                 <div class="menu-inner">
                     <nav>
                         <ul class="metismenu" id="menu">
-                            <li class="active">
+                            <li>
                                 <a href="javascript:void(0)" aria-expanded="true">
                                     <i class="ti-layout-sidebar-left"></i><span>
                                         Documents
@@ -74,6 +79,9 @@
                                     <li><a asp-action="List" asp-controller="SubCategory">SubCategories</a></li>
                                     <li><a asp-action="List" asp-controller="SubCategory">Add Subcategory</a></li>
                                 </ul>
+                            </li>
+                            <li>
+                                <a asp-action="list" asp-controller="Users" aria-expanded="true"><i class="ti-pie-chart"></i><span>Users</span></a>
                             </li>
                             <li>
                                 <a href="javascript:void(0)" aria-expanded="true"><i class="ti-pie-chart"></i><span>Notifcations</span></a>

@@ -8,6 +8,11 @@ namespace eVekilApplication.Models.ViewModels
 {
     public class RegisterModel
     {
+        public RegisterModel()
+        {
+
+        }
+
         [Required]
         [DataType(DataType.Text)]
         public string Name { get; set; }
