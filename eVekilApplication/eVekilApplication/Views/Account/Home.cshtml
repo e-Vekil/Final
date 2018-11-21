@@ -14,12 +14,11 @@
                             <h3 class="account-nav-title">MY ACCOUNT</h3>
                             <ul class="account-nav-content">
                                 <li class="active"><a href="javascript:void(0)">Dashboard</a></li>
-                                <li><a href="javascript:void(0)">Orders</a></li>
                                 <li><a href="javascript:void(0)">Downloads</a></li>
                                 <li><a href="javascript:void(0)">Addresses</a></li>
-                                <li><a href="javascript:void(0)">Account Details</a></li>
+                                <li><a asp-controller="Account" asp-action="Details">Account Details</a></li>
                                 <li><a href="javascript:void(0)">Wishlist</a></li>
-                                <li><a href="javascript:void(0)">Logout</a></li>
+                                <li><a asp-controller="Account" asp-action="Logout">Logout</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -27,7 +26,7 @@
                         <div class="account-details">
                             <p>
                                 Hello <strong>Ibrahimkhanli</strong> (not <strong>Ibrahimkhanli</strong>?
-                                <a asp-controller="Home" asp-action="Index">Log out</a>)
+                                <a asp-controller="Account" asp-action="Logout">Log out</a>)
                             </p>
                             <p>
                                 From your account dashboard you can view your 
@@ -37,29 +36,41 @@
                             </p>
                             <div class="account-options">
                                 <div class="row m-0">
+                                    @*<div class="box account-option account-option-order col-md-6 col-lg-4">
+                                        <a href="#">
+                                            <span><i class="fas fa-hand-holding-usd"></i>@*<i class="fas fa-box-open"></i></span>
+                                            Orders
+                                        </a>
+                                    </div>*@
                                     <div class="box account-option account-option-order col-md-6 col-lg-4">
-                                        <span><i class="fas fa-hand-holding-usd"></i>@*<i class="fas fa-box-open"></i>*@</span>
-                                        <a href="#">Orders</a>
+                                        <a href="#">
+                                            <span><i class="fas fa-cloud-download-alt"></i></span>
+                                            Downloads
+                                        </a>
                                     </div>
                                     <div class="box account-option account-option-order col-md-6 col-lg-4">
-                                        <span><i class="fas fa-cloud-download-alt"></i></span>
-                                        <a href="#">Downloads</a>
+                                        <a href="#">
+                                            <span><i class="fas fa-map-marker-alt"></i></span>
+                                            Addresses
+                                        </a>
                                     </div>
                                     <div class="box account-option account-option-order col-md-6 col-lg-4">
-                                        <span><i class="fas fa-map-marker-alt"></i></span>
-                                        <a href="#">Addresses</a>
+                                        <a asp-controller="Account" asp-action="Details">
+                                            <span><i class="far fa-user"></i></span>
+                                            Account Details
+                                        </a>
                                     </div>
                                     <div class="box account-option account-option-order col-md-6 col-lg-4">
-                                        <span><i class="far fa-user"></i></span>
-                                        <a href="#">Account Details</a>
+                                        <a href="#">
+                                            <span><i class="far fa-heart"></i></span>
+                                            Wishlist
+                                        </a>
                                     </div>
                                     <div class="box account-option account-option-order col-md-6 col-lg-4">
-                                        <span><i class="far fa-heart"></i></span>
-                                        <a href="#">Wishlist</a>
-                                    </div>
-                                    <div class="box account-option account-option-order col-md-6 col-lg-4">
-                                        <span><i class="fas fa-sign-out-alt"></i>></span>
-                                        <a href="#">Logout</a>
+                                        <a asp-controller="Account" asp-action="Logout">
+                                            <span><i class="fas fa-sign-out-alt"></i></span>
+                                            Logout
+                                        </a>
                                     </div>
                                 </div>
                             </div>

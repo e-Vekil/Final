@@ -23,6 +23,7 @@ namespace eVekilApplication.Models
                     Surname = "Ibrahimkhanli",
                     UserName = "ibrahimkhanli",
                     Email = "ibrahimxanlimurad@hotmail.com",
+                    RegisterDate = DateTime.Now
                 };
                 var identityResult = await userManager.CreateAsync(user, "Murad1234@");
                 if (identityResult.Succeeded)
