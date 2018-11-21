@@ -27,7 +27,7 @@ namespace eVekilApplication.Areas.Admin.Controllers
             List<Document> Documents;
             using (_db)
             {
-                Documents = _db.Documents.Include(x=>x.Advocate).OrderBy(x => x.Date).ToList();
+                Documents = _db.Documents.Include(x=>x.Advocate).Include(x=>x.Subcategory).ThenInclude(x=>x.Category).OrderBy(x => x.Date).ToList();
             }
 
             return View(Documents);
@@ -83,7 +83,7 @@ namespace eVekilApplication.Areas.Admin.Controllers
             Document document;
             using (_db)
             {
-                document = await _db.Documents.Include(x=>x.Advocate).Where(d => d.Id == id).FirstOrDefaultAsync();
+                document = await _db.Documents.Include(x=>x.Advocate).Include(x=>x.Subcategory).Where(d => d.Id == id).FirstOrDefaultAsync();
             }
             return View(document);
         }
@@ -92,28 +92,45 @@ namespace eVekilApplication.Areas.Admin.Controllers
         public async Task<IActionResult> Edit(Document doc)
         {
             Document document;
+            string advocateName = Request.Form["advocates"].ToString();
+            Advocate advocate =  await _db.Advocates.Where(x => x.Email == advocateName).FirstOrDefaultAsync();
+            doc.Advocate = advocate;
+            doc.AdvocateId = advocate.Id;
+            string subcategoryName = Request.Form["Categories"].ToString();
+            Subcategory subcategory =  await _db.Subcategories.Where(s => s.Name == subcategoryName).FirstOrDefaultAsync();
+            doc.Subcategory = subcategory;
+            doc.SubcategoryId = subcategory.Id;
+            if(Request.Form["File"].ToString() != "")
+            {
+                doc.FileName = doc.File.FileName;
+            }
             if (ModelState.IsValid)
             {
                 using (_db)
                 {
                     document = await _db.Documents.FindAsync(doc.Id);
-                    document.File = doc.File;
+                    if (document.File!=null)
+                    {
+                        document.File = doc.File;
+                    }
                     if (document != null)
                     {
                         if (document.File.ContentType == "application/vnd.openxmlformats-officedocument.wordprocessingml.document" || document.File.ContentType == "application/msword")
                         {
                             string deletedFileName = Path.Combine(Directory.GetCurrentDirectory(),"wwwroot","uploads", Request.Form["DeletedFile"].ToString());
-                            if (System.IO.File.Exists(deletedFileName))
+                            if(Request.Form["File"].ToString() != null)
                             {
-                                System.IO.File.Delete(deletedFileName);
-                            }
-                            string newfilename = Guid.NewGuid() + doc.File.FileName;
+                                if (!System.IO.File.Exists(deletedFileName))
+                                {
+                                    string newfilename = Guid.NewGuid() + doc.FileName;
 
-                            string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", newfilename);
+                                    string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", newfilename);
 
-                            using (FileStream fs = new FileStream(path, FileMode.Create))
-                            {
-                                await document.File.CopyToAsync(fs);
+                                    using (FileStream fs = new FileStream(path, FileMode.Create))
+                                    {
+                                        await document.File.CopyToAsync(fs);
+                                    }
+                                }
                             }
 
                         }

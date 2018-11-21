@@ -29,7 +29,7 @@
                     <div class="form-group">
                         <label class="col-md-12">Advocates</label>
                         <div class="col-md-12">
-                            <select name="advocates" class="form-control form-control-line">
+                            <select name="advocates" id="advocates" asp-for="Advocate" class="form-control form-control-line">
                                 <option value="@Model.Advocate.Email">@Model.Advocate.Name</option>
                             </select>
                         </div>
@@ -37,8 +37,8 @@
                     <div class="form-group">
                         <label class="col-md-12">Subcategory</label>
                         <div class="col-md-12">
-                            <select name="categories" class="form-control form-control-line">
-                                <option value="1">Emr</option>
+                            <select asp-for="Subcategory" name ="categories" id="Categories" class="form-control form-control-line">
+                                <option value="@Model.Subcategory.Name">@Model.Subcategory.Name</option>
                             </select>
                         </div>
                     </div>
@@ -46,7 +46,7 @@
                     <div class="form-group">
                         <label asp-for="File" class="col-md-12"></label>
                         <div class="col-md-12">
-                            <input type="file" accept="image/*" asp-for="File" class="form-control form-control-line">
+                            <input type="file" accept="image/*" asp-for="File" name="File" id="File" class="form-control form-control-line">
                             <img src="#" alt="Image Preview" id="imgpreview" />
                             <span asp-validation-for="File"></span>
                         </div>
