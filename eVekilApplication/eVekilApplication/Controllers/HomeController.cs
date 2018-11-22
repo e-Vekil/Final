@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using eVekilApplication.Data;
 using eVekilApplication.Models;
+using eVekilApplication.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,19 +22,28 @@ namespace eVekilApplication.Controllers
             return View();
         }
 
-        public IActionResult Document()
+        public IActionResult Document(int id)
         {
+            ViewBag.categoryId = $"{id}";
             return View();
         }
 
-        public async Task<IActionResult> DocumentDesc()
+        public async Task<IActionResult> DocumentDesc(int id)
         {
-            List<Comment> comments;
-            using (_db)
+            ViewBag.documentId = $"{id}";
+            int count = await _db.Comments.Where(x => x.DocumentId == id).CountAsync();
+            ViewBag.commentCount = count;
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> SendReview(CommentViewModel cm)
+        {
+            
+            if (ModelState.IsValid)
             {
-                comments = await _db.Comments.Include(c=>c.User).Include(c=>c.Document).ToListAsync();
+
             }
-            return View(comments);
+            return View();
         }
     }
 }

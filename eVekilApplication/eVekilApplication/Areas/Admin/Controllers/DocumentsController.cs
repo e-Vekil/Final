@@ -76,7 +76,6 @@ namespace eVekilApplication.Areas.Admin.Controllers
             else
                 return View();
         }
-
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
@@ -134,7 +133,6 @@ namespace eVekilApplication.Areas.Admin.Controllers
                             }
 
                         }
-                        
                         document.Name = doc.Name;
                         document.TermsOfUse = doc.TermsOfUse;
                         document.FileName = doc.File.FileName;

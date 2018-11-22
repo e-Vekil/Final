@@ -197,26 +197,7 @@ $(document).ready(function () {
     });
 });
 
-                                                //Dynamic ScrollRight
-$(window).scroll(function () {
-    var icons = [].slice.call(document.querySelectorAll(".sect"), 0).reverse();
-    var activeIcon = document.querySelector(".slider-wrapper li .slider.active");
-    //console.log(activeIcon);
-    for (var icon of icons) {
-        if (icon.offsetTop-50 < $(window).scrollTop()) {
-            if (icon.id != activeIcon.attributes[2].value){
-                activeIcon.classList.remove("active");
-                document.querySelector(".slider." + icon.id).classList.add("active");
-                //window.location.hash = icon.id;
-                //location.replace('https://localhost:44343/#' + icon.id);
-                //parent.location.hash = icon.id;
-                history.replaceState('', 'https://localhost:44343/#main2', '#'+icon.id);
-                //setTimeout(function (e) { e.preventDefault();window.location.hash = icon.id; return false }, 700);
-            }
-            break;
-        }
-    }
-});
+
 
                                         //Scroll Left(NAVBAR)
 
@@ -257,6 +238,27 @@ for (var icon of icons) {
     })
 }
 
+//Dynamic ScrollRight
+
+//$(window).scroll(function () {
+//    var icons = [].slice.call(document.querySelectorAll(".sect"), 0).reverse();
+//    var activeIcon = document.querySelector(".slider-wrapper li .slider.active");
+//    //console.log(activeIcon);
+//    for (var icon of icons) {
+//        if (icon.offsetTop - 50 < $(window).scrollTop()) {
+//            if (icon.id != activeIcon.attributes[2].value) {
+//                activeIcon.classList.remove("active");
+//                document.querySelector(".slider." + icon.id).classList.add("active");
+//                //window.location.hash = icon.id;
+//                //location.replace('https://localhost:44343/#' + icon.id);
+//                //parent.location.hash = icon.id;
+//                history.replaceState('', 'https://localhost:44343/#main2', '#' + icon.id);
+//                //setTimeout(function (e) { e.preventDefault();window.location.hash = icon.id; return false }, 700);
+//            }
+//            break;
+//        }
+//    }
+//});
 // Change Slider Color
 
 window.addEventListener("scroll", function () {

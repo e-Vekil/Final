@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using eVekilApplication.Data;
 using eVekilApplication.Models;
+using eVekilApplication.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -21,12 +22,18 @@ namespace eVekilApplication.Areas.Admin.Controllers
         }
         public async Task<IActionResult> List()
         {
-            List<Comment> comments;
+            CommentViewModel cm = new CommentViewModel();
             using (_db)
             {
-                comments = await _db.Comments.Include(x=>x.User).Include(x=>x.Document).ToListAsync();
+                cm.Comments = await _db.Comments.Include(x=>x.User).Include(x=>x.Document).ToListAsync();
             }
-            return View(comments);
+            return View(cm);
         }
+
+        public async Task<IActionResult> Accept()
+        {
+            return View();
+        }
+     
     }
 }
