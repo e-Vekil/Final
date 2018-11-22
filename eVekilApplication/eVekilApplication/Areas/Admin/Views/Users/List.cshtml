@@ -22,6 +22,9 @@
                                     Username
                                 </th>
                                 <th>
+                                    Roles
+                                </th>
+                                <th>
                                     Date
                                 </th>
                                 <th></th>
@@ -43,12 +46,15 @@
                                     <td>
                                         @Html.DisplayFor(modelItem => item.UserName)
                                     </td>
+                                     <td>
+                                        @Html.DisplayFor(modelItem => item.Roles)
+                                    </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.RegisterDate)
                                     </td>
                                     <td>
                                         @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                                        @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "delete" })
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.Id, roles = item.Roles }, new { @class = "delete" })
                                     </td>
                                 </tr>
                             }
@@ -63,14 +69,13 @@
 <!-- End PAge Content -->
 <!-- ============================================================== -->
 
-<script src="~/js/jquery.min.js"></script>
-<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
 
     $(function () {
         //Confirm page deletion
         $("a.delete").click(function () {
-            if (!confirm("Confirm page deletion")) return false;
+            if (!confirm("Confirm user deletion")) return false;
         });
 
     });

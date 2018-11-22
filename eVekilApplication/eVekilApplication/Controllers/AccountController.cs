@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace eVekilApplication.Controllers
@@ -121,36 +122,58 @@ namespace eVekilApplication.Controllers
         [HttpGet]
         public async Task<IActionResult> Details()
         {
-            string userid = HttpContext.Session.GetString("id");
+            //string userid = HttpContext.Session.GetString("id");
             //bool success = Int32.TryParse(HttpContext.Session.GetString("id"), out userid);
+            //User userr = await _db.Users.Where(x => x.Id == userid).FirstOrDefaultAsync();
 
-            User userr = await _db.Users.Where(x => x.Id == userid).FirstOrDefaultAsync();
 
-            RegisterModel user = new RegisterModel()
-            {
-                Name = userr.Name,
-                Surname = userr.Surname,
-                Email = userr.Email,
-                Password = "",
-                ConfirmPassword = ""
-            };
-            if (userr == null)
-            {
-                return Content("Siz daxil olmamısınız.");
-            }
+            //ClaimsPrincipal currentUser = this.User;
+            //var currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+
+            //RegisterModel user = new RegisterModel()
+            //{
+            //    Name = userr.Name,
+            //    Surname = userr.Surname,
+            //    Email = userr.Email,
+            //    Password = "",
+            //    ConfirmPassword = ""
+            //};
+            //if (userr == null)
+            //{
+            //    return Content("Siz daxil olmamısınız.");
+            //}
+            //else
+            //{
+            //    return View(user);
+            //};
+
+            User user = await _userManager.GetUserAsync(HttpContext.User);
+            if (user == null) return Content("Siz daxil olmamısınız.");
             else
             {
-                return View(user);
-            };
+                DetailsViewModel ruser = new DetailsViewModel()
+                {
+                    Name = user.Name,
+                    Surname = user.Surname,
+                    Username = user.UserName,
+                    Email = user.Email,
+                    Password = "",
+                    ConfirmPassword = "",
+                    OldPassword = ""
+                };
+
+                return View(ruser);
+            }
 
         }
 
         [HttpPost]
-        public async Task<IActionResult> Details(RegisterModel rvm)
+        public async Task<IActionResult> Details(DetailsViewModel rvm)
         {
-            string userid = HttpContext.Session.GetString("id");
-            User user = await _db.Users.Where(x => x.Id == userid).FirstOrDefaultAsync();
-
+            //string userid = HttpContext.Session.GetString("id");
+            //User user = await _db.Users.Where(x => x.Id == userid).FirstOrDefaultAsync();
+            User user = await _userManager.GetUserAsync(HttpContext.User);
 
             if (user == null)
             {
@@ -163,25 +186,40 @@ namespace eVekilApplication.Controllers
                 {
                     if (ModelState.IsValid)
                     {
-                        var result = await _userManager.AddPasswordAsync(user, rvm.Password);
-                        if (result.Errors.Count() > 1) ModelState.AddModelError("", "Şifrə səhv formadadır");
+
+                        //user.PasswordHash = AppUserManager.PasswordHasher.HashPassword(usermodel.Password);
+                        //var result = await AppUserManager.UpdateAsync(user);
 
 
-                        result = await _userManager.RemovePasswordAsync(user);
+                        //var result = await _userManager.RemovePasswordAsync(user);
+                        //if (result.Succeeded)
+                        //{
+                        //    result = await _userManager.AddPasswordAsync(user, rvm.Password);
+                        //    if (result.Succeeded)
+                        //    {
+                        //        return RedirectToAction(nameof(Home));
+                        //    }
+                        //    else
+                        //    {
+                        //        //ModelState.AddModelError("", result.Errors.FirstOrDefault().ToString());
+                        //        return View(rvm);
+                        //    }
+                        //}
+                        //else return Content("Nə isə səhv getdi...");
+
+                        var result = await _userManager.ChangePasswordAsync(user, rvm.OldPassword, rvm.Password);
                         if (result.Succeeded)
                         {
-                            result = await _userManager.AddPasswordAsync(user, rvm.Password);
-                            if (result.Succeeded)
-                            {
-                                return RedirectToAction(nameof(Home));
-                            }
-                            else
-                            {
-                                //ModelState.AddModelError("", result.Errors.FirstOrDefault().ToString());
-                                return View(rvm);
-                            }
+                            return RedirectToAction(nameof(Home));
                         }
-                        else return Content("Nə isə səhv getdi...");
+                        else
+                        {
+                            foreach (var item in result.Errors)
+                            {
+                                ModelState.AddModelError("", item.Description);
+                            }
+                            return View(rvm);
+                        }
                     }
                     else
                     {
@@ -195,6 +233,7 @@ namespace eVekilApplication.Controllers
                     {
                         user.Name = rvm.Name;
                         user.Surname = rvm.Surname;
+                        user.UserName = rvm.Username;
                         user.Email = rvm.Email;
 
                         await _db.SaveChangesAsync();
