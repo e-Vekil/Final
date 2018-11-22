@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace eVekilApplication.Models.ViewModels
 {
-    public class RegisterModel
+    public class DetailsViewModel
     {
         [Required]
         [DataType(DataType.Text)]
@@ -14,6 +14,9 @@ namespace eVekilApplication.Models.ViewModels
         [Required]
         [DataType(DataType.Text)]
         public string Surname { get; set; }
+        [Required]
+        [DataType(DataType.Text)]
+        public string Username { get; set; }
         [Required]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
@@ -24,8 +27,7 @@ namespace eVekilApplication.Models.ViewModels
         [DataType(DataType.Password)]
         [Compare("Password")]
         public string ConfirmPassword { get; set; }
-
-
+        [Required]
         [DataType(DataType.Password)]
         public string OldPassword { get; set; }
     }
