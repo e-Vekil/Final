@@ -17,7 +17,7 @@ namespace eVekilApplication
     {
         public static void Main(string[] args)
         {
-            IWebHost webHost = CreateWebHostBuilder(args).Build();
+            IWebHost webHost = CreateWebHostBuilder(args).Build(); 
 
             using (IServiceScope scopedService = webHost.Services.CreateScope())
             {
