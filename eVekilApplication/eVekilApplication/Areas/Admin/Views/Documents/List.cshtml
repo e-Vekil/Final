@@ -45,10 +45,10 @@
                                     @Html.DisplayFor(modelItem => item.Name)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Subcategory.CategoryId)
+                                   @item.Subcategory.Category.Name
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.SubcategoryId)
+                                   @item.Subcategory.Name
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Date)

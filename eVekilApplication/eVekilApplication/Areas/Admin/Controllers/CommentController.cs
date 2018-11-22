@@ -19,7 +19,6 @@ namespace eVekilApplication.Areas.Admin.Controllers
         {
             _db = db;
         }
-
         public async Task<IActionResult> List()
         {
             List<Comment> comments;
