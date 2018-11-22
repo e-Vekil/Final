@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using eVekilApplication.Areas.Admin.Models.ViewModels;
 using eVekilApplication.Data;
 using eVekilApplication.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -15,9 +16,15 @@ namespace eVekilApplication.Areas.Admin.Controllers
     [Authorize(Roles = "Admin")]
     public class UsersController : Controller
     {
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly EvekilDb _db;
-        public UsersController(EvekilDb db)
+        public UsersController(RoleManager<IdentityRole> roleManager, UserManager<User> userManager, SignInManager<User> signInManager, EvekilDb db)
         {
+            _userManager = userManager;
+            _signInManager = signInManager;
+            _roleManager = roleManager;
             _db = db;
         }
 
@@ -49,6 +56,63 @@ namespace eVekilApplication.Areas.Admin.Controllers
 
             }
             return View(users);
+        }
+
+        [HttpGet]
+        public IActionResult Edit(string id)
+        {
+            EditUserViewModel evm = new EditUserViewModel()
+            {
+                Id = id,
+                Password = "",
+                ConfirmPassword = ""
+            };
+            return View(evm);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit( EditUserViewModel evm)
+        {
+            User user = await _db.Users.Where(x => x.Id == evm.Id).FirstOrDefaultAsync();
+            string ispassword = Request.Form["changepassword"].ToString();
+
+            if (ispassword == "true")
+            {
+                if (ModelState.IsValid)
+                {
+                    user.PasswordHash = _userManager.PasswordHasher.HashPassword(user, evm.Password);
+                    var result = await _userManager.UpdateAsync(user);
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction(nameof(List));
+                    }
+                    else
+                    {
+                        foreach (var item in result.Errors)
+                        {
+                            ModelState.AddModelError("", item.Description);
+                        }
+                        return View(evm);
+                    }
+                }
+                else return View(evm);
+            }else
+            {
+                string role = Request.Form["roles"].ToString();
+                var result = await _userManager.AddToRoleAsync(user, role);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction(nameof(List));
+                }
+                else
+                {
+                    foreach (var item in result.Errors)
+                    {
+                        ModelState.AddModelError("", item.Description);
+                    }
+                    return View(evm);
+                }
+            }
         }
 
 
