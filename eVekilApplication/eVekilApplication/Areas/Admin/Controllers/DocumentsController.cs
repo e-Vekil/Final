@@ -134,6 +134,7 @@ namespace eVekilApplication.Areas.Admin.Controllers
 
                         }
                         document.Name = doc.Name;
+                        document.Price = doc.Price;
                         document.TermsOfUse = doc.TermsOfUse;
                         document.FileName = doc.File.FileName;
                         document.File = doc.File;

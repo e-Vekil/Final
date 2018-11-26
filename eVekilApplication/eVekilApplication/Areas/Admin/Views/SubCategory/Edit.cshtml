@@ -15,9 +15,10 @@
                     <div class="form-group">
                         <label asp-for="Category" class="col-md-12"></label>
                         <div class="col-md-12">
-                            <select asp-for="Category" id="CategoryName" name="CategoryName" class="form-control form-control-line">
+                            @*<select asp-for="Category" id="CategoryName" name="CategoryName" class="form-control form-control-line">
                                 <option>Insan Resurslari</option>
-                            </select>
+                            </select>*@
+                            <vc:categories></vc:categories>
                             <span asp-validation-for="Category"></span>
                         </div>
                     </div>
