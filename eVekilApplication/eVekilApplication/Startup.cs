@@ -44,7 +44,6 @@ namespace eVekilApplication
                 .AddEntityFrameworkStores<EvekilDb>()
                 .AddDefaultTokenProviders();
 
-
             //services.Configure<IdentityOptions>(options => {
 
             //    options.Password.RequireLowercase = true;

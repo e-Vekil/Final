@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using eVekilApplication.Data;
 using eVekilApplication.Models;
 using eVekilApplication.Models.ViewModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -31,19 +32,39 @@ namespace eVekilApplication.Controllers
         public async Task<IActionResult> DocumentDesc(int id)
         {
             ViewBag.documentId = $"{id}";
-            int count = await _db.Comments.Where(x => x.DocumentId == id).CountAsync();
+            int count = await _db.Comments.Where(x => x.DocumentId == id && x.Status == true).CountAsync();
             ViewBag.commentCount = count;
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> SendReview(CommentViewModel cm)
+        public async Task<IActionResult> SendReview(Comment cm)
         {
-            
+
+            int documentId = Convert.ToInt32(Request.Form["DocumentId"]);
+            Document doc =  await _db.Documents.Where(d => d.Id == documentId).Include(d => d.Advocate).Include(d => d.Subcategory).ThenInclude(d => d.Category).FirstOrDefaultAsync();
+            Comment comment = new Comment();
+            comment.Document = doc;
+            comment.DocumentId = documentId;
+            comment.Text = cm.Text;
+            string username = HttpContext.Session.GetString("id");
+            if (username != null)
+            {
+                User user = await _db.Users.Where(u => u.Id == username).FirstOrDefaultAsync();
+                comment.User = user;
+            }
+            comment.Status = false;
             if (ModelState.IsValid)
             {
+                await _db.Comments.AddAsync(comment);
+                await _db.SaveChangesAsync();
+                return RedirectToAction("DocumentDesc",new { id = doc.Id });
+            }
+            else
+            {
+                ModelState.AddModelError("", "Sehv Bash Verdi");
+                return View();
 
             }
-            return View();
         }
     }
 }

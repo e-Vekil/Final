@@ -22,8 +22,8 @@ namespace eVekilApplication.Components
             DocumentDescViewModel dm = new DocumentDescViewModel();
             CommentViewModel cm = new CommentViewModel();
             Document document = await _db.Documents.Where(d => d.Id == id).Include(d => d.Subcategory).ThenInclude(d => d.Category).FirstOrDefaultAsync();
-            cm.Comments = await _db.Comments.Where(c=>c.DocumentId == id).Include(c => c.User).Include(c => c.Document).ToListAsync();
-
+            cm.Comments = await _db.Comments.OrderByDescending(c=>c.Id).Where(c=>c.DocumentId == id).Include(c => c.User).Include(c => c.Document).ToListAsync();
+            
             dm.Cm = cm;
             dm.Document = document;
 

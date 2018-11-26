@@ -33,56 +33,61 @@
     <div class="col-lg-12 review-wrapper features py-5" data-name="2">
         <div class="row">
             @* SEND REVIEW *@
-            <div class="col-lg-12 send-review">
-                <header class="col-lg-12 p-0"></header>
-                <form method="post" asp-action="SendReview" asp-controller="Home">
-                    <div class="form-group">
-                        <label asp-for="Cm.User.Name">Username or email</label>
-                        <input asp-for="Cm.User.Name" type="text" class="form-control" id="UserName" required>
-                    </div>
-                    @*<div class="form-group">
-                        <label for="Rate" style="display:block;">Your Rate</label>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
-                    </div>*@
-                    <div class="form-group">
-                        <label asp-for="Cm.Text">Your Review</label>
-                        <textarea asp-for="Cm.Text" class="form-control" id="Question" rows="4" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-success">GÖNDƏR</button>
-                    </div>
-                </form>
-                <hr />
-            </div>
+            @if (Context.Session.GetString("isLoged") == "true")
+            {
+                <div class="col-lg-12 send-review">
+                    <header class="col-lg-12 p-0"></header>
+                    <form method="post" asp-action="SendReview" asp-controller="Home">
+                        @*<div class="form-group">
+                            <label asp-for="Cm.User.Name">Username or email</label>
+                            <input asp-for="Cm.User.Name" type="text" class="form-control" id="UserName" required>
+                        </div>*@
+                        <div class="form-group">
+                            <label asp-for="Cm.Text">Your Review</label>
+                            <textarea asp-for="Cm.Text" class="form-control" id="Question" rows="4" required></textarea>
+                        </div>
+                        <input type="number" asp-for="Document.Id" id="DocumentId" name="DocumentId" style="opacity:0;" />
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success">GÖNDƏR</button>
+                        </div>
+                    </form>
+                    <hr />
+                </div>
+            }
+            else
+            {
+                <div class="col-lg-12">
+                    <h3>Zəhmət Olmasa Sisteme Daxil Olun</h3>
+                </div>
+            }
             @* END SEND REVIEW *@
 
 
             @* USER REVIEWS *@
             @foreach (Comment comment in Model.Cm.Comments)
+            {
+                @if (comment.Status)
                 {
-                <div class="col-lg-12 reviews">
-                    <div class="row">
-                        <div class="col-lg-3">
-                            <img src="~/images/review.png" alt="Alternate Text" />
-                        </div>
-                        <div class="col-lg-9">
-                            <div class="col-lg-12 review-owner">
-                                <h4>@comment.User.Name  @comment.User.Surname</h4>
+                    <div class="col-lg-12 reviews">
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <img src="~/images/review.png" alt="Alternate Text" />
                             </div>
-                            <div class="col-lg-12 review-date">
-                                <p>@DateTime.Now.ToString("MM-dd-yyyy hh:mm")</p>
-                            </div>
-                            <div class="col-lg-12 review-content">
-                                <p>@comment.Text</p>
+                            <div class="col-lg-9">
+                                <div class="col-lg-12 review-owner">
+                                    <h4>@comment.User.Name  @comment.User.Surname</h4>
+                                </div>
+                                <div class="col-lg-12 review-date">
+                                    <p>@DateTime.Now.ToString("MM-dd-yyyy hh:mm")</p>
+                                </div>
+                                <div class="col-lg-12 review-content">
+                                    <p>@comment.Text</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    </div>
-                  }
+                }
+            }
 
             @* END USER REVIEWS *@
         </div>

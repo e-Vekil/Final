@@ -21,7 +21,6 @@ namespace eVekilApplication.Components
             HomeViewModel hm = new HomeViewModel();
             var categories = await _db.Categories.ToListAsync();
             hm.Categories = categories;
-            
             return View(hm);
         }
     }
