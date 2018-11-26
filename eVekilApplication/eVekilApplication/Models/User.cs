@@ -16,5 +16,6 @@ namespace eVekilApplication.Models
 
         [NotMapped]
         public string Roles { get; set; }
+        public bool IsViewed { get; set; }
     }
 }

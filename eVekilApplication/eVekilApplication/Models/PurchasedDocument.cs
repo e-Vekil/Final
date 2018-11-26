@@ -13,5 +13,7 @@ namespace eVekilApplication.Models
         public User User { get; set; }
         public int UserId { get; set; }
         public DateTime Date { get; set; }
+        public int Price { get; set; }
+        public bool IsViewed { get; set; }
     }
 }
