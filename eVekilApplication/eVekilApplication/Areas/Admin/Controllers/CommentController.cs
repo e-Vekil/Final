@@ -25,7 +25,7 @@ namespace eVekilApplication.Areas.Admin.Controllers
             CommentViewModel cm = new CommentViewModel();
             using (_db)
             {
-                cm.Comments = await _db.Comments.Include(x=>x.User).Include(x=>x.Document).ToListAsync();
+                cm.Comments = await _db.Comments.Include(x=>x.User).Include(x=>x.Document).OrderByDescending(x=>x.Id).ToListAsync();
             }
             return View(cm);
         }
