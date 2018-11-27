@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Threading.Tasks;
 using eVekilApplication.Data;
+using eVekilApplication.Infrastructure.Email;
 using eVekilApplication.Models;
 using eVekilApplication.Models.ViewModels;
 using Microsoft.AspNetCore.Http;
@@ -40,9 +43,8 @@ namespace eVekilApplication.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> SendReview(Comment cm)
+        public async Task<IActionResult> SendReview(Comment cm,[FromServices]EmailService service)
         {
-
             int documentId = Convert.ToInt32(Request.Form["DocumentId"]);
             Document doc =  await _db.Documents.Where(d => d.Id == documentId).Include(d => d.Advocate).Include(d => d.Subcategory).ThenInclude(d => d.Category).FirstOrDefaultAsync();
             Comment comment = new Comment();
@@ -61,6 +63,10 @@ namespace eVekilApplication.Controllers
             {
                 await _db.Comments.AddAsync(comment);
                 await _db.SaveChangesAsync();
+                var message = $@"Istifadəçi : {HttpContext.Session.GetString("name")} 
+Sənədin Adı:{doc.Name} 
+ Comment:{comment.Text}";
+                await service.SendMailAsync("tarlanru@code.edu.az","NEW COMMENT", message);
                 return RedirectToAction("DocumentDesc",new { id = doc.Id });
             }
             else
@@ -70,8 +76,6 @@ namespace eVekilApplication.Controllers
 
             }
         }
-
-
         [HttpGet]
         public async Task<IActionResult> AddToShoppingCard(int id)
         {
