@@ -303,16 +303,17 @@ namespace eVekilApplication.Controllers
                     await _db.SaveChangesAsync();
                 }
 
-                List<PurchasedDocument> AllPD = await _db.PurchasedDocuments.Where(x => x.User == user).ToListAsync();
+                //List<PurchasedDocument> AllPD = await _db.PurchasedDocuments.Where(x => x.User == user).ToListAsync();
 
-                if (AllPD.Count == SP.Count)
-                {
-                    _db.ShoppingCard.RemoveRange(SP);
-                    await _db.SaveChangesAsync();
+                //if (AllPD.Count == SP.Count)
+                //{
+                //}
+                //else return Content("Nə isə səhv getdi, xahiş edirik bizimlə əlaqə saxlayın.");
 
-                    return RedirectToAction("Index", "Home");
-                }
-                else return Content("Nə isə səhv getdi, xahiş edirik bizimlə əlaqə saxlayın.");
+                _db.ShoppingCard.RemoveRange(SP);
+                await _db.SaveChangesAsync();
+
+                return RedirectToAction("Index", "Home");
 
             }
 
