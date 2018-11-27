@@ -22,12 +22,17 @@ namespace eVekilApplication.Areas.Admin.Controllers
         }
         public async Task<IActionResult> List()
         {
-            CommentViewModel cm = new CommentViewModel();
-            using (_db)
+            //using (_db)
+            //{
+                 List<Comment> Comments = await _db.Comments.Include(x => x.User).Include(x => x.Document).OrderByDescending(x => x.Id).ToListAsync();
+            //}
+
+            foreach (var comment in Comments)
             {
-                cm.Comments = await _db.Comments.Include(x=>x.User).Include(x=>x.Document).OrderByDescending(x=>x.Id).ToListAsync();
+                comment.IsViewed = true;
+                await _db.SaveChangesAsync();
             }
-            return View(cm);
+            return View(Comments);
         }
 
         public async Task<IActionResult> Accept(int id)

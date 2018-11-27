@@ -25,10 +25,10 @@ namespace eVekilApplication.Areas.Admin.Controllers
         public IActionResult List()
         {
             List<Document> Documents;
-            using (_db)
-            {
+            //using (_db)
+            //{
                 Documents = _db.Documents.Include(x=>x.Advocate).Include(x=>x.Subcategory).ThenInclude(x=>x.Category).OrderBy(x => x.Date).ToList();
-            }
+            //}
 
             return View(Documents);
         }
@@ -80,10 +80,10 @@ namespace eVekilApplication.Areas.Admin.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             Document document;
-            using (_db)
-            {
+            //using (_db)
+            //{
                 document = await _db.Documents.Include(x=>x.Advocate).Include(x=>x.Subcategory).Where(d => d.Id == id).FirstOrDefaultAsync();
-            }
+            //}
             return View(document);
         }
 
@@ -105,8 +105,8 @@ namespace eVekilApplication.Areas.Admin.Controllers
             }
             if (ModelState.IsValid)
             {
-                using (_db)
-                {
+                //using (_db)
+                //{
                     document = await _db.Documents.FindAsync(doc.Id);
                     if (document.File!=null)
                     {
@@ -146,7 +146,7 @@ namespace eVekilApplication.Areas.Admin.Controllers
                         ModelState.AddModelError("", "This document is not exists!");
                     }
 
-                }
+                //}
 
                 return RedirectToAction(nameof(List));
             }
@@ -163,8 +163,8 @@ namespace eVekilApplication.Areas.Admin.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             Document doc;
-            using (_db)
-            {
+            //using (_db)
+            //{
                 doc =  await _db.Documents.Include(x=>x.Advocate).Where(d => d.Id == id).FirstOrDefaultAsync();
                 if (doc != null)
                 {
@@ -176,7 +176,7 @@ namespace eVekilApplication.Areas.Admin.Controllers
                     _db.Remove(doc);
                 }
                 await _db.SaveChangesAsync();
-            }
+            //}
             return RedirectToAction(nameof(List));
         }
 

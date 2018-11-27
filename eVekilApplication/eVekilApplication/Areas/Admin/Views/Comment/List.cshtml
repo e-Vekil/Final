@@ -1,4 +1,4 @@
-﻿@model CommentViewModel
+﻿@model List<Comment>
 <!-- ============================================================== -->
 <!-- Bread crumb and right sidebar toggle -->
 <!-- ============================================================== -->
@@ -38,7 +38,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var item in Model.Comments)
+                            @foreach (var item in Model)
                             {
                                 <tr id="id_@item.Id" style="cursor: pointer;">
                                     <td>

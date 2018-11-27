@@ -1,0 +1,43 @@
+﻿@model NotificationBellViewModel
+
+<li class="dropdown">
+    <i class="ti-bell dropdown-toggle" data-toggle="dropdown">
+        <span>@Model.Count</span>
+    </i>
+    <div class="dropdown-menu bell-notify-box notify-box">
+        <span class="notify-title">You have @Model.Count new notifications <a href="#">view all</a></span>
+        <div class="nofity-list">
+
+            @foreach (var item in Model.PurchasedDocuments)
+            {
+                <a asp-action="List" asp-controller="Downloads" class="notify-item">
+                    <div class="notify-thumb"><i class="ti-key btn-danger"></i></div>
+                    <div class="notify-text">
+                        <p><b>@item.User.UserName</b> has purchased <b>@item.Document.Name</b> for <b>@item.Price AZN</b></p>
+                        <span>@item.Date</span>
+                    </div>
+                </a>
+            }
+            @foreach (var item in Model.Users)
+            {
+                <a asp-action="List" asp-controller="Users" class="notify-item">
+                    <div class="notify-thumb"><i class="ti-key btn-primary"></i></div>
+                    <div class="notify-text">
+                        <p><b>@item.UserName</b> has created account.</p>
+                        <span>@item.RegisterDate</span>
+                    </div>
+                </a>
+            }
+            @foreach (var item in Model.Comments)
+            {
+                <a asp-action="List" asp-controller="Comments" class="notify-item">
+                    <div class="notify-thumb"> <i class="ti-comments-smiley btn-info"></i></div>
+                    <div class="notify-text">
+                        <p><b>@item.User.UserName</b> commented on document <b>@item.Document.Name</b></p>
+                        <span>@item.Date</span>
+                    </div>
+                </a>
+            }
+        </div>
+    </div>
+</li>
