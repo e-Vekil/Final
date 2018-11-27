@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using eVekilApplication.Data;
 
 namespace eVekilApplication.Migrations
 {
     [DbContext(typeof(EvekilDb))]
-    partial class EvekilDbModelSnapshot : ModelSnapshot
+    [Migration("20181126235905_ShoppingCard2")]
+    partial class ShoppingCard2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -236,13 +238,15 @@ namespace eVekilApplication.Migrations
 
                     b.Property<int>("DocumentId");
 
-                    b.Property<string>("UserId");
+                    b.Property<int>("UserId");
+
+                    b.Property<string>("UserId1");
 
                     b.HasKey("Id");
 
                     b.HasIndex("DocumentId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId1");
 
                     b.ToTable("ShoppingCard");
                 });
@@ -520,7 +524,7 @@ namespace eVekilApplication.Migrations
 
                     b.HasOne("eVekilApplication.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId1");
                 });
 
             modelBuilder.Entity("eVekilApplication.Models.Subcategory", b =>

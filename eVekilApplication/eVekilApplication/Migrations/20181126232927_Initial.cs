@@ -42,24 +42,25 @@ namespace eVekilApplication.Migrations
                 name: "AspNetUsers",
                 columns: table => new
                 {
+                    AccessFailedCount = table.Column<int>(nullable: false),
+                    EmailConfirmed = table.Column<bool>(nullable: false),
+                    LockoutEnabled = table.Column<bool>(nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(nullable: false),
                     Id = table.Column<string>(nullable: false),
                     UserName = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
                     Email = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(nullable: false),
                     PasswordHash = table.Column<string>(nullable: true),
                     SecurityStamp = table.Column<string>(nullable: true),
                     ConcurrencyStamp = table.Column<string>(nullable: true),
                     PhoneNumber = table.Column<string>(nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
-                    LockoutEnabled = table.Column<bool>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     Surname = table.Column<string>(nullable: true),
-                    RegisterDate = table.Column<DateTime>(nullable: false)
+                    RegisterDate = table.Column<DateTime>(nullable: false),
+                    IsViewed = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -257,6 +258,7 @@ namespace eVekilApplication.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
+                    Price = table.Column<int>(nullable: false),
                     AdvocateId = table.Column<int>(nullable: false),
                     SubcategoryId = table.Column<int>(nullable: false),
                     TermsOfUse = table.Column<string>(nullable: true),
@@ -318,7 +320,8 @@ namespace eVekilApplication.Migrations
                     DocumentId = table.Column<int>(nullable: false),
                     UserId1 = table.Column<string>(nullable: true),
                     UserId = table.Column<int>(nullable: false),
-                    Status = table.Column<bool>(nullable: false)
+                    Status = table.Column<bool>(nullable: false),
+                    IsViewed = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -381,7 +384,9 @@ namespace eVekilApplication.Migrations
                     DocumentId = table.Column<int>(nullable: false),
                     UserId1 = table.Column<string>(nullable: true),
                     UserId = table.Column<int>(nullable: false),
-                    Date = table.Column<DateTime>(nullable: false)
+                    Date = table.Column<DateTime>(nullable: false),
+                    Price = table.Column<int>(nullable: false),
+                    IsViewed = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {

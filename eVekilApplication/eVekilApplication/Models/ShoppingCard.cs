@@ -5,15 +5,12 @@ using System.Threading.Tasks;
 
 namespace eVekilApplication.Models
 {
-    public class PurchasedDocument
+    public class ShoppingCard
     {
         public int Id { get; set; }
+        public User User { get; set; }
+        public string UserId { get; set; }
         public Document Document { get; set; }
         public int DocumentId { get; set; }
-        public User User { get; set; }
-        public int UserId { get; set; }
-        public DateTime Date { get; set; }
-        public int Price { get; set; }
-        public bool IsViewed { get; set; }
     }
 }

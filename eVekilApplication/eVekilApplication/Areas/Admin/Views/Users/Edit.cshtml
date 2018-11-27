@@ -23,20 +23,35 @@
                     <input asp-for="Id" type="hidden" value="@Model.Id" />
                     <input type="hidden" name="changepassword" value="true" />
 
-                    <input type="submit" value="Send" />
+                    <input type="submit" value="Change" class="btn btn-primary" style="margin: 10px 20px;" />
                 </form>
                 <form asp-action="Edit" asp-controller="Users" method="post" class="form-horizontal form-material">
                     <div class="form-group">
-                        <label class="col-md-12">Advocates</label>
+                        <label class="col-md-12">Add Role</label>
                         <div class="col-md-12">
                             <select name="roles" class="form-control form-control-line">
+                                <option value="" selected disabled hidden>Choose here</option>
                                 <option value="User">User</option>
                                 <option value="Admin">Admin</option>
                             </select>
                         </div>
                     </div>
                     <input type="hidden" name="changepassword" value="false" />
-                    <input type="submit" value="Send" />
+                    <input type="submit" value="Add Role" class="btn btn-primary" style="margin: 10px 20px;" />
+                </form>
+                <form asp-action="Edit" asp-controller="Users" method="post" class="form-horizontal form-material">
+                    <div class="form-group">
+                        <label class="col-md-12">Delete Role</label>
+                        <div class="col-md-12">
+                            <select name="rolesdelete" class="form-control form-control-line">
+                                <option value="" selected disabled hidden>Choose here</option>
+                                <option value="User">User</option>
+                                <option value="Admin">Admin</option>
+                            </select>
+                        </div>
+                    </div>
+                    <input type="hidden" name="changepassword" value="false" />
+                    <input type="submit" value="Delete Role" class="btn btn-primary" style="margin: 10px 20px;" />
                 </form>
             </div>
         </div>

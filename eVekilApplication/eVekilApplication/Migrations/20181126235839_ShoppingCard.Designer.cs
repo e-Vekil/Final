@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using eVekilApplication.Data;
 
 namespace eVekilApplication.Migrations
 {
     [DbContext(typeof(EvekilDb))]
-    partial class EvekilDbModelSnapshot : ModelSnapshot
+    [Migration("20181126235839_ShoppingCard")]
+    partial class ShoppingCard
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -234,7 +236,7 @@ namespace eVekilApplication.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("DocumentId");
+                    b.Property<int?>("DocumentId");
 
                     b.Property<string>("UserId");
 
@@ -515,8 +517,7 @@ namespace eVekilApplication.Migrations
                 {
                     b.HasOne("eVekilApplication.Models.Document", "Document")
                         .WithMany()
-                        .HasForeignKey("DocumentId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("DocumentId");
 
                     b.HasOne("eVekilApplication.Models.User", "User")
                         .WithMany()

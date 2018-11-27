@@ -12,6 +12,7 @@ namespace eVekilApplication.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public int Price { get; set; }
         public Advocate Advocate { get; set; }
         public int AdvocateId { get; set; }
         //public Category Category { get; set; }

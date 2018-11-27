@@ -6,6 +6,7 @@ using eVekilApplication.Data;
 using eVekilApplication.Models;
 using eVekilApplication.Models.ViewModels;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,8 +15,10 @@ namespace eVekilApplication.Controllers
     public class HomeController : Controller
     {
         private readonly EvekilDb _db;
-        public HomeController(EvekilDb db)
+        private readonly UserManager<User> _userManager;
+        public HomeController(UserManager<User> userManager, EvekilDb db)
         {
+            _userManager = userManager;
             _db = db;
         }
         public IActionResult Index()
@@ -64,6 +67,54 @@ namespace eVekilApplication.Controllers
                 ModelState.AddModelError("", "Sehv Bash Verdi");
                 return View();
 
+            }
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> AddToShoppingCard(int id)
+        {
+            User user = await _userManager.GetUserAsync(HttpContext.User);
+            Document doc = await _db.Documents.Include(x=>x.Advocate).Include(x=>x.Subcategory).Where(x => x.Id == id).FirstOrDefaultAsync();
+
+            if (user == null)
+            {
+                return RedirectToAction("Registration", "Account");
+            }
+            else
+            {
+                ShoppingCard SC = new ShoppingCard();
+                SC.Document = doc;
+                SC.DocumentId = doc.Id;
+                SC.User = user;
+                SC.UserId = user.Id;
+
+                await _db.ShoppingCard.AddAsync(SC);
+                await _db.SaveChangesAsync();
+
+                return RedirectToAction(nameof(Index));
+            }
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteFromShoppingCard(int id)
+        {
+            User user = await _userManager.GetUserAsync(HttpContext.User);
+            Document doc = await _db.Documents.Include(x => x.Advocate).Include(x => x.Subcategory).Where(x => x.Id == id).FirstOrDefaultAsync();
+
+            if (user == null)
+            {
+                return RedirectToAction("Registration", "Account");
+            }
+            else
+            {
+                ShoppingCard SC = await _db.ShoppingCard.Where(x => x.Document == doc && x.UserId == user.Id).FirstOrDefaultAsync();
+
+                _db.ShoppingCard.Remove(SC);
+                await _db.SaveChangesAsync();
+
+                return RedirectToAction(nameof(Index));
             }
         }
     }

@@ -32,6 +32,9 @@
                                     Subcategory
                                 </th>
                                 <th>
+                                    Price
+                                </th>
+                                <th>
                                     Added date
                                 </th>
                                 <th></th>
@@ -45,10 +48,13 @@
                                     @Html.DisplayFor(modelItem => item.Name)
                                 </td>
                                 <td>
-                                   @item.Subcategory.Category.Name
+                                    @item.Subcategory.Category.Name
                                 </td>
                                 <td>
-                                   @item.Subcategory.Name
+                                    @item.Subcategory.Name
+                                </td>
+                                <td>
+                                    @item.Price
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Date)

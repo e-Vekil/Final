@@ -99,19 +99,41 @@ namespace eVekilApplication.Areas.Admin.Controllers
             }else
             {
                 string role = Request.Form["roles"].ToString();
-                var result = await _userManager.AddToRoleAsync(user, role);
-                if (result.Succeeded)
+                string roledelete = Request.Form["rolesdelete"].ToString();
+
+                if (role == "")
                 {
-                    return RedirectToAction(nameof(List));
+                    var result = await _userManager.RemoveFromRoleAsync(user, roledelete);
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction(nameof(List));
+                    }
+                    else
+                    {
+                        foreach (var item in result.Errors)
+                        {
+                            ModelState.AddModelError("", item.Description);
+                        }
+                        return View(evm);
+                    }
                 }
                 else
                 {
-                    foreach (var item in result.Errors)
+                    var result = await _userManager.AddToRoleAsync(user, role);
+                    if (result.Succeeded)
                     {
-                        ModelState.AddModelError("", item.Description);
+                        return RedirectToAction(nameof(List));
                     }
-                    return View(evm);
+                    else
+                    {
+                        foreach (var item in result.Errors)
+                        {
+                            ModelState.AddModelError("", item.Description);
+                        }
+                        return View(evm);
+                    }
                 }
+                
             }
         }
 

@@ -65,10 +65,10 @@ namespace eVekilApplication.Areas.Admin.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             Subcategory subcategory;
-            using (_db)
-            {
+            //using (_db)
+            //{
                 subcategory = await _db.Subcategories.Where(c => c.Id == id).FirstOrDefaultAsync();
-            }
+            //}
             return View(subcategory);
         }
 
@@ -79,8 +79,8 @@ namespace eVekilApplication.Areas.Admin.Controllers
             int id = subcat.Id;
             if (ModelState.IsValid)
             {
-                using (_db)
-                {
+                //using (_db)
+                //{
                     subcategory = await _db.Subcategories.Include(x=>x.Category).Where(x => x.Id == id).FirstOrDefaultAsync();
                     string categoryName = Request.Form["CategoryName"].ToString();
                     Category category = await _db.Categories.Where(c => c.Name == categoryName).FirstOrDefaultAsync();
@@ -90,7 +90,7 @@ namespace eVekilApplication.Areas.Admin.Controllers
                     subcategory.CategoryId = category.Id;
 
                     await _db.SaveChangesAsync();
-                }
+                //}
                 return RedirectToAction(nameof(List));
             }
             else

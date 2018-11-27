@@ -10,14 +10,14 @@ using eVekilApplication.Data;
 namespace eVekilApplication.Migrations
 {
     [DbContext(typeof(EvekilDb))]
-    [Migration("20181122060849_Initial")]
+    [Migration("20181126232927_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
+                .HasAnnotation("ProductVersion", "2.1.1-rtm-30846")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -64,6 +64,8 @@ namespace eVekilApplication.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("DocumentId");
+
+                    b.Property<bool>("IsViewed");
 
                     b.Property<bool>("Status");
 
@@ -124,6 +126,8 @@ namespace eVekilApplication.Migrations
                     b.Property<string>("FileName");
 
                     b.Property<string>("Name");
+
+                    b.Property<int>("Price");
 
                     b.Property<int>("SubcategoryId");
 
@@ -209,6 +213,10 @@ namespace eVekilApplication.Migrations
 
                     b.Property<int>("DocumentId");
 
+                    b.Property<bool>("IsViewed");
+
+                    b.Property<int>("Price");
+
                     b.Property<int>("UserId");
 
                     b.Property<string>("UserId1");
@@ -253,6 +261,8 @@ namespace eVekilApplication.Migrations
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
+
+                    b.Property<bool>("IsViewed");
 
                     b.Property<bool>("LockoutEnabled");
 

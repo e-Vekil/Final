@@ -22,6 +22,7 @@ namespace eVekilApplication.Data
         public virtual DbSet<PropertySubcategory> PropertySubcategories { get; set; }
         public virtual DbSet<PropertyValue> PropertyValues { get; set; }
         public virtual DbSet<PurchasedDocument> PurchasedDocuments { get; set; }
+        public virtual DbSet<ShoppingCard> ShoppingCard { get; set; }
 
     }
 }
