@@ -52,9 +52,9 @@ namespace eVekilApplication.Controllers
                 if (ModelState.IsValid) 
                 {
                     User user = await _userManager.FindByEmailAsync(rvm.Login.Email);
-                    var userRole = await _userManager.IsInRoleAsync(user, "Admin");
                     if (user != null)
                     {
+                        var userRole = await _userManager.IsInRoleAsync(user, "Admin");
                         var result = await _signInManager.PasswordSignInAsync(user, rvm.Login.Password, rvm.Login.IsRemmember, true);
                         if (result.Succeeded)
                         {
