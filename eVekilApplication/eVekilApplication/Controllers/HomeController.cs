@@ -51,7 +51,7 @@ namespace eVekilApplication.Controllers
             comment.Document = doc;
             comment.DocumentId = documentId;
             comment.Text = cm.Text;
-            comment.IsViewed = false;
+            comment.Date = DateTime.Now;
             string username = HttpContext.Session.GetString("id");
             if (username != null)
             {

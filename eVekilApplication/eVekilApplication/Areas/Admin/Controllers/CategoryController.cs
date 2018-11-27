@@ -22,10 +22,10 @@ namespace eVekilApplication.Areas.Admin.Controllers
         public async Task<IActionResult> List()
         {
             List<Category> categories;
-            using (_db)
-            {
+            //using (_db)
+            //{
                 categories =  await _db.Categories.OrderBy(x=>x.Visibilty).ToListAsync();
-            }
+            //}
             return View(categories);
         }
 
@@ -40,15 +40,15 @@ namespace eVekilApplication.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                using (_db)
-                {
+                //using (_db)
+                //{
                     Category category = new Category();
                     category.Name = cat.Name;
                     category.Description = cat.Description;
                     category.Visibilty = cat.Visibilty;
                     await _db.AddAsync(category);
-                    await _db.SaveChangesAsync();
-                }
+                    //await _db.SaveChangesAsync();
+                //}
                 return RedirectToAction(nameof(List));
             }
             else
@@ -61,10 +61,10 @@ namespace eVekilApplication.Areas.Admin.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             Category category;
-            using (_db)
-            {
+            //using (_db)
+            //{
                 category = await _db.Categories.Where(c => c.Id == id).FirstOrDefaultAsync();
-            }
+            //}
             return View(category);
         }
 
@@ -75,14 +75,14 @@ namespace eVekilApplication.Areas.Admin.Controllers
             int id = cat.Id;
             if (ModelState.IsValid)
             {
-                using (_db)
-                {
+                //using (_db)
+                //{
                     category = await _db.Categories.FindAsync(id);
                     category.Name = cat.Name;
                     category.Description = cat.Description;
                     category.Visibilty = cat.Visibilty;
                     await _db.SaveChangesAsync();
-                }
+                //}
                 return RedirectToAction(nameof(List));
             }
             else
@@ -95,13 +95,13 @@ namespace eVekilApplication.Areas.Admin.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             Category category;
-            using (_db)
-            {
+            //using (_db)
+            //{
                 category = await _db.Categories.FindAsync(id);
                 _db.Remove(category);
                 await _db.SaveChangesAsync();
 
-            }
+            //}
             return RedirectToAction(nameof(List));
         }
 

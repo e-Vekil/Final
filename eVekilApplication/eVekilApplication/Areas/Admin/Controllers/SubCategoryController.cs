@@ -23,10 +23,10 @@ namespace eVekilApplication.Areas.Admin.Controllers
         public async Task<IActionResult> List()
         {
             List<Subcategory> subcategories;
-            using (_db)
-            {
+            //using (_db)
+            //{
                 subcategories = await _db.Subcategories.Include(x=>x.Category).OrderBy(x => x.Name).ToListAsync();
-            }
+            //}
             return View(subcategories);
         }
 
@@ -41,8 +41,8 @@ namespace eVekilApplication.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                using (_db)
-                {
+                //using (_db)
+                //{
                     string categoryName = Request.Form["CategoryName"].ToString();
                     Category category = await _db.Categories.Where(c => c.Name == categoryName).FirstOrDefaultAsync();
 
@@ -52,7 +52,7 @@ namespace eVekilApplication.Areas.Admin.Controllers
                     subcategory.CategoryId = category.Id;
                     await _db.AddAsync(subcategory);
                     await _db.SaveChangesAsync();
-                }
+                //}
                 return RedirectToAction(nameof(List));
             }
             else
@@ -101,12 +101,12 @@ namespace eVekilApplication.Areas.Admin.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             Subcategory subcategory;
-            using (_db)
-            {
+            //using (_db)
+            //{
                 subcategory = await _db.Subcategories.FindAsync(id);
                 _db.Remove(subcategory);
                 await _db.SaveChangesAsync();
-            }
+            //}
             return RedirectToAction(nameof(List));
         }
     }

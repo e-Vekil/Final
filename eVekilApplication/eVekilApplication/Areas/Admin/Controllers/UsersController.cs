@@ -31,10 +31,16 @@ namespace eVekilApplication.Areas.Admin.Controllers
         public async Task<IActionResult> List()
         {
             List<User> users;
-            using (_db)
-            {
+            //using (_db)
+            //{
                 users = await _db.Users.OrderByDescending(x => x.RegisterDate).ToListAsync();
                 //List<string> userRoles = null;
+
+                foreach(var user in users)
+                {
+                    user.IsViewed = true;
+                    await _db.SaveChangesAsync();
+                }
 
                 foreach (var user in users)
                 {
@@ -54,7 +60,7 @@ namespace eVekilApplication.Areas.Admin.Controllers
 
                 }
 
-            }
+            //}
             return View(users);
         }
 
@@ -142,8 +148,8 @@ namespace eVekilApplication.Areas.Admin.Controllers
         public async Task<IActionResult> Delete(string id, string roles)
         {
             User user;
-            using (_db)
-            {
+            //using (_db)
+            //{
                 user = await _db.Users.Where(x => x.Id == id).FirstOrDefaultAsync();
                 if (user != null)
                 {
@@ -151,7 +157,7 @@ namespace eVekilApplication.Areas.Admin.Controllers
                     else _db.Users.Remove(user);
                 }
                 await _db.SaveChangesAsync();
-            }
+            //}
             return RedirectToAction(nameof(List));
         }
 

@@ -52,9 +52,9 @@ namespace eVekilApplication.Controllers
                 if (ModelState.IsValid) 
                 {
                     User user = await _userManager.FindByEmailAsync(rvm.Login.Email);
-                    var userRole = await _userManager.IsInRoleAsync(user, "Admin");
                     if (user != null)
                     {
+                        var userRole = await _userManager.IsInRoleAsync(user, "Admin");
                         var result = await _signInManager.PasswordSignInAsync(user, rvm.Login.Password, rvm.Login.IsRemmember, true);
                         if (result.Succeeded)
                         {
@@ -258,6 +258,64 @@ namespace eVekilApplication.Controllers
                    
                 }
             };
+
+        }
+
+
+        public async Task<IActionResult> PurchasedDocuments()
+        {
+            List<PurchasedDocument> Downloads;
+            User user = await _userManager.GetUserAsync(HttpContext.User);
+
+            if (user == null) return Content("Siz daxil olmamısınız.");
+            else
+            {
+                Downloads = await _db.PurchasedDocuments.Include(x => x.User).Include(x => x.Document).Where(x => x.User == user).OrderByDescending(x => x.Date).ToListAsync();
+
+                return View(Downloads);
+            }
+        }
+
+
+
+        public async Task<IActionResult> Purchase()
+        {
+            User user = await _userManager.GetUserAsync(HttpContext.User);
+
+            if (user == null) return Content("Siz daxil olmamısınız.");
+            else
+            {
+                List<ShoppingCard> SP = await _db.ShoppingCard.Include(x => x.User).Include(x => x.Document).Where(x => x.User == user).ToListAsync();
+                foreach (var item in SP)
+                {
+                    PurchasedDocument PD = new PurchasedDocument()
+                    {
+                        User = item.User,
+                        UserId = item.UserId,
+                        Document = item.Document,
+                        DocumentId = item.DocumentId,
+                        Date = DateTime.Now,
+                        Price = item.Document.Price,
+                        IsCompleted = true
+                    };
+
+                    await _db.PurchasedDocuments.AddAsync(PD);
+                    await _db.SaveChangesAsync();
+                }
+
+                //List<PurchasedDocument> AllPD = await _db.PurchasedDocuments.Where(x => x.User == user).ToListAsync();
+
+                //if (AllPD.Count == SP.Count)
+                //{
+                //}
+                //else return Content("Nə isə səhv getdi, xahiş edirik bizimlə əlaqə saxlayın.");
+
+                _db.ShoppingCard.RemoveRange(SP);
+                await _db.SaveChangesAsync();
+
+                return RedirectToAction("Index", "Home");
+
+            }
 
         }
 
