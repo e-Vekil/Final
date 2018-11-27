@@ -7,6 +7,7 @@ using eVekilApplication.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace eVekilApplication.Areas.Admin.Controllers
 {

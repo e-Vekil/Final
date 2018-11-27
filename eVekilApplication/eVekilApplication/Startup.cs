@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using eVekilApplication.Data;
+using eVekilApplication.Infrastructure.Email;
 using eVekilApplication.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -38,6 +39,18 @@ namespace eVekilApplication
                 options.IdleTimeout = TimeSpan.FromMinutes(15);//You can set Time   
             });
 
+            services.Configure<EmailServiceOption>((option) => {
+
+                option.DisplayName = "E-VAKIL.AZ";
+                option.Email = "tarlanru@code.edu.az";
+                option.Password = "terlan5253";
+                option.EnableSSL = true;
+                option.Host = "smtp.gmail.com";
+                option.Port = 587;
+            });
+
+
+            services.AddSingleton<EmailService>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddIdentity<User, IdentityRole>()
