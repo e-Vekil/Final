@@ -1,6 +1,6 @@
 ﻿@model HomeViewModel
 @foreach (var category in Model.Categories)
 {
-    <a href="#@category.Name.Replace(" ","")">@category.Name</a>
+    <a href="#@category.Id">@category.Name</a>
    
 }

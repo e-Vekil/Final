@@ -32,8 +32,14 @@ namespace eVekilApplication.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult Registration()
+        public async Task<IActionResult> Registration()
         {
+            User user = await _userManager.GetUserAsync(HttpContext.User);
+            if (user != null)
+            {
+                return RedirectToAction(nameof(Home));
+            }
+    
             return View();
         }
 
@@ -114,9 +120,18 @@ namespace eVekilApplication.Controllers
             }
         }
 
-        public IActionResult Home()
+        [HttpGet]
+        public async Task<IActionResult> Home()
         {
-            return View();
+            User user = await _userManager.GetUserAsync(HttpContext.User);
+            if (user == null)
+            {
+                return Content("Siz daxil olmamısınız.");
+            }
+            else
+            {
+                return View(user);
+            }
         }
 
         [HttpGet]
