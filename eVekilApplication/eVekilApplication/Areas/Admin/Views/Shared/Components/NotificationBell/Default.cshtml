@@ -30,7 +30,7 @@
             }
             @foreach (var item in Model.Comments)
             {
-                <a asp-action="List" asp-controller="Comments" class="notify-item">
+                <a asp-action="List" asp-controller="Comment" class="notify-item">
                     <div class="notify-thumb"> <i class="ti-comments-smiley btn-info"></i></div>
                     <div class="notify-text">
                         <p><b>@item.User.UserName</b> commented on document <b>@item.Document.Name</b></p>
