@@ -20,7 +20,7 @@
                                 if (subcategory.CategoryId == category.Id)
                                 {
                                     <li>
-                                        <a href="">@subcategory.Name</a>
+                                        <a asp-action="Document" asp-controller="Home" asp-route-id="@category.Id">@subcategory.Name</a>
                                     </li>
                                     <hr>
                                 }
