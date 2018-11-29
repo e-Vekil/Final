@@ -1,25 +1,28 @@
 ﻿@model DocumentDescViewModel
 @* DOCUMENT INFO *@
-<div class="col-lg-4 document-desc-img">
-    <img src="~/images/bg.jpg" class="w-100" alt="Document" />
+<div class=" col-lg-2 py-3 col-md-2 col-sm-3 col-4 document-desc-img">
+    <i class="fas fa-file-alt"></i>
 </div>
-<div class="col-lg-8 document-desc-info">
+<div class="col-lg-10 document-desc-info">
     <header class="col-lg-12">
-        <h3>@Model.Document.Name</h3>
+        <h3 style="font-weight:bold;">@Model.Document.Name</h3>
     </header>
+    <div class="col-lg-12 document-desc-price mt-3">
+        <p>@Model.Document.Price AZN</p>
+    </div>
     <div class="col-lg-12 document-short-desc mt-3">
         <p>@Model.Document.Description</p>
     </div>
-    <div class="col-lg-12 mt-3">
+    <div class="col-lg-12 mt-3 add-to-cart">
         @*<a asp-action="AddToShoppingCard" asp-controller="Home" asp-="@Model.Document.Id" class="add-button">Add to cart</a>*@
-        @Html.ActionLink("Add to cart", "AddToShoppingCard", "Home",new { id = @Model.Document.Id }, new { @class = "add-button" })
+        @Html.ActionLink("Səbətə At", "AddToShoppingCard", "Home", new { id = @Model.Document.Id }, new { @class = "add-button" })
     </div>
 </div>
 @* END DOCUMENT INFO *@
-<div class="col-lg-12 mt-5 document-desc-features">
+<div class="col-lg-12 p-0 mt-5 document-desc-features">
     <header class="col-lg-12 p-0">
-        <span class="description active" data-id="1">Document Description</span>
-        <span class="review" data-id="2">Reviews(@ViewBag.commentCount)</span>
+        <span class="description active" data-id="1">Sənəd Haqqında</span>
+        <span class="review" data-id="2">Şərhlər(@ViewBag.commentCount)</span>
     </header>
     @* MAIN DESCRIPTION *@
     <div class="col-lg-12 description-wrapper features py-5 active" data-name="1">
@@ -44,7 +47,7 @@
                             <input asp-for="Cm.User.Name" type="text" class="form-control" id="UserName" required>
                         </div>*@
                         <div class="form-group">
-                            <label asp-for="Cm.Text">Your Review</label>
+                            <label asp-for="Cm.Text">Şərh</label>
                             <textarea asp-for="Cm.Text" class="form-control" id="Question" rows="4" required></textarea>
                         </div>
                         <input type="number" asp-for="Document.Id" id="DocumentId" name="DocumentId" style="opacity:0;" />
@@ -57,8 +60,8 @@
             }
             else
             {
-                <div class="col-lg-12">
-                    <h3>Zəhmət Olmasa Sisteme Daxil Olun</h3>
+                <div class="alert alert-danger col-lg-12" role="alert">
+                    Şərh yazmaq üçün login olmalısınız!
                 </div>
             }
             @* END SEND REVIEW *@
@@ -71,12 +74,12 @@
                 {
                     <div class="col-lg-12 reviews">
                         <div class="row">
-                            <div class="col-lg-3">
+                            <div class="col-lg-1">
                                 <img src="~/images/review.png" alt="Alternate Text" />
                             </div>
-                            <div class="col-lg-9">
+                            <div class="col-lg-11">
                                 <div class="col-lg-12 review-owner">
-                                    <h4>@comment.User.Name  @comment.User.Surname</h4>
+                                    <h5 style="font-weight:bold;">@comment.User.Name  @comment.User.Surname</h5>
                                 </div>
                                 <div class="col-lg-12 review-date">
                                     <p>@DateTime.Now.ToString("MM-dd-yyyy hh:mm")</p>
@@ -92,5 +95,25 @@
 
             @* END USER REVIEWS *@
         </div>
+    </div>
+</div>
+<div class="col-12 py-3 my-3 similar-documents">
+    <div class="col-lg-12 similar-document-title">
+        <h3>Oxşar Sənədlər</h3>
+    </div>
+    <div class="row">
+        @foreach (Document document in Model.documents)
+        {
+            <div class="col-lg-3 pt-3 similar-document-wrapper col-md-3 col-sm-4">
+                <div class="row">
+                    <div class="col-6 mx-auto similar-document-img">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="col-12 text-center mx-auto similar-document-desc">
+                        <p style="font-weight:bold;">@document.Name</p>
+                    </div>
+                </div>
+            </div>
+        }
     </div>
 </div>

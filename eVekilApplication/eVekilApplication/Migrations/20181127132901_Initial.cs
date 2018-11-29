@@ -228,6 +228,7 @@ namespace eVekilApplication.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
+                    Price = table.Column<int>(nullable: false),
                     SubcategoryId = table.Column<int>(nullable: false),
                     UserId1 = table.Column<string>(nullable: true),
                     UserId = table.Column<int>(nullable: false),
@@ -321,6 +322,7 @@ namespace eVekilApplication.Migrations
                     UserId1 = table.Column<string>(nullable: true),
                     UserId = table.Column<int>(nullable: false),
                     Status = table.Column<bool>(nullable: false),
+                    Date = table.Column<DateTime>(nullable: false),
                     IsViewed = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
@@ -382,11 +384,11 @@ namespace eVekilApplication.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     DocumentId = table.Column<int>(nullable: false),
-                    UserId1 = table.Column<string>(nullable: true),
-                    UserId = table.Column<int>(nullable: false),
+                    UserId = table.Column<string>(nullable: true),
                     Date = table.Column<DateTime>(nullable: false),
                     Price = table.Column<int>(nullable: false),
-                    IsViewed = table.Column<bool>(nullable: false)
+                    IsViewed = table.Column<bool>(nullable: false),
+                    IsCompleted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -398,8 +400,8 @@ namespace eVekilApplication.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_PurchasedDocuments_AspNetUsers_UserId1",
-                        column: x => x.UserId1,
+                        name: "FK_PurchasedDocuments_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -531,9 +533,9 @@ namespace eVekilApplication.Migrations
                 column: "DocumentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PurchasedDocuments_UserId1",
+                name: "IX_PurchasedDocuments_UserId",
                 table: "PurchasedDocuments",
-                column: "UserId1");
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ShoppingCard_DocumentId",

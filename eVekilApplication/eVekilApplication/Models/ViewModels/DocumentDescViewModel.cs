@@ -9,5 +9,6 @@ namespace eVekilApplication.Models.ViewModels
     {
         public Document Document { get; set; }
         public CommentViewModel Cm { get; set; }
+        public IQueryable<Document> documents { get; set; }
     }
 }
