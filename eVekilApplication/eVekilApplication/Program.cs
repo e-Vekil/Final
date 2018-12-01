@@ -37,7 +37,6 @@ namespace eVekilApplication
                         dbContext.Advocates.Add(NihadAliyev);
                         dbContext.SaveChanges();
                     }
-
                     if (!dbContext.Subcategories.Any() && !dbContext.Categories.Any())
                     {
                         #region Categories
@@ -230,9 +229,7 @@ namespace eVekilApplication
                         dbContext.Subcategories.AddRange(EM, EF, VT, E, EK, EV, A, IE, AS, KS, V, BS, QIE, ET, ASM, PM, XM, BM, DM, ME, IM, HSUY, EUMEF, ES, TQ, VF, Akt, QF);
                         dbContext.SaveChanges();
                     }
-
-
-                    UserAndRoleCreater.CreateAsync(scopedService, dbContext).Wait();
+                    //UserAndRoleCreater.CreateAsync(scopedService, dbContext).Wait();
 
                 }
             }
