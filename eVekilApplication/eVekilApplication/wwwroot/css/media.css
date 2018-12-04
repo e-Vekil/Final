@@ -140,9 +140,15 @@
         padding-bottom:50px;
         padding-right:0px;
     }
-    .registration-wrapper .register-wrapper{
-        margin-top:20px;
+    .document-desc-img{
+        margin:0px 15px!important;
     }
+        .document-desc-img i{
+            font-size:6.5em!important;
+        }
+        .registration-wrapper .register-wrapper {
+            margin-top: 20px;
+        }
     .search-wrapper{
         right:0%!important;
     }

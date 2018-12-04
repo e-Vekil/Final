@@ -2,7 +2,7 @@
 <section class="account">
     <header class="account-header">
         <div class="container text-center">
-            <h1>MY ACCOUNT</h1>
+            <h1>MƏNİM HESABIM</h1>
         </div>
    </header>
 
@@ -12,28 +12,25 @@
                 <div class="row">
                     <div class="col-md-4">
                         <nav class="account-nav">
-                            <h3 class="account-nav-title">MY ACCOUNT</h3>
+                            <h3 class="account-nav-title">Mənim Hesabım</h3>
                             <ul class="account-nav-content">
                                 <li class="active"><a asp-controller="Account" asp-action="Home">Dashboard</a></li>
-                                <li><a asp-controller="Account" asp-action="PurchasedDocuments">Downloads</a></li>
-                                <li><a href="javascript:void(0)">Addresses</a></li>
-                                <li><a asp-controller="Account" asp-action="Details">Account Details</a></li>
-                                <li><a href="javascript:void(0)">Wishlist</a></li>
-                                <li><a asp-controller="Account" asp-action="Logout">Logout</a></li>
+                                <li><a asp-controller="Account" asp-action="PurchasedDocuments">Yükləmələr</a></li>
+                                <li><a asp-controller="Account" asp-action="Details">İstifadəçi Məlumatları</a></li>
+                                <li><a asp-controller="Account" asp-action="Logout">Çıxış</a></li>
                             </ul>
                         </nav>
                     </div>
                     <div class="col-md-8">
                         <div class="account-details">
                             <p>
-                                Hello <strong>@Model.UserName</strong> (not <strong>@Model.UserName</strong>?
-                                <a asp-controller="Account" asp-action="Logout">Log out</a>)
+                                Xoş Gəlmisən <strong>@Model.UserName</strong> !@*(Siz <strong>@Model.UserName</strong> deyilsiniz?
+                                <a asp-controller="Account" asp-action="Logout">Çıxış</a>)*@
                             </p>
                             <p>
-                                From your account dashboard you can view your 
-                                <a asp-controller="Home" asp-action="Index">recent orders</a>, manage your 
-                                <a asp-controller="Home" asp-action="Index">shipping and billing addresses</a>, and 
-                                <a asp-controller="Home" asp-action="Index">edit your password and account details</a>.
+                                Dashboard hissəsindən öz 
+                                <a asp-controller="Account" asp-action="PurchasedDocuments">yükləmələrinizə baxa bilər</a> və 
+                                <a asp-controller="Account" asp-action="Details">məlumatlarınızı dəyişə bilərsiniz</a>.
                             </p>
                             <div class="account-options">
                                 <div class="row m-0">
@@ -46,31 +43,19 @@
                                     <div class="box account-option account-option-order col-md-6 col-lg-4">
                                         <a asp-controller="Account" asp-action="PurchasedDocuments">
                                             <span><i class="fas fa-cloud-download-alt"></i></span>
-                                            Downloads
-                                        </a>
-                                    </div>
-                                    <div class="box account-option account-option-order col-md-6 col-lg-4">
-                                        <a href="#">
-                                            <span><i class="fas fa-map-marker-alt"></i></span>
-                                            Addresses
+                                            Yükləmələr
                                         </a>
                                     </div>
                                     <div class="box account-option account-option-order col-md-6 col-lg-4">
                                         <a asp-controller="Account" asp-action="Details">
                                             <span><i class="far fa-user"></i></span>
-                                            Account Details
-                                        </a>
-                                    </div>
-                                    <div class="box account-option account-option-order col-md-6 col-lg-4">
-                                        <a href="#">
-                                            <span><i class="far fa-heart"></i></span>
-                                            Wishlist
+                                           İstifadəçi məlumatları
                                         </a>
                                     </div>
                                     <div class="box account-option account-option-order col-md-6 col-lg-4">
                                         <a asp-controller="Account" asp-action="Logout">
                                             <span><i class="fas fa-sign-out-alt"></i></span>
-                                            Logout
+                                            Çıxış
                                         </a>
                                     </div>
                                 </div>

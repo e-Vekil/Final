@@ -1,5 +1,6 @@
 ﻿using eVekilApplication.Data;
 using eVekilApplication.Models;
+using eVekilApplication.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -19,9 +20,10 @@ namespace eVekilApplication.Components
 
         public async Task<IViewComponentResult> InvokeAsync(int id)
         {
-            List<Document> documents;
-            documents = await _db.Documents.Where(d=>d.Subcategory.CategoryId == id).Include(d=>d.Advocate).Include(d=>d.Subcategory).ThenInclude(d=>d.Category).ToListAsync();
-            return View(documents);
+            DocumentViewModel dm = new DocumentViewModel();
+            dm.Documents = await _db.Documents.Where(d => d.Subcategory.CategoryId == id).Include(d => d.Advocate).Include(d => d.Subcategory).ThenInclude(d => d.Category).ToListAsync();
+            dm.category = await _db.Categories.Where(c => c.Id == id).FirstOrDefaultAsync();
+            return View(dm);
         }
     }
 }

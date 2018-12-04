@@ -1,4 +1,5 @@
 ﻿using eVekilApplication.Data;
+using eVekilApplication.Infrastructure.Email;
 using eVekilApplication.Models;
 using eVekilApplication.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -45,7 +46,7 @@ namespace eVekilApplication.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Registration(RegistrationViewModel rvm)
+        public async Task<IActionResult> Registration(RegistrationViewModel rvm, [FromServices]EmailService service)
         {
             if (rvm.Login != null)
             {
@@ -102,7 +103,10 @@ namespace eVekilApplication.Controllers
                         if (signInResult.Succeeded)
                         {
                             HttpContext.Session.SetString("isLoged", "true");
+                            var message = $@"{user.Name} {user.Surname} {user.RegisterDate} tarixində saytdan qeydiyyatdan keçmişdir.";
+                            await service.SendMailAsync("tarlanru@code.edu.az", "USER REGISTER", message);
                             return RedirectToAction("Home", "Account");
+
                         }
                     }
                     else
