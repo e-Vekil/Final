@@ -1,0 +1,26 @@
+﻿@model HomeViewModel
+<aside class="side-bar">
+    <div class="side-bar-content">
+        <ul class="m-0">
+            <li>
+                <span class="close-icon"></span>
+            </li>
+            @foreach (Category category in Model.Categories)
+            {
+                <li>
+                    <a href="#@category.Id">@category.Name</a>
+                </li>
+            }
+            <li>
+                <a href="#About">About</a>
+            </li>
+            <li>
+                <a href="#ContactUs">Contact</a>
+            </li>
+            <hr>
+            <li>
+                <a href="">Blog</a>
+            </li>
+        </ul>
+    </div>
+</aside>
