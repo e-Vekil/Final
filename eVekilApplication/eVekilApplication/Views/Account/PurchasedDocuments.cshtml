@@ -16,11 +16,9 @@
                             <h3 class="account-nav-title">MY ACCOUNT</h3>
                             <ul class="account-nav-content">
                                 <li><a asp-controller="Account" asp-action="Home">Dashboard</a></li>
-                                <li class="active"><a asp-controller="Account" asp-action="PurchasedDocuments">Downloads</a></li>
-                                <li><a href="javascript:void(0)">Addresses</a></li>
-                                <li><a asp-controller="Account" asp-action="Details">Account Details</a></li>
-                                <li><a href="javascript:void(0)">Wishlist</a></li>
-                                <li><a asp-controller="Account" asp-action="Logout">Logout</a></li>
+                                <li class="active"><a asp-controller="Account" asp-action="PurchasedDocuments">Yükləmələr</a></li>
+                                <li><a asp-controller="Account" asp-action="Details">İstifadəçi Məlumatları</a></li>
+                                <li><a asp-controller="Account" asp-action="Logout">Çıxış</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -39,13 +37,13 @@
                                                         <thead>
                                                             <tr>
                                                                 <th>
-                                                                    Document
+                                                                    Sənəd
                                                                 </th>
                                                                 <th>
-                                                                    Price
+                                                                    Qiymət
                                                                 </th>
                                                                 <th>
-                                                                    Date
+                                                                    Tarix
                                                                 </th>
                                                             </tr>
                                                         </thead>
