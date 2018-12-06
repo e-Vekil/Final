@@ -1,26 +1,50 @@
 ﻿@model HomeViewModel
 <aside class="side-bar">
     <div class="side-bar-content">
-        <ul class="m-0">
-            <li>
-                <span class="close-icon"></span>
-            </li>
-            @foreach (Category category in Model.Categories)
-            {
+        @if (ViewBag.Title == "Index")
+        {
+            <ul class="m-0">
                 <li>
-                    <a href="#_@category.Id">@category.Name</a>
+                    <span class="close-icon"></span>
                 </li>
-            }
-            <li>
-                <a href="#About">About</a>
-            </li>
-            <li>
-                <a href="#ContactUs">Contact</a>
-            </li>
-            <hr>
-            <li>
-                <a href="">Blog</a>
-            </li>
-        </ul>
+                @foreach (Category category in Model.Categories)
+                {
+                    <li>
+                        <a href="#_@category.Id">@category.Name</a>
+                    </li>
+                }
+                <li>
+                    <a href="#About">Haqqımızda</a>
+                </li>
+                <li>
+                    <a href="#ContactUs">Əlaqə</a>
+                </li>
+                <hr>
+                <li id="loginnav">
+                    <a asp-action="Registration" asp-controller="Home">Daxil ol/Qeydiyyat</a>
+                </li>
+            </ul>
+        }
+        else
+        {
+            <ul class="m-0">
+                <li>
+                    <span class="close-icon"></span>
+                </li>
+                <li>
+                    <a asp-action="Index" asp-controller="Home">Ana Səhifə</a>
+                </li>
+                @foreach (Category category in Model.Categories)
+                {
+                    <li>
+                        <a asp-action="Document" asp-controller="Home" asp-route-id="@category.Id">@category.Name</a>
+                    </li>
+                }
+                <hr>
+                <li id="loginnav">
+                    <a asp-action="Registration" asp-controller="Home">Daxil ol/Qeydiyyat</a>
+                </li>
+            </ul>
+        }
     </div>
 </aside>
