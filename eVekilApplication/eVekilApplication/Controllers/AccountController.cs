@@ -104,7 +104,7 @@ namespace eVekilApplication.Controllers
                         {
                             HttpContext.Session.SetString("isLoged", "true");
                             var message = $@"{user.Name} {user.Surname} {user.RegisterDate} tarixində saytdan qeydiyyatdan keçmişdir.";
-                            await service.SendMailAsync("tarlanru@code.edu.az", "USER REGISTER", message);
+                            await service.SendMailAsync("ibrahimxanlimurad@hotmail.com", "USER REGISTER", message);
                             return RedirectToAction("Home", "Account");
 
                         }

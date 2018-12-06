@@ -1,4 +1,6 @@
-﻿@model DocumentDescViewModel
+﻿using Microsoft.AspNet.Identity;
+
+@model DocumentDescViewModel
 @* DOCUMENT INFO *@
 <div class=" col-lg-2 py-3 col-md-2 col-sm-3 col-4 document-desc-img">
     <i class="fas fa-file-alt"></i>
@@ -43,9 +45,9 @@
                     <header class="col-lg-12 p-0"></header>
                     <form method="post" asp-action="SendReview" asp-controller="Home">
                         @*<div class="form-group">
-                            <label asp-for="Cm.User.Name">Username or email</label>
-                            <input asp-for="Cm.User.Name" type="text" class="form-control" id="UserName" required>
-                        </div>*@
+                                <label asp-for="Cm.User.Name">Username or email</label>
+                                <input asp-for="Cm.User.Name" type="text" class="form-control" id="UserName" required>
+                            </div>*@
                         <div class="form-group">
                             <label asp-for="Cm.Text">Şərh</label>
                             <textarea asp-for="Cm.Text" class="form-control" id="Question" rows="4" required></textarea>
@@ -70,7 +72,7 @@
             @* USER REVIEWS *@
             @foreach (Comment comment in Model.Cm.Comments)
             {
-                @if (comment.Status)
+                @if (comment.Status || comment.User.UserName == User.Identity.Name)
                 {
                     <div class="col-lg-12 reviews">
                         <div class="row">

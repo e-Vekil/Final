@@ -45,6 +45,9 @@ namespace eVekilApplication.Controllers
         [HttpPost]
         public async Task<IActionResult> SendReview(Comment cm,[FromServices]EmailService service)
         {
+            User user = await _userManager.GetUserAsync(HttpContext.User);
+            if (user == null) return Content("Siz daxil olmamısınız!");
+
             int documentId = Convert.ToInt32(Request.Form["DocumentId"]);
             Document doc =  await _db.Documents.Where(d => d.Id == documentId).Include(d => d.Advocate).Include(d => d.Subcategory).ThenInclude(d => d.Category).FirstOrDefaultAsync();
             Comment comment = new Comment();
@@ -52,12 +55,14 @@ namespace eVekilApplication.Controllers
             comment.DocumentId = documentId;
             comment.Text = cm.Text;
             comment.Date = DateTime.Now;
-            string username = HttpContext.Session.GetString("id");
-            if (username != null)
-            {
-                User user = await _db.Users.Where(u => u.Id == username).FirstOrDefaultAsync();
-                comment.User = user;
-            }
+            comment.User = user;
+            //string username = HttpContext.Session.GetString("id");
+            //if (username != null)
+            //{
+            //    User user = await _db.Users.Where(u => u.Id == username).FirstOrDefaultAsync();
+            //    comment.User = user;
+            //}
+
             comment.Status = false;
             if (ModelState.IsValid)
             {
