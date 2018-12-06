@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -58,18 +59,34 @@ namespace eVekilApplication
                 .AddEntityFrameworkStores<EvekilDb>()
                 .AddDefaultTokenProviders();
 
-            //services.Configure<IdentityOptions>(options => {
 
-            //    options.Password.RequireLowercase = true;
-            //    options.Password.RequireUppercase = true;
-            //    options.Password.RequireDigit = true;
 
-            //    options.User.AllowedUserNameCharacters = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM";
-            //    options.User.RequireUniqueEmail = true;
+            services.Configure<IdentityOptions>(options =>
+            {
 
-            //});
+                options.Password.RequireLowercase = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequireDigit = true;
+                options.Password.RequiredUniqueChars = 0;
+                options.Password.RequireNonAlphanumeric = false;
 
-            services.AddMvc();
+                options.User.AllowedUserNameCharacters = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM";
+                options.User.RequireUniqueEmail = true;
+
+            });
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                // Cookie settings
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(15);
+
+                options.LoginPath = "/Account/Registration";
+                options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+                options.SlidingExpiration = true;
+            });
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -81,7 +98,7 @@ namespace eVekilApplication
                 app.UseStatusCodePages();
             }
             else
-                app.UseExceptionHandler("/Home/error");
+                app.UseDeveloperExceptionPage();
 
             app.UseSession();
             app.UseStaticFiles();
