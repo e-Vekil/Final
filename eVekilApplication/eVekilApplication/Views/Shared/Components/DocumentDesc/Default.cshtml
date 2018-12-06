@@ -76,20 +76,43 @@
                 {
                     <div class="col-lg-12 reviews">
                         <div class="row">
-                            <div class="col-lg-1">
-                                <img src="~/images/review.png" alt="Alternate Text" />
-                            </div>
-                            <div class="col-lg-11">
-                                <div class="col-lg-12 review-owner">
-                                    <h5 style="font-weight:bold;">@comment.User.Name  @comment.User.Surname</h5>
+                            @if (comment.User.UserName == User.Identity.Name)
+                            {
+                                <div class="col-lg-1">
+                                    <img src="~/images/review.png" alt="Alternate Text" />
                                 </div>
-                                <div class="col-lg-12 review-date">
-                                    <p>@DateTime.Now.ToString("MM-dd-yyyy hh:mm")</p>
+                                <div class="col-lg-10">
+                                    <div class="col-lg-12 review-owner">
+                                        <h5 style="font-weight:bold;">@comment.User.Name  @comment.User.Surname</h5>
+                                    </div>
+                                    <div class="col-lg-12 review-date">
+                                        <p>@DateTime.Now.ToString("MM-dd-yyyy hh:mm")</p>
+                                    </div>
+                                    <div class="col-lg-12 review-content">
+                                        <p>@comment.Text</p>
+                                    </div>
                                 </div>
-                                <div class="col-lg-12 review-content">
-                                    <p>@comment.Text</p>
+                                <div class="col-lg-1">
+                                    <a asp-action="DeleteReview" asp-controller="Home" asp-route-id="@comment.Id" class="btn btn-danger">Sil</a>
                                 </div>
-                            </div>
+                            }
+                            else
+                            {
+                                <div class="col-lg-1">
+                                    <img src="~/images/review.png" alt="Alternate Text" />
+                                </div>
+                                <div class="col-lg-11">
+                                    <div class="col-lg-12 review-owner">
+                                        <h5 style="font-weight:bold;">@comment.User.Name  @comment.User.Surname</h5>
+                                    </div>
+                                    <div class="col-lg-12 review-date">
+                                        <p>@DateTime.Now.ToString("MM-dd-yyyy hh:mm")</p>
+                                    </div>
+                                    <div class="col-lg-12 review-content">
+                                        <p>@comment.Text</p>
+                                    </div>
+                                </div>
+                            }
                         </div>
                     </div>
                 }

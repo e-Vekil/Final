@@ -81,6 +81,27 @@ Sənədin Adı:{doc.Name}
 
             }
         }
+
+
+        [HttpGet    ]
+        public async Task<IActionResult> DeleteReview(int id)
+        {
+            try
+            {
+                Comment comment = await _db.Comments.Where(c => c.Id == id).Include(c => c.User).FirstOrDefaultAsync();
+                _db.Remove(comment);
+                await _db.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception exp)
+            {
+                ModelState.AddModelError("", exp.Message);
+                return RedirectToAction(nameof(DocumentDesc));
+            }
+        }
+
+
+
         [HttpGet]
         public async Task<IActionResult> AddToShoppingCard(int id)
         {
