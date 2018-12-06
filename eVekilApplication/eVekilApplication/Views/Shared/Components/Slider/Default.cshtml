@@ -10,8 +10,8 @@
         @foreach (Category category in Model.Categories)
          {
              counter++;
-            <li data-id="@counter">
-                <a class="slider @category.Id" href="#@category.Id" data-id="@category.Id"></a>
+            <li data-id="_@counter">
+                <a class="slider _@category.Id" href="#_@category.Id" data-id="_@category.Id"></a>
             </li>
         }
         <li data-id="6">
