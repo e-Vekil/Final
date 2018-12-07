@@ -24,7 +24,7 @@ namespace eVekilApplication.Areas.Admin.Controllers
             List<Category> categories;
             //using (_db)
             //{
-                categories =  await _db.Categories.OrderBy(x=>x.Visibilty).ToListAsync();
+            categories = await _db.Categories.OrderBy(x => x.Visibilty).ToListAsync();
             //}
             return View(categories);
         }
@@ -42,12 +42,12 @@ namespace eVekilApplication.Areas.Admin.Controllers
             {
                 //using (_db)
                 //{
-                    Category category = new Category();
-                    category.Name = cat.Name;
-                    category.Description = cat.Description;
-                    category.Visibilty = cat.Visibilty;
-                    await _db.AddAsync(category);
-                    //await _db.SaveChangesAsync();
+                Category category = new Category();
+                category.Name = cat.Name;
+                category.Description = cat.Description;
+                category.Visibilty = cat.Visibilty;
+                await _db.AddAsync(category);
+                await _db.SaveChangesAsync();
                 //}
                 return RedirectToAction(nameof(List));
             }
@@ -63,7 +63,7 @@ namespace eVekilApplication.Areas.Admin.Controllers
             Category category;
             //using (_db)
             //{
-                category = await _db.Categories.Where(c => c.Id == id).FirstOrDefaultAsync();
+            category = await _db.Categories.Where(c => c.Id == id).FirstOrDefaultAsync();
             //}
             return View(category);
         }
@@ -77,11 +77,11 @@ namespace eVekilApplication.Areas.Admin.Controllers
             {
                 //using (_db)
                 //{
-                    category = await _db.Categories.FindAsync(id);
-                    category.Name = cat.Name;
-                    category.Description = cat.Description;
-                    category.Visibilty = cat.Visibilty;
-                    await _db.SaveChangesAsync();
+                category = await _db.Categories.FindAsync(id);
+                category.Name = cat.Name;
+                category.Description = cat.Description;
+                category.Visibilty = cat.Visibilty;
+                await _db.SaveChangesAsync();
                 //}
                 return RedirectToAction(nameof(List));
             }
@@ -89,7 +89,7 @@ namespace eVekilApplication.Areas.Admin.Controllers
             {
                 return View();
             }
-           
+
         }
 
         public async Task<IActionResult> Delete(int id)
@@ -97,9 +97,9 @@ namespace eVekilApplication.Areas.Admin.Controllers
             Category category;
             //using (_db)
             //{
-                category = await _db.Categories.FindAsync(id);
-                _db.Remove(category);
-                await _db.SaveChangesAsync();
+            category = await _db.Categories.FindAsync(id);
+            _db.Remove(category);
+            await _db.SaveChangesAsync();
 
             //}
             return RedirectToAction(nameof(List));

@@ -53,6 +53,25 @@ namespace eVekilApplication.Areas.Admin.Controllers
 
         }
 
+
+        public async Task<IActionResult> Unaccept(int id)
+        {
+            try
+            {
+                Comment comment = await _db.Comments.Where(c => c.Id == id).Include(c => c.User).FirstOrDefaultAsync();
+                comment.Status = false;
+                await _db.SaveChangesAsync();
+                return RedirectToAction(nameof(List));
+            }
+            catch (Exception exp)
+            {
+                ModelState.AddModelError("", exp.Message);
+                return RedirectToAction(nameof(List));
+            }
+
+
+        }
+
         public async Task<IActionResult> Delete(int id)
         {
             try

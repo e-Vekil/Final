@@ -93,6 +93,10 @@
     .login-register-wrapper{
         display:none!important;
     }
+
+    #loginnav {
+        display: list-item!important;
+    }
 }
                                             
 @media only screen  and (max-width:420px){

@@ -21,9 +21,9 @@ namespace eVekilApplication.Areas.Admin.Components
         {
             NotificationBellViewModel NBVM = new NotificationBellViewModel();
 
-            List<Comment> Comments = await _db.Comments.Include(x => x.User).Where(x => x.IsViewed == false).OrderByDescending(x => x.Date).ToListAsync();
             List<User> Users = await _db.Users.Where(x => x.IsViewed == false).OrderByDescending(x => x.RegisterDate).ToListAsync();
             List<PurchasedDocument> purchasedDocuments = await _db.PurchasedDocuments.Include(x => x.User).Include(x => x.Document).Where(x => x.IsViewed == false).OrderByDescending(x => x.Date).ToListAsync();
+            List<Comment> Comments = await _db.Comments.Include(x => x.User).Include(x => x.Document).Where(x => x.IsViewed == false).OrderByDescending(x => x.Date).ToListAsync();
 
             NBVM.Comments = Comments;
             NBVM.Users = Users;

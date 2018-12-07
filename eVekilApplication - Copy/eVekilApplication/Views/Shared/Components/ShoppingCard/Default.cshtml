@@ -1,0 +1,61 @@
+﻿@model List<ShoppingCard>
+
+<aside class="side-bar-product-wrapper">
+    <div class="side-bar-product">
+        <div class="side-bar-product-content">
+            <header class="col-lg-12 d-flex side-bar-title">
+                <h4>SHOPPING CART</h4>
+                <a href="#" class="close-icon-product">Close</a>
+            </header>
+
+            @if (Model == null)
+            {
+                <div class="no-product col-lg-12"></div>
+            }
+            else
+            {
+                <div class="ordered-products p-0 col-lg-12">
+                    @{int totalprice = 0;}
+                    @* Product Information *@
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-lg-12 product-info py-3">
+                            <div class="row">
+                                <div class="col-3 product-img">
+                                    <img src="~/images/bg.jpg" class="w-100" style="height:70px;" alt="Alternate Text" />
+                                </div>
+                                <div class="col-9 product-desc">
+                                    <header>
+                                        <a href="#">@item.Document.Name</a>
+                                    </header>
+                                    <div class="col-lg-12 p-0">
+                                        <span class="count">1 x <span>@item.Document.Price AZN</span></span>
+                                    </div>
+                                    <a asp-action="DeleteFromShoppingCard" asp-controller="Home" asp-route-id="@item.Document.Id"><i class="fas fa-times"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                        totalprice += item.Document.Price;
+                      }
+                    @*Product Information  End *@
+                </div>
+
+                @* SUBTOTAL *@
+                <div class="col-lg-12 subtotal d-flex">
+                    <p>SUBTOTAL:</p>
+                    <span class="price">@totalprice AZN</span>
+                </div>
+                <hr />
+                @* CheckOut *@
+                <div class="col-lg-12 my-3 checkout">
+                    <a asp-action="Purchase" asp-controller="Account">CHECKOUT</a>
+                </div>
+            }
+
+
+
+
+        </div>
+    </div>
+</aside>
