@@ -40,7 +40,7 @@ namespace eVekilApplication.Controllers
             {
                 return RedirectToAction(nameof(Home));
             }
-    
+
             return View();
         }
 
@@ -83,6 +83,7 @@ namespace eVekilApplication.Controllers
             }
             else if (rvm.Register != null)
             {
+                ViewBag.Info = "Register";
                 if (ModelState.IsValid)
                 { 
                     User user = new User() 
