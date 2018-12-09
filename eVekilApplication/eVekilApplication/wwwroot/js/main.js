@@ -541,3 +541,10 @@ for (var nl of navlist) {
         navlistactive = this.firstElementChild;
     })
 }
+
+
+$(document).ready(function () {
+    $(".rg-button").click(function () {
+        $(".confirm").show();
+    })
+})

@@ -4,6 +4,17 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-6 form-wrapper">
+                @{
+                    string active = String.Empty;
+                    @if (Context.Session.GetString("isRegsiterValid") == null)
+                    {
+                        active = "";
+                    }
+                    else
+                    {
+                        active = "active";
+                    }
+                }
                 <div class="login-form active" data-name="1">
                     <header class="mb-5">
                         <h3><i class="fas fa-sign-in-alt"></i>Daxil olun</h3>
@@ -45,6 +56,7 @@
                         <h3><i class="fas fa-user-alt"></i>Qeydiyyat</h3>
                     </header>
                     <form asp-action="Registration" asp-controller="Account" method="post">
+                        <div asp-validation-summary="ModelOnly"></div>
                         <div class="form-group">
                             <label asp-for="Register.Name">Ad</label>
                             <input asp-for="Register.Name" class="form-control">
@@ -76,7 +88,7 @@
                             </p>
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="form-button">QEYDİYYATDAN KEÇİN</button>
+                            <button type="submit" class="form-button rg-button">QEYDİYYATDAN KEÇİN</button>
                         </div>
                     </form>
                 </div>
@@ -85,6 +97,7 @@
                 <header class="mb-5"><h3>Qeydiyyat</h3></header>
                 <div class="col-lg-12 text"><p>Saytdan qeydiyyatdan keçməklə siz sənəd nümunələrini yükləyə bilər,yükləmələrinizi idarə edə bilər və öz şərhlərinizi yaza bilərsiniz.</p></div>
                 <div class="col-lg-12 buttons d-flex justify-content-center">
+
                     <a href="#" class="login-button" data-id="1">Daxil olun</a>
                     <a href="#" class="register-button active" data-id="2">Qeydiyyat</a>
                 </div>
@@ -92,3 +105,16 @@
         </div>
     </div>
 </section>
+
+@if (Context.Session.GetString("isRegisterValid") == "true")
+{
+    <div class="col-ml-8 mx-auto confirm">
+        <h4>
+            Təsdiq Mesajı <p>@ViewBag.email</p> ünvanına göndərildi
+            Zəhmət olmasa emailinizi yoxlayın
+            Qeyd:Email təsdiq olunmadığı halda sistemə daxil ola bilməyəcəksiniz!
+        </h4>
+    </div>
+}
+
+
