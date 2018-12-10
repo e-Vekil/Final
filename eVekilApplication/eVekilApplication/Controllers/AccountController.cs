@@ -112,18 +112,15 @@ namespace eVekilApplication.Controllers
                             userId = user.Id,
                             token = Token
                         });
-                        ViewBag.isConfirmed = false;
-                        ViewBag.tokenlink = Tokenlink;
-                        ViewBag.email = user.Email;
                         var acceptMessage = "E-VAKIL.AZ QEYDIYYAT TESDIQ LINKI" + " " + "http://localhost:60457/" + $"{Tokenlink}";
-                        await  service.SendMailAsync(user.Email, "E-VAKIL.AZ TESDIQ", acceptMessage);
+                        await service.SendMailAsync(user.Email, "E-VAKIL.AZ TESDIQ", acceptMessage);
                         //Email Confirm End
 
                         HttpContext.Session.SetString("isRegisterValid", "true");
                         await _userManager.AddToRoleAsync(user, "user");
                         var message = $@"{user.Name} {user.Surname} {user.RegisterDate} tarixində saytdan qeydiyyatdan keçmişdir.";
                         await service.SendMailAsync("ibrahimxanlimurad@hotmail.com", "USER REGISTER", message);
-                        return RedirectToAction("Home", "Account");
+                        return RedirectToAction("Registration", "Account");
                     }
                     else
                     {
@@ -131,6 +128,7 @@ namespace eVekilApplication.Controllers
                     }
 
                 }
+
                 return View();
 
             }
@@ -155,9 +153,12 @@ namespace eVekilApplication.Controllers
             IdentityResult result =await _userManager.ConfirmEmailAsync(user, token);
             if (result.Succeeded)
             {
-                return Content("Confirmed");
+                return RedirectToAction("Home", "Account");
             }
-            return RedirectToAction("Index", "Home");
+            else
+            {
+                return RedirectToAction("Registration", "Account");
+            }
         }
 
         [HttpGet]
