@@ -1338,3 +1338,22 @@ footer p{
     background-size: cover;
     background-repeat:no-repeat;    
 }
+
+/*Confirm Email*/
+.confirm h4{
+    color:brown;
+}
+.confirm p {
+    color: black;
+}
+.confirm {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 2000;
+    display: none;
+    background: white;
+    border-radius: 10px;
+    padding: 50px 100px;
+}

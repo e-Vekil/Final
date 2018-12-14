@@ -55,27 +55,35 @@ namespace eVekilApplication.Controllers
                     User user = await _userManager.FindByEmailAsync(rvm.Login.Email);
                     if (user != null)
                     {
-                        var userRole = await _userManager.IsInRoleAsync(user, "Admin");
-                        var result = await _signInManager.PasswordSignInAsync(user, rvm.Login.Password, rvm.Login.IsRemmember, true);
-                        if (result.Succeeded)
+                        if (user.EmailConfirmed)
                         {
-                            HttpContext.Session.SetString("id", user.Id);
-                            HttpContext.Session.SetString("name", user.UserName);
-                            HttpContext.Session.SetString("isLoged", "true");
-
-                            if (userRole)
-                            {
-                                return RedirectToAction("Index", "Home", new { area = "Admin" });
-                            }
-                            else
+                            var userRole = await _userManager.IsInRoleAsync(user, "Admin");
+                            var result = await _signInManager.PasswordSignInAsync(user, rvm.Login.Password, rvm.Login.IsRemmember, true);
+                            if (result.Succeeded)
                             {
                                 HttpContext.Session.SetString("id", user.Id);
                                 HttpContext.Session.SetString("name", user.UserName);
                                 HttpContext.Session.SetString("isLoged", "true");
-                                return RedirectToAction("Home", "Account", new { area = "" });
+
+                                if (userRole)
+                                {
+                                    return RedirectToAction("Index", "Home", new { area = "Admin" });
+                                }
+                                else
+                                {
+                                    HttpContext.Session.SetString("id", user.Id);
+                                    HttpContext.Session.SetString("name", user.UserName);
+                                    HttpContext.Session.SetString("isLoged", "true");
+                                    return RedirectToAction("Home", "Account", new { area = "" });
+                                }
                             }
+                            return View();
                         }
-                        return View();
+                        else
+                        {
+                            ModelState.AddModelError("", "Email təsdiq olunmayıb");
+                        }
+                    
                     }
 
                 }
@@ -97,18 +105,23 @@ namespace eVekilApplication.Controllers
                     var identityResult = await _userManager.CreateAsync(user, rvm.Register.Password);
                     if (identityResult.Succeeded)
                     {
-                        HttpContext.Session.SetString("id", user.Id);
-                        HttpContext.Session.SetString("name", user.UserName);
-                        await _userManager.AddToRoleAsync(user, "user");
-                        var signInResult = await _signInManager.PasswordSignInAsync(user, rvm.Register.Password, true, true);
-                        if (signInResult.Succeeded)
-                        {
-                            HttpContext.Session.SetString("isLoged", "true");
-                            var message = $@"{user.Name} {user.Surname} {user.RegisterDate} tarixində saytdan qeydiyyatdan keçmişdir.";
-                            await service.SendMailAsync("ibrahimxanlimurad@hotmail.com", "USER REGISTER", message);
-                            return RedirectToAction("Home", "Account");
+                        //Email Confirm
 
-                        }
+                        string Token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                        string Tokenlink = Url.Action("ConfirmEmail", "Account", new
+                        {
+                            userId = user.Id,
+                            token = Token
+                        });
+                        var acceptMessage = "E-VAKIL.AZ QEYDIYYAT TESDIQ LINKI" + " " + "http://localhost:60457/" + $"{Tokenlink}";
+                        await service.SendMailAsync(user.Email, "E-VAKIL.AZ TESDIQ", acceptMessage);
+                        //Email Confirm End
+
+                        HttpContext.Session.SetString("isRegisterValid", "true");
+                        await _userManager.AddToRoleAsync(user, "user");
+                        var message = $@"{user.Name} {user.Surname} {user.RegisterDate} tarixində saytdan qeydiyyatdan keçmişdir.";
+                        await service.SendMailAsync("ibrahimxanlimurad@hotmail.com", "USER REGISTER", message);
+                        return RedirectToAction("Registration", "Account");
                     }
                     else
                     {
@@ -116,12 +129,36 @@ namespace eVekilApplication.Controllers
                     }
 
                 }
+
                 return View();
 
             }
             else
             {
                 return Content("Nəisə səhv getdi.");
+            }
+        }
+        [HttpGet]
+        public async Task<IActionResult> ConfirmEmail(string userId,string token)
+        {
+            if(userId == null || token == null)
+            {
+                return Content("Error");
+            }
+            var user =  await _userManager.FindByIdAsync(userId);
+            if(user == null)
+            {
+                return Content("Error");
+            }
+
+            IdentityResult result =await _userManager.ConfirmEmailAsync(user, token);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Home", "Account");
+            }
+            else
+            {
+                return RedirectToAction("Registration", "Account");
             }
         }
 
