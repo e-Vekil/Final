@@ -106,6 +106,7 @@ namespace eVekilApplication.Controllers
             }
             else if (rvm.Register != null)
             {
+                ViewBag.Info = "Register";
                 if (ModelState.IsValid)
                 { 
                     User user = new User() 
