@@ -45,7 +45,8 @@ namespace eVekilApplication
                             Name = "İnsan Resursları",
                             Description = @"Bu bölmədə kadrlar şöbəsinin faəliyyətinə aid müxtəlif sənəd nümunələri, o cümlədən əmr formaları, əmək müqavilələri, əmək müqavilələrinə əlavələr, vəzifə təlimatları, aktlar, izahat formaları, ərizələr, əmr kitabları və s. yerləşdirilmişdir.
                                            Diqqətinizə təqdim edilən bu sənəd nümunələri Azərbaycan Respublikasında fəaliyyət göstərən müxtəlif təşkilatlar tərəfindən istifadə edilməkdədir.",
-                            Visibilty = true
+                            Visibilty = true,
+                            PhotoPath = "hr1.jpg"
 
                         };
                         Category MS = new Category()
@@ -53,7 +54,8 @@ namespace eVekilApplication
                             Name = "Məhkəmə Sənədləri",
                             Description = @"Əsasən mülki və iqtisadi mübahisələr üzrə məhkəməyə qədər və məhkəmə araşdırması dövründə tərtib edilən sənəd nümunələri bu bölmədə sizin diqqətinizə təqdim edilir.
                             Sənəd nümunələri arasında təmənnasız təqdim edilən bəzi iddia ərizələri formaları ilə yanaşı, müxtəlif məzmunlu və formalı vəsatətlər, apellyasiya şikayətləri, kassasiya şikayətləri formaları və s. mövcuddur. Sənəd nümunələri Azərbaycan Respublikası Vəkillər Kollegiyasının üzvləri tərəfindən tərtib edilmişdir. Sənəd nümunələrindən real məhkəmə işlərində istifadə edilmişdir.",
-                            Visibilty = true
+                            Visibilty = true,
+                            PhotoPath = "mehkeme1.jpg"
 
 
                         };
@@ -62,14 +64,16 @@ namespace eVekilApplication
                             Name = "Müqavilələr",
                             Description = @"Azərbaycan Respublikasının qanunvericiliyinə uyğun tərtib edilən müxtəlif müqavilə növləri. Təqdim edilən bütün müqavilə növləri təcrübədə istifadə edilmişdir.
                                            Müqavilələr arasında tez-tez istifadə edilən alğı-satqı, bağışlama, podrat, xidmət müqavilələri ilə yanaşı Azərbaycan işgüzar adətlərində yeni-yeni rast gəlinən autsorsinq, birgə əməliyyat sazişləri nümunələri də daxil edilmişdir.",
-                            Visibilty = true
+                            Visibilty = true,
+                            PhotoPath = "muqavile3.jpg"
                         };
                         Category SS = new Category()
                         {
                             Name = "Sair Sənədlər",
                             Description = @"Yuxarıdakı təsnifata yer almamış sənəd nümunələrini hazırki bölmədə yerləşdirərək diqqətinizə çatdırırıq. Bu bölmədə hüquqi şəxsin təsis sənədləri nümunələri, informasiya sorğuları, şikayət ərizələri, prtokol formaları, etibarnamələr, müraciət ərizələri və s. sənəd nümunələri yerləşdirilmişdir.
                                            We understand business. That's why we begin every project with a workshop — crafting a one-of-a-kind, unique strategy that is designed to help you win.",
-                            Visibilty = true
+                            Visibilty = true,
+                            PhotoPath = "sair.jpg"
                         };
                         #endregion
 

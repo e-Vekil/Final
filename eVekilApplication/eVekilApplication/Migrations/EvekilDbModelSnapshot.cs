@@ -48,6 +48,8 @@ namespace eVekilApplication.Migrations
 
                     b.Property<string>("Name");
 
+                    b.Property<string>("PhotoPath");
+
                     b.Property<bool>("Visibilty");
 
                     b.HasKey("Id");
@@ -130,8 +132,6 @@ namespace eVekilApplication.Migrations
                     b.Property<int>("Price");
 
                     b.Property<int>("SubcategoryId");
-
-                    b.Property<string>("TermsOfUse");
 
                     b.HasKey("Id");
 

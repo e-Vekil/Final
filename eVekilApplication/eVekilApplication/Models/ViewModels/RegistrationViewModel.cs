@@ -9,5 +9,6 @@ namespace eVekilApplication.Models.ViewModels
     {
         public LoginModel Login { get; set; }
         public RegisterModel Register { get; set; }
+        public IEnumerable<String> Providers { get; set; }
     }
 }

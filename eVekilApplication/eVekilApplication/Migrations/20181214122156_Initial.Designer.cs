@@ -10,8 +10,8 @@ using eVekilApplication.Data;
 namespace eVekilApplication.Migrations
 {
     [DbContext(typeof(EvekilDb))]
-    [Migration("20181210114957_INITIAL")]
-    partial class INITIAL
+    [Migration("20181214122156_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -49,6 +49,8 @@ namespace eVekilApplication.Migrations
                     b.Property<string>("Description");
 
                     b.Property<string>("Name");
+
+                    b.Property<string>("PhotoPath");
 
                     b.Property<bool>("Visibilty");
 
@@ -132,8 +134,6 @@ namespace eVekilApplication.Migrations
                     b.Property<int>("Price");
 
                     b.Property<int>("SubcategoryId");
-
-                    b.Property<string>("TermsOfUse");
 
                     b.HasKey("Id");
 
