@@ -1,4 +1,13 @@
-﻿@media only screen  and (max-width:650px){
+﻿@media only screen and (max-width: 575px){
+    .page-cover{
+        background-image: url(/../images/mobile.png);
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+}
+
+@media only screen  and (max-width:650px){
     .navHelper{
         display: none!important;
     }
