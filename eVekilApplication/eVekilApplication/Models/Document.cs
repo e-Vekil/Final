@@ -19,7 +19,6 @@ namespace eVekilApplication.Models
         //public int CategoryId { get; set; }
         public Subcategory Subcategory { get; set; }
         public int SubcategoryId { get; set; }
-        public string TermsOfUse { get; set; }
         public string Description { get; set; }
         public DateTime Date { get; set; }
         public string FileName { get; set; }

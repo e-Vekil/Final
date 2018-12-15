@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using eVekilApplication.Data;
 using eVekilApplication.Infrastructure.Email;
 using eVekilApplication.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.Facebook;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -32,7 +34,7 @@ namespace eVekilApplication
         {
             services.AddDbContext<EvekilDb>(options =>
             {
-                options.UseSqlServer(Configuration["ConnectionString:DefaultConnection"]);
+                options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]);
             });
 
             services.AddDistributedMemoryCache();
@@ -40,7 +42,16 @@ namespace eVekilApplication
                 options.IdleTimeout = TimeSpan.FromMinutes(15);//You can set Time  
                 options.Cookie.MaxAge = TimeSpan.FromMinutes(15);
             });
-
+            services.AddAuthentication(options=> {
+                options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            })
+                .AddFacebook(facebookOptions=> {
+                    facebookOptions.AppId = "359770388182038";
+                    facebookOptions.AppSecret = "e0d86dae757f12cccfacd46a0adae9c1";
+                })
+                   .AddCookie();
             services.Configure<EmailServiceOption>((option) => {
 
                 option.DisplayName = "E-VAKIL.AZ";

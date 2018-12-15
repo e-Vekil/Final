@@ -2,6 +2,8 @@
 using eVekilApplication.Infrastructure.Email;
 using eVekilApplication.Models;
 using eVekilApplication.Models.ViewModels;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -23,25 +25,38 @@ namespace eVekilApplication.Controllers
         private readonly SignInManager<User> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly EvekilDb _db;
-        public AccountController(RoleManager<IdentityRole> roleManager, UserManager<User> userManager, SignInManager<User> signInManager, EvekilDb db)
+        private readonly IAuthenticationSchemeProvider _authenticationSchemeProvider;
+        public AccountController(RoleManager<IdentityRole> roleManager, UserManager<User> userManager, SignInManager<User> signInManager, EvekilDb db, IAuthenticationSchemeProvider authenticationSchemeProvider)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
             _db = db;
+            _authenticationSchemeProvider = authenticationSchemeProvider;
+
         }
 
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> Registration()
         {
+            var allSchemeProvider = (await _authenticationSchemeProvider.GetAllSchemesAsync()).Select(a => a.DisplayName).Where(n => !String.IsNullOrEmpty(n));
             User user = await _userManager.GetUserAsync(HttpContext.User);
             if (user != null)
             {
                 return RedirectToAction(nameof(Home));
             }
+            RegistrationViewModel reg = new RegistrationViewModel()
+            {
+                Providers = allSchemeProvider
+            };
+            return View(reg);
+        }
 
-            return View();
+        [HttpGet]
+        public IActionResult SignIn(string provider)
+        {
+            return Challenge(new AuthenticationProperties {RedirectUri ="/" }, provider);
         }
 
         [HttpPost]
@@ -363,8 +378,7 @@ namespace eVekilApplication.Controllers
 
         public async Task<IActionResult> Logout()
         {
-            await _signInManager.SignOutAsync();
-            HttpContext.Session.Clear();
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index", "Home", new { area = "" });
         }
 

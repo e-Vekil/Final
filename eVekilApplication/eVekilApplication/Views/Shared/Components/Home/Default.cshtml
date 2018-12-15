@@ -2,15 +2,17 @@
 @foreach (var category in Model.Categories)
 {
     <div class="category-name col-12 p-0 py-3">
-        <h3>@category.Name</h3>
-        <i class="fas fa-angle-down"></i>
+        <div class="row">
+            <div class="col-10 d-flex align-items-center"><h4>@category.Name</h4></div>
+            <div class="col-2 d-flex align-items-center category-icon"><i class="fas fa-angle-down"></i></div>
+        </div>
     </div>
     <li class="sect category-item" id="_@category.Id">
 
         <article class="category">
             <div class="container">
                 <div class="row">
-                    <div class="mx-auto category-content category-bg" style="height:500px;background-image:url('images/hr1.jpg');">
+                    <div class="mx-auto category-content category-bg" style="height:500px;background-image:url('images/@category.PhotoPath');">
                         <h1 class="category-title">@category.Name</h1>
                     </div>
                     <div class="category-features">

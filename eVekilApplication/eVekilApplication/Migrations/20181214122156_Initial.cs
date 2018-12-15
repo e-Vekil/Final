@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace eVekilApplication.Migrations
 {
-    public partial class INITIAL : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -75,6 +75,7 @@ namespace eVekilApplication.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
+                    PhotoPath = table.Column<string>(nullable: true),
                     Visibilty = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
@@ -262,7 +263,6 @@ namespace eVekilApplication.Migrations
                     Price = table.Column<int>(nullable: false),
                     AdvocateId = table.Column<int>(nullable: false),
                     SubcategoryId = table.Column<int>(nullable: false),
-                    TermsOfUse = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     Date = table.Column<DateTime>(nullable: false),
                     FileName = table.Column<string>(nullable: true)

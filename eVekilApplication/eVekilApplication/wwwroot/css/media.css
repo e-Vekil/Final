@@ -59,9 +59,12 @@
     .main-page-wrapper article.category{
         padding-top:50px!important;
     }
-    section.about h1 {
-        font-size: 3em !important;
-    }
+        .main-page-wrapper article.category .category-title{
+            display:none;
+        }
+        section.about h1 {
+            font-size: 2em !important;
+        }
     #about-slider{
         overflow:visible;
         height:100%!important;
@@ -107,22 +110,43 @@
         display: list-item!important;
     }
 }
-                                            
-@media only screen  and (max-width:420px){
-    .intro-desc{
+@media only screen and (max-width:575px) {
+    #main2{
+        /*background-image:url('images/bg.png')!important;*/
+        background-position:center;
+        background-size:cover;
+        background-repeat:no-repeat;
+    }
+}    
+@media only screen and (max-width:420px) {
+    .intro-desc {
         display: none;
     }
-    .intro{
-       padding-top:140px!important;
+
+    .intro {
+        padding-top: 140px !important;
     }
-    .contact-content{
-        padding:20px 30px!important;
+
+    .contact-content {
+        padding: 20px 17px !important;
+    }
+
+    .contact-header h1 {
+        font-size: 2em !important;
+    }
+
+    .main-page-wrapper .category-text {
+        margin-top: 20px !important;
+    }
+
+    .download-button {
+        margin-bottom: 30px;
     }
 }
 @media only screen and (max-width:868px){
     .main-page-wrapper .category-content {
         width: 90% !important;
-        height: 350px !important;
+        height: 220px !important;
     }
     .category-title{
         font-size: 3rem!important;
@@ -169,13 +193,22 @@
         width:150px!important;
         right:-4%!important;
     }
+    #About .contact-header h1{
+        font-size:3em;
+    }
+    .main-page-wrapper .category-text{
+        padding-left:0px!important;
+    }
+    .download-button{
+        padding-left:0px!important;
+    }
 }
 @media only screen and (max-width:320px){
     .side-bar-product{
         width:320px!important;
     }
     .close-icon-product{
-        margin-left:46px!important;
+        margin-left:174px!important;
     }
 }
 
