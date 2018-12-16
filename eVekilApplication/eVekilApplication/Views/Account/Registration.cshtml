@@ -47,8 +47,12 @@
                                 </div>
                             </div>
                             <div class="col-lg-12 d-flex p-0">
-                                <a asp-action="Home" asp-controller="Account" class="social-register facebook"> <i class="fab fa-facebook-f"></i>Facebook</a>
-                                <a asp-action="Home" asp-controller="Account" class="social-register google"><i class="fab fa-google-plus-g"></i>Google</a>
+                                @foreach (var item in Model.Providers)
+                                {
+                                    <a asp-action="SignIn" asp-controller="Account" class="social-register facebook"> <i class="fab fa-facebook-f"></i>@item</a>
+                                }
+                                @*<a asp-action="Home" asp-controller="Account" class="social-register facebook"> <i class="fab fa-facebook-f"></i>Facebook</a>
+                                <a asp-action="Home" asp-controller="Account" class="social-register google"><i class="fab fa-google-plus-g"></i>Google</a>*@
                             </div>
                         </form>
                     </div>
@@ -153,8 +157,12 @@ else
                                 </div>
                             </div>
                             <div class="col-lg-12 d-flex p-0">
-                                <a asp-action="Home" asp-controller="Account" class="social-register facebook"> <i class="fab fa-facebook-f"></i>Facebook</a>
-                                <a asp-action="Home" asp-controller="Account" class="social-register google"><i class="fab fa-google-plus-g"></i>Google</a>
+                                @foreach (var item in Model.Providers)
+                                {
+                                    <a asp-action="SignIn" asp-controller="Account" class="social-register facebook"> <i class="fab fa-facebook-f"></i>@item</a>
+                                }
+                                @*<a asp-action="Home" asp-controller="Account" class="social-register facebook"> <i class="fab fa-facebook-f"></i>Facebook</a>
+                                <a asp-action="Home" asp-controller="Account" class="social-register google"><i class="fab fa-google-plus-g"></i>Google</a>*@
                             </div>
                         </form>
                     </div>
