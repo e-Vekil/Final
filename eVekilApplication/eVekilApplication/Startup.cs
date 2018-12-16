@@ -42,6 +42,7 @@ namespace eVekilApplication
                 options.IdleTimeout = TimeSpan.FromMinutes(15);//You can set Time  
                 options.Cookie.MaxAge = TimeSpan.FromMinutes(15);
             });
+
             services.AddAuthentication(options=> {
                 options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;

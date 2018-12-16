@@ -41,11 +41,11 @@ namespace eVekilApplication.Controllers
         public async Task<IActionResult> Registration()
         {
             var allSchemeProvider = (await _authenticationSchemeProvider.GetAllSchemesAsync()).Select(a => a.DisplayName).Where(n => !String.IsNullOrEmpty(n));
-            User user = await _userManager.GetUserAsync(HttpContext.User);
-            if (user != null)
-            {
-                return RedirectToAction(nameof(Home));
-            }
+            //User user = await _userManager.GetUserAsync(HttpContext.User);
+            //if (user != null)
+            //{
+            //    return RedirectToAction(nameof(Home));
+            //}
             RegistrationViewModel reg = new RegistrationViewModel()
             {
                 Providers = allSchemeProvider
@@ -54,6 +54,7 @@ namespace eVekilApplication.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult SignIn(string provider)
         {
             return Challenge(new AuthenticationProperties {RedirectUri ="/" }, provider);
@@ -128,7 +129,7 @@ namespace eVekilApplication.Controllers
                             userId = user.Id,
                             token = Token
                         });
-                        var acceptMessage = "E-VAKIL.AZ QEYDIYYAT TESDIQ LINKI" + " " + "http://localhost:60457/" + $"{Tokenlink}";
+                        var acceptMessage = "E-VAKIL.AZ QEYDIYYAT TESDIQ LINKI" + " " + "https://localhost:44302" + $"{Tokenlink}";
                         await service.SendMailAsync(user.Email, "E-VAKIL.AZ TESDIQ", acceptMessage);
                         //Email Confirm End
 
@@ -154,6 +155,7 @@ namespace eVekilApplication.Controllers
             }
         }
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> ConfirmEmail(string userId,string token)
         {
             if(userId == null || token == null)
@@ -378,6 +380,8 @@ namespace eVekilApplication.Controllers
 
         public async Task<IActionResult> Logout()
         {
+            await _signInManager.SignOutAsync();
+            HttpContext.Session.Clear();
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index", "Home", new { area = "" });
         }

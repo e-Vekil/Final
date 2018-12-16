@@ -46,10 +46,10 @@
                             </div>
                         </div>
                         <div class="col-lg-12 d-flex p-0">
-                            @foreach (var item in Model.Providers)
-                            {
-                                <a asp-action="SignIn" asp-controller="Account" class="social-register facebook"> <i class="fab fa-facebook-f"></i>@item</a>
-                            }
+                            @*@foreach (string provider in Model.Providers)
+                            {*@
+                                <a asp-action="SignIn" asp-controller="Account" asp-route-provider="Facebook" class="social-register facebook"> <i class="fab fa-facebook-f"></i>Facebook</a>
+                            @*  *@}
                         </div>
                     </form>
                 </div>
