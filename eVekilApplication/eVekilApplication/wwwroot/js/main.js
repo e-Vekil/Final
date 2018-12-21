@@ -1,6 +1,6 @@
 ﻿// MAIN VIDEO WIDTH
 var w = $(window).width();
-$('#mainVideo').css('width', w);
+//$('#mainVideo').css('width', w);
 
 // ON SCROLL NAVBAR FIXED
 var navBarWrapper = document.querySelector(".nav-bar-wrapper");
@@ -253,7 +253,7 @@ $(window).scroll(function () {
                 //window.location.hash = icon.id;
                 //location.replace('https://localhost:44343/#' + icon.id);
                 //parent.location.hash = icon.id;
-                history.replaceState('', 'https://localhost:44343/#main2', '#' + icon.id);
+                history.replaceState('', 'https://localhost:44343/#main2', '#' + icon.id);  
                 //setTimeout(function (e) { e.preventDefault();window.location.hash = icon.id; return false }, 700);
             }
             break;
@@ -316,54 +316,54 @@ $(document).ready(function () {
     //   });
     // }
 
-//ABOUT SLIDER
-var articles = document.querySelectorAll("section.about article");
-var articleWrapper = document.querySelector("#about-slider .about-slider-wrapper");
-var aboutList = document.querySelectorAll(".about-nav li");
-//var activeListItem = document.querySelector(".about-nav li span.active");
-var dataId;
-var oldId = 1;
-var res = 0;
-for (var item of aboutList) {
-    item.addEventListener("click", function () {
-        $(".about-nav li span.active").removeClass("active");
-        this.firstElementChild.classList.add("active");
-        activeListItem = this.firstElementChild;
-        dataId = this.firstElementChild.getAttribute("data-id");
-        for (var article of articles) {
-            article.classList.remove("active");
-            if (article.getAttribute("data-name") == dataId) {
-                article.classList.add("active");
-            }
-        }
-    })
-}
+////ABOUT SLIDER
+//var articles = document.querySelectorAll("section.about article");
+//var articleWrapper = document.querySelector("#about-slider .about-slider-wrapper");
+//var aboutList = document.querySelectorAll(".about-nav li");
+////var activeListItem = document.querySelector(".about-nav li span.active");
+//var dataId;
+//var oldId = 1;
+//var res = 0;
+//for (var item of aboutList) {
+//    item.addEventListener("click", function () {
+//        $(".about-nav li span.active").removeClass("active");
+//        this.firstElementChild.classList.add("active");
+//        activeListItem = this.firstElementChild;
+//        dataId = this.firstElementChild.getAttribute("data-id");
+//        for (var article of articles) {
+//            article.classList.remove("active");
+//            if (article.getAttribute("data-name") == dataId) {
+//                article.classList.add("active");
+//            }
+//        }
+//    })
+//}
 
 
 
 
 
-var articles = document.querySelectorAll("section.about article");
-var articleWrapper = document.querySelector("#about-slider .about-slider-wrapper");
-var aboutList = document.querySelectorAll(".about-slider-wrapper div.accordion");
-//var activeListItem = document.querySelector(".about-slider-wrapper div.accordion.active");
-var dataId;
-var oldId = 1;
-var res = 0;
-for (var item of aboutList) {
-    item.addEventListener("click", function () {
-        $(".about-slider-wrapper div.accordion.active").removeClass("active");
-        this.classList.add("active");
-        activeListItem = this;
-        dataId = this.getAttribute("data-id");
-        for (var article of articles) {
-            article.classList.remove("active");
-            if (article.getAttribute("data-name") == dataId) {
-                article.classList.add("active");
-            }
-        }
-    })
-}
+//var articles = document.querySelectorAll("section.about article");
+//var articleWrapper = document.querySelector("#about-slider .about-slider-wrapper");
+//var aboutList = document.querySelectorAll(".about-slider-wrapper div.accordion");
+////var activeListItem = document.querySelector(".about-slider-wrapper div.accordion.active");
+//var dataId;
+//var oldId = 1;
+//var res = 0;
+//for (var item of aboutList) {
+//    item.addEventListener("click", function () {
+//        $(".about-slider-wrapper div.accordion.active").removeClass("active");
+//        this.classList.add("active");
+//        activeListItem = this;
+//        dataId = this.getAttribute("data-id");
+//        for (var article of articles) {
+//            article.classList.remove("active");
+//            if (article.getAttribute("data-name") == dataId) {
+//                article.classList.add("active");
+//            }
+//        }
+//    })
+//}
 
 //console.log(screen.width);
 
@@ -486,7 +486,6 @@ for (var button of changeButtons) {
             button.classList.remove("active");
         }
         this.classList.add("active");
-
         var dataId = this.getAttribute("data-id");
         console.log(dataId)
         for (var div of descriptionAndReview) {
@@ -548,7 +547,102 @@ $(document).ready(function () {
         $(".confirm").show();
     })
 
-    //if ($(".video-container").hasClass("d-none")) {
-    //    $(".video-container").removeClass("d-none");
-    //}
+    //About on scroll fixed menu
+    $(window).scroll(function(){
+        var scrollTop = $(window).scrollTop();
+        var listoffsetTop = $(".about-nav").offset().top;
+        if (listoffsetTop - scrollTop <= 98) {
+            $(".about-nav").addClass("fixed");
+        }
+
+        if ($("#About").offset().top - scrollTop >=-137) {
+            $(".about-nav").removeClass("fixed");
+        }
+        var nextElementOffsetTop = $("#About").next().offset().top;
+        if (nextElementOffsetTop - scrollTop < $(".about-nav").innerHeight() + 80) {
+            $(".about-nav").removeClass("fixed");
+        }
+        //if ($("#About").offset().top - scrollTop - 100 <= listoffsetTop) {
+        //    console.log("yes")
+        //}
+        //console.log(listoffsetTop);
+      
+       
+    })
+
+    //About on click dynamic scroll with transition
+    $(".about-nav a").on('click', function (event) {
+        if (this.hash !== "") {
+            event.preventDefault();
+            var hash = this.hash;
+            $('html, body').animate({
+                scrollTop: $(hash).offset().top-100
+            }, 800, function () {
+            });
+        }
+    });
+
+    var aboutNavListItems = document.querySelectorAll(".about-nav a");
+    var aboutNavSpans = document.querySelectorAll(".about-nav a span")
+
+    for (var item of aboutNavListItems) {
+        item.addEventListener("click", function (e) {
+            for (var span of aboutNavSpans) {
+
+                span.classList.remove("active");
+            }
+            this.firstElementChild.classList.add("active");
+        })
+    }
+
+
+
+    //About dynamic scroll left
+
+
+    //$(window).scroll(function () {
+    //    var aboutUss = [].slice.call(document.querySelectorAll(".about-us"), 0).reverse();
+    //    var activeIcon = document.querySelector(".about-nav-item.active");
+    //    for (var aboutUs of aboutUss) {
+    //        console.log(aboutUs.offsetTop);
+    //        //if (aboutUs.offsetTop - 50 < $(window).scrollTop()) {
+    //        //    if (aboutUs.id != activeIcon.attributes[3].value) {
+    //        //        console.log("girid")
+    //        //        activeIcon.classList.remove("active");
+    //        //        document.querySelector(".about-nav-item" + "." + icon.id).classList.add("active");
+    //        //        //window.location.hash = icon.id;
+    //        //        //location.replace('https://localhost:44343/#' + icon.id);
+    //        //        //parent.location.hash = icon.id;
+    //        //        //history.replaceState('', 'https://localhost:44343/#main2', '#' + icon.id);
+    //        //        //setTimeout(function (e) { e.preventDefault();window.location.hash = icon.id; return false }, 700);
+    //        //    }
+    //        //    break;
+    //        //}
+    //    }
+    //});
+
+
+    //About accordion
+    $(".accordion").click(function () {
+        var dataId = $(this).attr("data-id");
+        var elements = document.querySelectorAll(".about-us");
+        for (var element of elements) {
+            var dataName = element.getAttribute("data-name");
+            if (dataId == dataName) {
+                if (element.classList.contains("active")) {
+                    element.classList.remove("active");
+                    $(this).children("h3").removeClass("active");
+                    $(this).children("i").removeClass("active");
+                }
+                else {
+                    $(this).children("h3").addClass("active");
+                    element.classList.add("active");
+                    $(this).children("i").addClass("active");
+                }
+                
+            }
+        }
+
+    })
+   
 })

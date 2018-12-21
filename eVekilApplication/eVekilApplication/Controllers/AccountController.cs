@@ -41,11 +41,11 @@ namespace eVekilApplication.Controllers
         public async Task<IActionResult> Registration()
         {
             var allSchemeProvider = (await _authenticationSchemeProvider.GetAllSchemesAsync()).Select(a => a.DisplayName).Where(n => !String.IsNullOrEmpty(n));
-            //User user = await _userManager.GetUserAsync(HttpContext.User);
-            //if (user != null)
-            //{
-            //    return RedirectToAction(nameof(Home));
-            //}
+            User user = await _userManager.GetUserAsync(HttpContext.User);
+            if (user != null)
+            {
+                return RedirectToAction(nameof(Home));
+            }
             RegistrationViewModel reg = new RegistrationViewModel()
             {
                 Providers = allSchemeProvider
@@ -390,6 +390,6 @@ namespace eVekilApplication.Controllers
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index", "Home", new { area = "" });
         }
-
+            
     }
 }

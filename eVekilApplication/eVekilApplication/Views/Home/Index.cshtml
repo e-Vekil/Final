@@ -6,9 +6,10 @@
 <div class="page-cover">
     <div id="container" class="video-container d-none d-sm-block">
         <video id="mainVideo" autoplay="autoplay" loop="loop" muted="muted">
-             <source src="~/videos/original.webm" type="video/mp4">
+            <source src="~/videos/original.webm" type="video/mp4">
         </video>
     </div>
+    <img src="~/images/qiz1.jpg" id="bg-photo" alt="Alternate Text" />
 </div>
 <!-- Main Background Video End -->
 
@@ -52,36 +53,37 @@
     <div class="container">
         @* Slider *@
         <div class="col-lg-12 p-0 py-5"><h1>BİZ <span>E-VEKIL.AZ</span></h1></div>
-        <div class="row">
-            <div class="col-lg-4 about-nav">
-                <ul>
-                    <li><span data-id="1" class="active">About</span></li>
-                    <li><span data-id="2">Process</span></li>
-                    <li><span data-id="3">Expertise</span></li>
-                    <li><span data-id="4">People</span></li>
-                </ul>
-            </div>
-            <div id="about-slider" class="col-lg-8">
+        <div class="about-nav">
+            <ul>
+                <li><a href="#Haqqimizda"><span data-id="1" class="active about-nav-item Haqqimizda" data-hash="Haqqimizda">Haqqımızda</span></a></li>
+                <li><a href="#Process"><span data-id="2" class="about-nav-item Process" data-hash="Process">Process</span></a></li>
+                <li><a href="#Expertise"><span data-id="3" class="about-nav-item Expertise" data-hash="Expertise">Expertise</span></a></li>
+                <li><a href="#People"><span data-id="4" class="about-nav-item People" data-hash="People">People</span></a></li>
+            </ul>
+        </div>
+            <div id="about-slider" class="about">
                 <div class="about-slider-wrapper col-12 p-0">
-                    <div class="col-12 p-0 accordion active" data-id="1"><h3>About</h3></div>
-                    <hr />
-                    <article class="about-us active" data-name="1">
+                    <div class="col-12 p-0 accordion" data-id="1"><h3>Haqqımızda</h3><i class="fas fa-angle-down"></i></div>
+                    <article class="about-us m-0" id="Haqqimizda" data-name="1">
                         <div class="row">
                             <div class="col-lg-8">
                                 <p>
-                                    We believe that creating customer-centric experiences based on UX best practices, market research, and user testing is the best way to achieve Results on Internet® (ROI).
+                                    e-vakil.az saytının məqsədi istifadəçilərinə peşəkar hüquqi yardım göstərməkdir. Qeyd edilən hüquqi yardım (i) saytımızda yerləşdirilmiş müxtəlif növ sənədlərin təqdim edilməsindən və (ii) sifarişinizə uyğun sənədlərin hazırlanmasından ibarətdir.
+                                    Təqdim edilən sənədlər arasında müxtəlif ərizə formaları, aktlar, protokollar, müqavilələr, etibarnamələr, qərarlar və s. tapmaq olar.
                                 </p>
-                                <p>For over 20 years, we have been creating high-performance websites, apps, and software that deliver ultimate digital experiences for financial services and insurance companies, nonprofits, and government agencies.</p>
+                                <p>
+                                    Qeyd etmək lazımdır ki, e-vakil.az saytının təsisçiləri bu saytı pul qazanmaq üçün yaratmamışlar. Bu səbəbdən təqdim edilən bir çox sənəd formaları pulsuz və ya çox ucuz qiymətə təklif edilir. Saytımızda satışda olan məhsullar, fəaliyyətimizi dəstəkləmək üçündür.
+                                    Müraciət edən şəxs e-vakil.az saytı vasitəsilə tapdığı vəkilin hərəkətlərindən narazı olarsa və ya digər səbəblərdən vəkildən imtina edərsə və  e-vakil.az saytına başqa vəkil tapmaq üçün müraciət edərsə müraciət edən şəxsin tələblərinə cavab verə biləcək vəkil tapmağa yardım etməyə və sair üsulla hüquqi yardım etməyə çalışacağıq.
+                                </p>
                             </div>
                             <div class="col-lg-4">
                             </div>
                         </div>
                     </article>
                     <div class="col-12 p-0 accordion" data-id="2">
-                        <h3>Process</h3>
+                        <h3>Process</h3><i class="fas fa-angle-down"></i>
                     </div>
-                    <hr />
-                    <article class="about-us" data-name="2">
+                    <article class="about-us" id="Process" data-name="2">
                         <div class="row">
                             <div class="col-lg-8">
                                 <p>
@@ -93,9 +95,8 @@
                             </div>
                         </div>
                     </article>
-                    <div class="col-12 p-0 accordion" data-id="3"><h3>Expertise</h3></div>
-                    <hr />
-                    <article class="about-us" data-name="3">
+                    <div class="col-12 p-0 accordion" data-id="3"><h3>Expertise</h3><i class="fas fa-angle-down"></i></div>
+                    <article class="about-us" id="Expertise" data-name="3">
                         <div class="row">
                             <div class="col-lg-8">
                                 <p>
@@ -107,20 +108,20 @@
                             </div>
                         </div>
                     </article>
-                    <div class="col-12 p-0 accordion" data-id="4"> <h3>People</h3></div>
-                    <hr />
-                    <article class="about-us" data-name="4">
+                    <div class="col-12 p-0 accordion" data-id="4"> <h3>People</h3><i class="fas fa-angle-down"></i></div>
+                    <article class="about-us" id="People" data-name="4">
                         <div class="row">
                             <div class="col-lg-8 people-images">
                                 <h3>Meet our leadership team:</h3>
                                 <div class="row">
                                     <div class="col-lg-4 p-0 people my-1 col-md-4 col-sm-4">
                                         <div class="people-img-wrapper">
-                                        <div class="people-img-overlay">
-                                            <p>XXXX</p>
-                                            <p>XXXXXXX</p>
+                                            <div class="people-img-overlay">
+                                                <p>XXXX</p>
+                                                <p>XXXXXXX</p>
+                                            </div>
+                                            <img src="https://cdn2.hubspot.net/hubfs/439788/intechnic_2017/assets/images/landing/about/people-1.jpg?noresize" alt="Vekil" />
                                         </div>
-                                        <img src="https://cdn2.hubspot.net/hubfs/439788/intechnic_2017/assets/images/landing/about/people-1.jpg?noresize" alt="Vekil" /></div>
                                     </div>
                                     <div class="col-lg-4 p-0 people my-1 col-md-4 col-sm-4">
                                         <div class="people-img-wrapper">
@@ -181,7 +182,6 @@
                     </article>
                 </div>
             </div>
-        </div>
     </div>
 </section>
 <section id="ContactUs" class="sect contactUs">
@@ -222,7 +222,7 @@
                         </div>
                         <div class="col-12">
                             <div class="form-group">
-                                <button type="submit" class="btn btn-danger">Göndər</button>
+                                <button type="submit" style="background:#8a1919; color:white;" class="btn btn-danger">Göndər</button>
                             </div>
                         </div>
                     </div>
