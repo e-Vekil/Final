@@ -1,107 +1,225 @@
 ﻿@model RegistrationViewModel
-
-<section class="registration-wrapper">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 form-wrapper">
-                @{
-                    string active = String.Empty;
-                    @if (Context.Session.GetString("isRegsiterValid") == null)
-                    {
-                        active = "";
+@if (ViewBag.Info != "Register")
+{
+    <section class="registration-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 form-wrapper">
+                    @{
+                        string active = String.Empty;
+                        @if (Context.Session.GetString("isRegsiterValid") == null)
+                        {
+                            active = "";
+                        }
+                        else
+                        {
+                            active = "active";
+                        }
                     }
-                    else
-                    {
-                        active = "active";
-                    }
-                }
-                <div class="login-form active" data-name="1">
-                    <header class="mb-5">
-                        <h3><i class="fas fa-sign-in-alt"></i>Daxil olun</h3>
-                    </header>
-                    <form asp-action="Registration" asp-controller="Account" method="post">
-                        <div asp-validation-summary="ModelOnly"></div>
-                        <div class="form-group">
-                            <label asp-for="Login.Email">Elektron ünvan</label>
-                            <input asp-for="Login.Email" class="form-control">
-                            <span asp-validation-for="Login.Email"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Login.Password">Şifrə</label>
-                            <input asp-for="Login.Password" class="form-control">
-                            <span asp-validation-for="Login.Password"></span>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="form-button">DAXİL OLUN</button>
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-6">
-                                    <input asp-for="Login.IsRemmember" aria-label="Checkbox for following text input">
-                                    <span>Yadda saxla</span>
-                                </div>
-                                <div class="col-6 text-right">
-                                    <a href="#" class="forget-password"><i class="far fa-dizzy"></i>Şifrənin bərpası</a>
+                    <div class="login-form active" data-name="1">
+                        <header class="mb-5">
+                            <h3><i class="fas fa-sign-in-alt"></i>Daxil olun</h3>
+                        </header>
+                        <form asp-action="Registration" asp-controller="Account" method="post">
+                            <div asp-validation-summary="ModelOnly"></div>
+                            <div class="form-group">
+                                <label asp-for="Login.Email">Elektron ünvan</label>
+                                <input asp-for="Login.Email" class="form-control">
+                                <span asp-validation-for="Login.Email"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Login.Password">Şifrə</label>
+                                <input asp-for="Login.Password" class="form-control">
+                                <span asp-validation-for="Login.Password"></span>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="form-button">DAXİL OLUN</button>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <input asp-for="Login.IsRemmember" aria-label="Checkbox for following text input">
+                                        <span>Yadda saxla</span>
+                                    </div>
+                                    <div class="col-6 text-right">
+                                        <a href="#" class="forget-password"><i class="far fa-dizzy"></i>Şifrənin bərpası</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-12 d-flex p-0">
-                            @*@foreach (string provider in Model.Providers)
-                            {*@
-                                <a asp-action="SignIn" asp-controller="Account" asp-route-provider="Facebook" class="social-register facebook"> <i class="fab fa-facebook-f"></i>Facebook</a>
-                            @*  *@}
-                        </div>
-                    </form>
+                            <div class="col-lg-12 d-flex p-0">
+                                @foreach (var item in Model.Providers)
+                                {
+                                    <a asp-action="SignIn" asp-controller="Account" class="social-register facebook"> <i class="fab fa-facebook-f"></i>@item</a>
+                                }
+                                @*<a asp-action="Home" asp-controller="Account" class="social-register facebook"> <i class="fab fa-facebook-f"></i>Facebook</a>
+                                    <a asp-action="Home" asp-controller="Account" class="social-register google"><i class="fab fa-google-plus-g"></i>Google</a>*@
+                            </div>
+                        </form>
+                    </div>
+                    <div class="register-form" data-name="2">
+                        <header class="mb-5">
+                            <h3><i class="fas fa-user-alt"></i>Qeydiyyat</h3>
+                        </header>
+                        <form asp-action="Registration" asp-controller="Account" method="post">
+                            <div class="form-group">
+                                <label asp-for="Register.Name">Ad</label>
+                                <input asp-for="Register.Name" class="form-control">
+                                <span asp-validation-for="Register.Name" class="alert-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Register.Surname">Soyad</label>
+                                <input asp-for="Register.Surname" class="form-control">
+                                <span asp-validation-for="Register.Surname" class="alert-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Register.Email">Elektron ünvan</label>
+                                <input asp-for="Register.Email" class="form-control">
+                                <span asp-validation-for="Register.Email" class="alert-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Register.Password">Şifrə</label>
+                                <input asp-for="Register.Password" class="form-control">
+                                <span asp-validation-for="Register.Password" class="alert-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Register.ConfirmPassword">Şifrəni təsdiq edin</label>
+                                <input asp-for="Register.ConfirmPassword" class="form-control">
+                                <span asp-validation-for="Register.ConfirmPassword" class="alert-danger"></span>
+                            </div>
+                            <div class="secure-info">
+                                <p>
+                                    Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described in our privacy policy.
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="form-button">QEYDİYYATDAN KEÇİN</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <div class="register-form" data-name="2">
-                    <header class="mb-5">
-                        <h3><i class="fas fa-user-alt"></i>Qeydiyyat</h3>
-                    </header>
-                    <form asp-action="Registration" asp-controller="Account" method="post">
-                        <div asp-validation-summary="ModelOnly"></div>
-                        <div class="form-group">
-                            <label asp-for="Register.Name">Ad</label>
-                            <input asp-for="Register.Name" class="form-control">
-                            <span asp-validation-for="Register.Name"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Register.Surname">Soyad</label>
-                            <input asp-for="Register.Surname" class="form-control">
-                            <span asp-validation-for="Register.Surname"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Register.Email">Elektron ünvan</label>
-                            <input asp-for="Register.Email" class="form-control">
-                            <span asp-validation-for="Register.Email"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Register.Password">Şifrə</label>
-                            <input asp-for="Register.Password" class="form-control">
-                            <span asp-validation-for="Register.Password"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Register.ConfirmPassword">Şifrəni təsdiq edin</label>
-                            <input asp-for="Register.ConfirmPassword" class="form-control">
-                            <span asp-validation-for="Register.ConfirmPassword"></span>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="form-button rg-button">QEYDİYYATDAN KEÇİN</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="col-lg-6 register-wrapper text-center">
-                <header class="mb-5"><h3>Qeydiyyat</h3></header>
-                <div class="col-lg-12 text"><p>Saytdan qeydiyyatdan keçməklə siz sənəd nümunələrini yükləyə bilər,yükləmələrinizi idarə edə bilər və öz şərhlərinizi yaza bilərsiniz.</p></div>
-                <div class="col-lg-12 buttons d-flex justify-content-center">
-
-                    <a href="#" class="login-button" data-id="1">Daxil olun</a>
-                    <a href="#" class="register-button active" data-id="2">Qeydiyyat</a>
+                <div class="col-lg-6 register-wrapper text-center">
+                    <header class="mb-5"><h3>Qeydiyyat</h3></header>
+                    <div class="col-lg-12 text"><p>Saytdan qeydiyyatdan keçməklə siz sənəd nümunələrini yükləyə bilər,yükləmələrinizi idarə edə bilər və öz şərhlərinizi yaza bilərsiniz.</p></div>
+                    <div class="col-lg-12 buttons d-flex justify-content-center">
+                        <a href="#" class="login-button" data-id="1">Daxil olun</a>
+                        <a href="#" class="register-button active" data-id="2">Qeydiyyat</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+}
+else
+{
+    <section class="registration-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 form-wrapper">
+                    @{
+                        string active = String.Empty;
+                        @if (Context.Session.GetString("isRegsiterValid") == null)
+                        {
+                            active = "";
+                        }
+                        else
+                        {
+                            active = "active";
+                        }
+                    }
+                    <div class="login-form" data-name="1">
+                        <header class="mb-5">
+                            <h3><i class="fas fa-sign-in-alt"></i>Daxil olun</h3>
+                        </header>
+                        <form asp-action="Registration" asp-controller="Account" method="post">
+                            <div asp-validation-summary="ModelOnly"></div>
+                            <div class="form-group">
+                                <label asp-for="Login.Email">Elektron ünvan</label>
+                                <input asp-for="Login.Email" class="form-control">
+                                <span asp-validation-for="Login.Email"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Login.Password">Şifrə</label>
+                                <input asp-for="Login.Password" class="form-control">
+                                <span asp-validation-for="Login.Password"></span>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="form-button">DAXİL OLUN</button>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <input asp-for="Login.IsRemmember" aria-label="Checkbox for following text input">
+                                        <span>Yadda saxla</span>
+                                    </div>
+                                    <div class="col-6 text-right">
+                                        <a href="#" class="forget-password"><i class="far fa-dizzy"></i>Şifrənin bərpası</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 d-flex p-0">
+                                @foreach (var item in Model.Providers)
+                                {
+                                    <a asp-action="SignIn" asp-controller="Account" class="social-register facebook"> <i class="fab fa-facebook-f"></i>@item</a>
+                                }
+                                @*<a asp-action="Home" asp-controller="Account" class="social-register facebook"> <i class="fab fa-facebook-f"></i>Facebook</a>
+                                    <a asp-action="Home" asp-controller="Account" class="social-register google"><i class="fab fa-google-plus-g"></i>Google</a>*@
+                            </div>
+                        </form>
+                    </div>
+                    <div class="register-form active" data-name="2">
+                        <header class="mb-5">
+                            <h3><i class="fas fa-user-alt"></i>Qeydiyyat</h3>
+                        </header>
+                        <form asp-action="Registration" asp-controller="Account" method="post">
+                            <div class="form-group">
+                                <label asp-for="Register.Name">Ad</label>
+                                <input asp-for="Register.Name" class="form-control">
+                                <span asp-validation-for="Register.Name" class="alert-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Register.Surname">Soyad</label>
+                                <input asp-for="Register.Surname" class="form-control">
+                                <span asp-validation-for="Register.Surname" class="alert-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Register.Email">Elektron ünvan</label>
+                                <input asp-for="Register.Email" class="form-control">
+                                <span asp-validation-for="Register.Email" class="alert-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Register.Password">Şifrə</label>
+                                <input asp-for="Register.Password" class="form-control">
+                                <span asp-validation-for="Register.Password" class="alert-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Register.ConfirmPassword">Şifrəni təsdiq edin</label>
+                                <input asp-for="Register.ConfirmPassword" class="form-control">
+                                <span asp-validation-for="Register.ConfirmPassword" class="alert-danger"></span>
+                            </div>
+                            <div class="secure-info">
+                                <p>
+                                    Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described in our privacy policy.
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="form-button">QEYDİYYATDAN KEÇİN</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-6 register-wrapper text-center">
+                    <header class="mb-5"><h3>Qeydiyyat</h3></header>
+                    <div class="col-lg-12 text"><p>Saytdan qeydiyyatdan keçməklə siz sənəd nümunələrini yükləyə bilər,yükləmələrinizi idarə edə bilər və öz şərhlərinizi yaza bilərsiniz.</p></div>
+                    <div class="col-lg-12 buttons d-flex justify-content-center">
+                        <a href="#" class="login-button active" data-id="1">Daxil olun</a>
+                        <a href="#" class="register-button" data-id="2">Qeydiyyat</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+}
 @if (Context.Session.GetString("isRegisterValid") == "true")
 {
     <div class="col-ml-8 mx-auto confirm">
@@ -112,5 +230,6 @@
         </h4>
     </div>
 }
+
 
 
