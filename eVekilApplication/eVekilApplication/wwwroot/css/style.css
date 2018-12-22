@@ -63,16 +63,28 @@ li{
     transition: all 0.4s ease-in-out;
 }
 
-
+#bg-photo {
+    height: -webkit-fill-available;
+    transform:translateX(-10%);
+}
 /* START MAIN VIDEO */
 .page-cover {
-    width: 100%;
+    /*width: 100%;
     position: absolute;
     height: 100vh;
     top: 0;
     left: 0;
     z-index: -1;
+    overflow: hidden;*/
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
     overflow: hidden;
+    object-fit: cover;
+    object-position: center;
 }
 .page-cover:after {
     content: "";
@@ -87,12 +99,18 @@ li{
     opacity: 0.7;
 }
 .page-cover video{
+    display: block;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    object-fit: cover;
+    object-position: center;
     /*height: 1064px;*/
     /*width: 1536px;*/
-    margin-top: -65px;
+    /*margin-top: -65px;
     margin-left: 0px;
 
-    object-fit: fill;
+    object-fit: fill;*/
     /*object-position:center;*/
     /*margin-top:-100px!important;*/
 }
@@ -624,10 +642,10 @@ li{
 .category-content{
     width:90%;
     position: relative;
-    box-shadow: 20px 20px 400px rgba(0, 0, 0, 0.4);
+    box-shadow: 50px 0px 800px rgba(0, 0, 0, 0.4);
 }
 .category-title {
-    color: white;
+    color: black;
     font-size: 4.5rem;
     position: absolute;
     top: -7%;
@@ -648,7 +666,7 @@ li{
     top:53%;
     left:60%;
     z-index:5;
-                        box-shadow: 0 100px 250px rgba(30,96,178,0.2);
+    box-shadow: 0 100px 250px rgba(30,96,178,0.2);
 }
 .category-features ul{
     padding: 30px 40px;
@@ -670,15 +688,16 @@ li{
     transform: rotate(180deg);
     transition: all 0.4s ease-in-out;
 }
-.main-page-wrapper .category-name i {
-    font-size: 1.2em;
-    position: absolute;
-    top: 50%;
-    transform: rotate(0deg);
-    transform: translateY(-50%);
-    transition: all 0.4s ease-in-out;
-    right: 5%;
-}
+    .main-page-wrapper .category-name i {
+        font-size: 1.2em;
+        position: absolute;
+        top: 50%;
+        color: #1C2331;
+        transform: rotate(0deg);
+        transform: translateY(-50%);
+        transition: all 0.4s ease-in-out;
+        right: 25%;
+    }
 .download-button span {
     display:inline-block;
     border-radius:100%;
@@ -718,6 +737,9 @@ li{
 }
 /*Categories End*/
 /*About Section*/
+#About {
+    background: #1C2331;
+}
 section.about .people-img-wrapper {
     padding: 0px 7px;
     height: 100%;
@@ -757,82 +779,110 @@ section.about ul li {
     padding: 5px 0px;
     cursor: pointer;
 }
-section.about ul li span.active{
-    color:black!important;
-}
-section.about ul li span{
-    color: rgba(34,31,31,0.22);
-    font-size: 30px;
-    font-weight: bold;
-}
-section.about ul li:hover span{
-    color: black;
-    transition:all 0.2s ease-in-out;
-}
+    section.about ul li span.active {
+        color: #8a1919 !important;
+    }
+    section.about ul li span {
+        color: white;
+        font-size: 30px;
+        font-weight: bold;
+    }
+        section.about ul li span.active {
+            color: #8a1919;
+            transition: all 0.2s ease-in-out;
+        }
+        section.about ul li:hover span {
+            color: white;
+            transition: all 0.2s ease-in-out;
+        }
 section.about h1{
-    color:black;
+    color:white;
     font-size:5em;
     font-weight:bold;
 }
-section.about span {
-    color: #d82533;
-}
+    section.about span {
+        color: #8a1919;
+    }
 section.about .about-us p{
-    color:black;
+    color:white;
     font-size:18px;
 }
 #about-slider {
-    height: 500px;
+    /*height: 500px;
     overflow:hidden;
-    position: relative;
+    position: relative;*/
+    width: 70%;
+    margin-left: 300px;
 }
 #about-slider article{
-    max-height:500px;
+    /*max-height:500px;
     position: absolute;
     top: 1000px;
-    transition:all 1s ease-in-out;
+    transition:all 1s ease-in-out;*/
     /*visibility: hidden;*/
 }
 #about-slider article.active{
     /*visibility: visible;*/
-    display: block!important;   
+    /*display: block!important;   
     top: 10px;
-    transition:all 1s ease-in-out;
+    transition:all 1s ease-in-out;*/
 
 }
-section.about hr{
+.about-us{
+    margin-top:150px;
+}
+
+section.about hr {
     display: none;
 }
-#about-slider .about-slider-wrapper {
-    width: 100%;
-    transition: all 1s ease-in-out;
+.about-nav {
+    width: 250px;
+    position: absolute;
+    transition: all 0.3s ease-in-out;
 }
+    .about-nav.fixed {
+        position: fixed;
+        z-index: 10;
+        transition:all 0.3s ease-in-out;
+        top: 100px;
+    }
+    #about-slider .about-slider-wrapper {
+        width: 100%;
+        transition: all 1s ease-in-out;
+    }
 #about-slider .accordion{
-    display:none;
+    display: none;
+    cursor: pointer;
+    position:relative;
 }
-#about-slider .accordion{
-    cursor:pointer;
-}
-#about-slider .accordion h3 {
-    font-weight: bold;
-    color: rgba(34,31,31,0.22);
-}
-#about-slider .accordion:hover h3{
-    color:black;
-    transition:all 0.1s ease-in-out;
-}
-#about-slider .accordion.active h3 {
-        color:black;
-}
-#about-slider .accordion.active:hover h3{
-    color:black;
-}
-
-/*SECTION CONTACT US*/
-#ContactUs{
-                                                 /*height:100vh;*/
-    padding:50px 0px;
-}
+    #about-slider .accordion h3.active{
+        color: #8a1919;
+        transition:all 0.4s ease-in-out;
+    }
+    #about-slider .accordion h3 {
+        font-weight: bold;
+        color: white;
+        transition: all 0.4s ease-in-out;
+        margin:10px 0px;
+    }
+    #about-slider .accordion i {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 1%;
+        font-size: 1.2em;
+        transition: all 0.4s ease-in-out;
+        color: white;
+    }
+        #about-slider .accordion i.active {
+            color: #8a1919;
+            transition: all 0.4s ease-in-out;
+        }
+        /*SECTION CONTACT US*/
+        #ContactUs {
+            /*height:100vh;*/
+            padding: 50px 0px;
+        }
 .contact-header h1 {
     color: black;
     font-size: 5em;

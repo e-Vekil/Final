@@ -41,11 +41,11 @@ namespace eVekilApplication.Controllers
         public async Task<IActionResult> Registration()
         {
             var allSchemeProvider = (await _authenticationSchemeProvider.GetAllSchemesAsync()).Select(a => a.DisplayName).Where(n => !String.IsNullOrEmpty(n));
-            //User user = await _userManager.GetUserAsync(HttpContext.User);
-            //if (user != null)
-            //{
-            //    return RedirectToAction(nameof(Home));
-            //}
+            User user = await _userManager.GetUserAsync(HttpContext.User);
+            if (user != null)
+            {
+                return RedirectToAction(nameof(Home));
+            }
             RegistrationViewModel reg = new RegistrationViewModel()
             {
                 Providers = allSchemeProvider
@@ -90,6 +90,8 @@ namespace eVekilApplication.Controllers
                                     HttpContext.Session.SetString("id", user.Id);
                                     HttpContext.Session.SetString("name", user.UserName);
                                     HttpContext.Session.SetString("isLoged", "true");
+                                    HttpContext.Session.Remove("emailConfirmed");
+                                    HttpContext.Session.Remove("isSended");
                                     return RedirectToAction("Home", "Account", new { area = "" });
                                 }
                             }
@@ -133,7 +135,8 @@ namespace eVekilApplication.Controllers
                         await service.SendMailAsync(user.Email, "E-VAKIL.AZ TESDIQ", acceptMessage);
                         //Email Confirm End
 
-                        HttpContext.Session.SetString("isRegisterValid", "true");
+                        HttpContext.Session.SetString("isSended", "true");
+                        HttpContext.Session.SetString("email", user.Email);
                         await _userManager.AddToRoleAsync(user, "user");
                         var message = $@"{user.Name} {user.Surname} {user.RegisterDate} tarixində saytdan qeydiyyatdan keçmişdir.";
                         await service.SendMailAsync("ibrahimxanlimurad@hotmail.com", "USER REGISTER", message);
@@ -171,6 +174,8 @@ namespace eVekilApplication.Controllers
             IdentityResult result =await _userManager.ConfirmEmailAsync(user, token);
             if (result.Succeeded)
             {
+                HttpContext.Session.Clear();
+                HttpContext.Session.SetString("emailConfirmed","true");
                 return RedirectToAction("Home", "Account");
             }
             else
@@ -363,7 +368,7 @@ namespace eVekilApplication.Controllers
                 }
 
                 //List<PurchasedDocument> AllPD = await _db.PurchasedDocuments.Where(x => x.User == user).ToListAsync();
-
+                
                 //if (AllPD.Count == SP.Count)
                 //{
                 //}
@@ -385,6 +390,6 @@ namespace eVekilApplication.Controllers
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index", "Home", new { area = "" });
         }
-
+            
     }
 }
