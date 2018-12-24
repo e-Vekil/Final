@@ -1,7 +1,111 @@
-﻿<vc:document id="Convert.ToInt32(@ViewBag.categoryId)"></vc:document>
-@*<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-<script>
-    $(function () {
-        $('[data-toggle="popover"]').popover()
-    })
-</script>*@
+﻿@model DocumentViewModel
+<section class="all-documents-header">
+        <header class="all-category-name col-12 p-0 py-3">
+            <div class="mx-auto all-category-content">
+                <h1 class="all-category-title">@Model.Category.Name</h1>
+            </div>
+        </header>
+</section>
+<section class="documents-filter">
+    <div class="container">
+        <div class="dropdown">
+            <button class="btn filter-button dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               @(ViewBag.FilterName!=null?ViewBag.FilterName:"Bütün Sənədlər")
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                @{
+                    var count = 1;
+                }
+                @foreach (Subcategory sub in Model.Subcategories)
+                {
+                    if (count == 1)
+                    {
+                        <a class="dropdown-item" asp-action="Document" asp-controller="Home" asp-route-subId="0">Bütün Sənədlər</a>
+
+                    }
+
+                    <a class="dropdown-item" asp-action="Document" asp-controller="Home" asp-route-subId="@sub.Id">@sub.Name</a>
+                    count++;
+                }
+            </div>
+        </div>
+    </div>
+</section>
+<section class="documents">
+    <div class="container">
+        <div class="row">
+
+            @if (ViewBag.DocumentCount != 0)
+            {
+                @foreach (Document document in Model.Documents)
+                {
+
+                    <div class="document-item col-lg-6 col-md-6 col-sm-12">
+                        <div class="document-info">
+                            <div class="document-icon">
+                                <a asp-action="DocumentDesc" asp-controller="Home" asp-route-id="@document.Id">
+                                    <i class="fas fa-file-alt"></i>
+                                </a>
+                            </div>
+                            <div class="document-header">
+                                <h3><a asp-action="DocumentDesc" asp-controller="Home" asp-route-id="@document.Id">@document.Name</a></h3>
+                            </div>
+                            <div class="document-price">
+                                <a asp-action="DocumentDesc" asp-controller="Home" asp-route-id="@document.Id">Sənədə baxış</a>
+                                <a href="#">
+                                    <span>
+                                        @document.Price AZN
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+             }
+            else
+            {
+            <div class="col-lg-12">
+                <span class="alert alert-danger">Bu kateqoriya ilə bağlı sənəd nümunəsi yoxdur.</span>
+            </div>
+            }
+
+
+        </div>
+
+        </div>
+</section>
+<section class="pag-section my-5">
+    <div class="container">
+        @if (ViewBag.Total != 0)
+        {
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only"></span>
+                        </a>
+                    </li>
+                    @for (int i = 1; i <= ViewBag.Total; i++)
+                    {
+                        @if (i == ViewBag.Page)
+                        {
+                            <li class="page-item active"><a class="page-link" asp-action="Document" asp-controller="Home" asp-route-subId="@ViewBag.SubId"  asp-route-page="@i">@i</a></li>
+                        }
+                        else
+                        {
+                            <li class="page-item"><a class="page-link" asp-action="Document" asp-controller="Home" asp-route-subId="@ViewBag.SubId" asp-route-page="@i">@i</a></li>
+                        }
+                    }
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        }
+        </div>
+</section>

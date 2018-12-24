@@ -22,7 +22,7 @@
                                 if (subcategory.CategoryId == category.Id)
                                 {
                                     <li>
-                                        <a asp-action="Document" asp-controller="Home" asp-route-id="@category.Id">@subcategory.Name</a>
+                                        <a asp-action="Document" asp-controller="Home" asp-route-id="@subcategory.CategoryId" asp-route-subId="@subcategory.Id">@subcategory.Name</a>
                                     </li>
                                     <hr>
                                 }
@@ -33,7 +33,7 @@
                         <p> @category.Description</p>
                     </div>
                     <div class="download-button d-flex align-items-center col-lg-12">
-                        <a asp-action="Document" asp-controller="Home" asp-route-id="@category.Id">
+                        <a asp-action="Document" asp-controller="Home" asp-route-id="@category.Id" asp-route-subId="0">
                             <span class="circle">
                             </span>
                             <p>Sənəd nümunələrini <br />buradan yükləyin</p>

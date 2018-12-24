@@ -746,9 +746,17 @@ section.about .people-img-wrapper {
     position: relative;
     cursor: pointer;
 }
-section.about .people-img-wrapper img{
-    height:100%;
-    width:100%;
+.about-nav li:hover .about-nav-item{
+    padding-left: 10px;
+    transition: all 0.3s ease-in-out;
+    color: #8a1919;
+}
+.about-nav li .about-nav-item{
+    transition:all 0.3s ease-in-out;
+}
+section.about .people-img-wrapper img {
+    height: 100%;
+    width: 100%;
 }
 .people-img-overlay {
     width: 92%;
@@ -1019,6 +1027,10 @@ section.about hr {
 .add-to-cart a{
     border-radius:5px;
 }
+.documents-filter .filter-button{
+    background: #1C2331;
+    color:white;
+}
 .document-desc-wrapper .add-button {
     padding: 10px 10px;
     display: inline-block;
@@ -1090,16 +1102,13 @@ section.documents .container{
 }
                                                                                               
 .all-documents-header {
-    margin-top: 100px;
+    margin-top: 93px;
     position: relative;
 }
 
 .all-category-title {
-    color: black;
+    color: white;
     font-size: 4.5rem;
-    position: absolute;
-    top: -7%;
-    left: 5%;
     font-weight: bold;
 }
 
@@ -1118,11 +1127,15 @@ section.documents .container{
 
 .all-category-text p{
     font-size: 20px;
+    color:white;
 }
 
 .all-category-content {
-    margin-top: 100px !important;
     padding: 50px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background: #1C2331;
     width: 100%;
     position: relative;
     box-shadow: 20px 20px 400px rgba(0, 0, 0, 0.4);
@@ -1244,7 +1257,7 @@ section.documents .container{
 
 
 .documents-filter{
-    margin: 20px;
+    margin: 20px 0px;
 }
 
 /**************ALL DOCUMENTS END****************/
@@ -1413,4 +1426,17 @@ footer p{
     background: white;
     border-radius: 10px;
     padding: 50px 100px;
+}
+
+/*Pagination*/
+.page-link {
+    color: #1C2331;
+}
+.page-item.active .page-link {
+    color: white;
+    border-color: #1C2331!important;
+    background-color: #1C2331 !important;
+}
+.documents .alert{
+    padding:1px;
 }

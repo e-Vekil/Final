@@ -6,7 +6,14 @@
         background-repeat: no-repeat;
     }
 }
-
+@media only screen  and (max-width:767px){
+    .all-category-title{
+        font-size: 1.6em!important;
+    }
+    .all-category-content{
+        padding:15px!important;
+    }
+}
 @media only screen  and (max-width:650px){
     .navHelper{
         display: none!important;

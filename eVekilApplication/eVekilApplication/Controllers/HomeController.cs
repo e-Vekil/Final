@@ -30,10 +30,32 @@ namespace eVekilApplication.Controllers
             return View();
         }
 
-        public IActionResult Document(int id)
+        public async Task<IActionResult> Document(int id,int subId,int page=1)
         {
-            ViewBag.categoryId = $"{id}";
-            return View();
+            DocumentViewModel dm = new DocumentViewModel();
+            if ((id == 0 && subId != 0) || (id != 0 && subId != 0))
+            {
+                dm.Documents = await _db.Documents.Where(d => d.SubcategoryId == subId).Skip((page - 1) * 6).Take(6).Include(d => d.Advocate).Include(d => d.Subcategory).ThenInclude(d => d.Category).ToListAsync();
+                Subcategory sub = await _db.Subcategories.Where(s => s.Id == subId).FirstOrDefaultAsync();
+                dm.Category = await _db.Categories.Where(c => c.Id == sub.CategoryId).FirstOrDefaultAsync();
+                dm.Subcategories = await _db.Subcategories.Where(s => s.CategoryId == sub.CategoryId).ToListAsync();
+                ViewBag.Total = Math.Ceiling(_db.Documents.Where(d => d.SubcategoryId == subId).Count() / 6.0);
+                ViewBag.SubId = subId;
+                ViewBag.FilterName = sub.Name;
+                ViewBag.DocumentCount = dm.Documents.Count();
+            }
+            else if(id !=0 && subId == 0)
+            {
+                dm.Documents = await _db.Documents.Where(d => d.Subcategory.CategoryId == id).Skip((page - 1) * 6).Take(6).Include(d => d.Advocate).Include(d => d.Subcategory).ThenInclude(d => d.Category).ToListAsync();
+                dm.Subcategories = await _db.Subcategories.Where(s=>s.CategoryId == id).OrderBy(x => x.Name).ToListAsync();
+                dm.Category = await _db.Categories.Where(c => c.Id == id).FirstOrDefaultAsync();
+                ViewBag.Total = Math.Ceiling(_db.Documents.Where(d => d.Subcategory.CategoryId == id).Count() / 6.0);
+                ViewBag.SubId = 0;
+                ViewBag.DocumentCount = dm.Documents.Count();
+            }
+
+            ViewBag.Page = page;
+            return View(dm);
         }
 
         public async Task<IActionResult> DocumentDesc(int id)
