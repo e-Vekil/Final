@@ -28,12 +28,12 @@ namespace eVekilApplication.Areas.Admin.Controllers
             _db = db;
         }
 
-        public async Task<IActionResult> List()
+        public async Task<IActionResult> List(int page = 1)
         {
             List<User> users;
             //using (_db)
             //{
-                users = await _db.Users.OrderByDescending(x => x.RegisterDate).ToListAsync();
+                users = await _db.Users.Skip((page -1)*10).Take(10).OrderByDescending(x => x.RegisterDate).ToListAsync();
                 //List<string> userRoles = null;
 
                 foreach(var user in users)
@@ -59,6 +59,9 @@ namespace eVekilApplication.Areas.Admin.Controllers
                     //user.Roles = string.Join(",", userRoles);
 
                 }
+
+              ViewBag.UserTotal = Math.Ceiling(_db.Users.Count() / 10.0);
+              ViewBag.UserPage = page;
 
             //}
             return View(users);

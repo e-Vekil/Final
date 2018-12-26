@@ -27,6 +27,7 @@
                             <span asp-validation-for="Price"></span>
                         </div>
                     </div>
+                   <vc:tags id="add"></vc:tags>
                     <div class="form-group">
                         <label class="col-md-12">Advocates</label>
                         <div class="col-md-12">
@@ -34,9 +35,10 @@
                     <option value="@Model.Advocate.Email">@Model.Advocate.Name</option>
                     <option value="nihad@hgn.az">Nihad Eliyev</option>
                 </select>*@
-                            <vc:advocates></vc:advocates>
+
                         </div>
                     </div>
+                    <vc:advocates></vc:advocates>
                     <div class="form-group">
                         <label class="col-md-12">Subcategory</label>
                         <div class="col-md-12">

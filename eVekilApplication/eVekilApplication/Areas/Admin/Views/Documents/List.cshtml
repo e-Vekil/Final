@@ -43,27 +43,27 @@
                         <tbody>
                             @foreach (var item in Model)
                             {
-                            <tr id="id_@item.Id" style="cursor: pointer;">
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Name)
-                                </td>
-                                <td>
-                                    @item.Subcategory.Category.Name
-                                </td>
-                                <td>
-                                    @item.Subcategory.Name
-                                </td>
-                                <td>
-                                    @item.Price
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Date)
-                                </td>
-                                <td>
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "delete" })
-                                </td>
-                            </tr>
+                                <tr id="id_@item.Id" style="cursor: pointer;">
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </td>
+                                    <td>
+                                        @item.Subcategory.Category.Name
+                                    </td>
+                                    <td>
+                                        @item.Subcategory.Name
+                                    </td>
+                                    <td>
+                                        @item.Price
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Date)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "delete" })
+                                    </td>
+                                </tr>
                             }
                         </tbody>
                     </table>
@@ -72,6 +72,42 @@
         </div>
     </div>
 </div>
+
+
+<section class="pag-section my-5">
+    <div class="container">
+        @if (ViewBag.Total != 0)
+        {
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only"></span>
+                        </a>
+                    </li>
+                    @for (int i = 1; i <= ViewBag.DocumentTotal; i++)
+                    {
+                        @if (i == ViewBag.DocumentPage)
+                        {
+                            <li class="page-item active"><a class="page-link" asp-action="List" asp-controller="Documents" asp-route-page="@i">@i</a></li>
+                        }
+                        else
+                        {
+                            <li class="page-item"><a class="page-link" asp-action="List" asp-controller="Documents" asp-route-page="@i">@i</a></li>
+                        }
+                    }
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        }
+    </div>
+</section>
 <!-- ============================================================== -->
 <!-- End PAge Content -->
 <!-- ============================================================== -->
