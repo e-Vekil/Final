@@ -52,6 +52,11 @@ namespace eVekilApplication
                     facebookOptions.AppId = "359770388182038";
                     facebookOptions.AppSecret = "e0d86dae757f12cccfacd46a0adae9c1";
                 })
+                .AddGoogle(googleOptions =>
+                {
+                    googleOptions.ClientId = "64365837343-02dl1ff838pkuvvm66fpjmnvmvfo15t6.apps.googleusercontent.com";
+                    googleOptions.ClientSecret = "8P_jEWGF7pYS1NYg-xBbc_E4";
+                })
                    .AddCookie();
             services.Configure<EmailServiceOption>((option) => {
 

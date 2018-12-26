@@ -53,12 +53,31 @@ namespace eVekilApplication.Controllers
             return View(reg);
         }
 
+
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> ChangePassword()
+        {
+            return View();
+        }
+
+
+
         [HttpGet]
         [AllowAnonymous]
         public IActionResult SignIn(string provider)
         {
             return Challenge(new AuthenticationProperties {RedirectUri ="/" }, provider);
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task LoginGoogle()
+        {
+            await HttpContext.ChallengeAsync("Google", new AuthenticationProperties() { RedirectUri = "/Account/Home" });
+        }
+
 
         [HttpPost]
         [AllowAnonymous]
