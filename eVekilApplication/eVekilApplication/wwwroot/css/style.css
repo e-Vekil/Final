@@ -989,15 +989,18 @@ section.about hr {
     display:block;
 }
 /*SPECIFIC DOCUMENT*/
-.similar-document-img{
-    display:inline-block;
-    height:180px;
+.similar-document-img {
+    display: inline-block;
+    height: 180px;
+    background:#1C2331!important;
 }
 .similar-document-title {
     padding: 10px 15px;
-    background: #8A1919;
-    border-radius:5px;
-   
+    background:#1C2331;
+    border-radius: 5px;
+}
+.document-desc-img{
+    background:#1C2331!important;
 }
 .similar-document-title h3{
     color:white;
@@ -1005,6 +1008,7 @@ section.about hr {
 }
 .similar-document-img i {
     font-size: 8em;
+    color:white!important;
 }
     .similar-document-item {
         width: 100%;
@@ -1015,17 +1019,26 @@ section.about hr {
 }
 .document-desc-img i{
     font-size:8em;
+    color:white;
 }
-.document-desc-img,.similar-document-img{
-    text-align:center;
-    background:white;
-    max-height:200px;
-    border:1.4px solid black; 
-    border-radius:10px;
-    padding-top:30px;
+.document-desc-info h3 {
+    font-weight: bold;
+    color: #1C2331;
 }
-.add-to-cart a{
-    border-radius:5px;
+.document-desc-info header {
+    border-bottom: 1px solid #1C2331;
+    padding-bottom:10px;
+}
+.document-desc-img, .similar-document-img {
+    text-align: center;
+    background: white;
+    max-height: 200px;
+    /*border:1.4px solid black;*/
+    border-radius: 10px;
+    padding-top: 30px;
+}
+.add-to-cart a {
+    border-radius: 5px;
 }
 .documents-filter .filter-button{
     background: #1C2331;
@@ -1034,8 +1047,8 @@ section.about hr {
 .document-desc-wrapper .add-button {
     padding: 10px 10px;
     display: inline-block;
-    background: #8a1919;
-    border: 2px solid #8a1919;
+    background: #1C2331;
+    border: 2px solid #1C2331;
     color: white;
     transition: all 0.3s ease-in-out;
 }
@@ -1072,7 +1085,7 @@ section.about hr {
     font-weight: normal;
     padding: 10px 10px;
     color: white;
-    background: #8a1919;
+    background:#1C2331;
     cursor: pointer;
 }
 .send-review #UserName{
@@ -1084,9 +1097,9 @@ section.about hr {
     width: 50px;
 }
 .document-desc-price {
-    color: #1aada3;
-    font-size:1.7em;
-    font-weight:bold;
+    color: #1C2331;
+    font-size: 1.7em;
+    font-weight: bold;
 }
     .document-desc-price i {
         color: #1aada3;

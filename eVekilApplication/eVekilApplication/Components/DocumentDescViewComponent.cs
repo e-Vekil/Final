@@ -24,7 +24,7 @@ namespace eVekilApplication.Components
             Document document = await _db.Documents.Where(d => d.Id == id).Include(d => d.Subcategory).ThenInclude(d => d.Category).FirstOrDefaultAsync();
             cm.Comments = await _db.Comments.OrderByDescending(c=>c.Id).Where(c=>c.DocumentId == id).Include(c => c.User).Include(c => c.Document).ToListAsync();
 
-            dm.documents = _db.Documents.Where(d => d.Subcategory.CategoryId == document.Subcategory.CategoryId).Take(4);
+            dm.documents = _db.Documents.Where(d => d.Subcategory.CategoryId == document.Subcategory.CategoryId).OrderBy(d=>d.Date).Take(4);
             dm.Cm = cm;
             dm.Document = document;
 
