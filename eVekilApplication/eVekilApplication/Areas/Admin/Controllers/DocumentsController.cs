@@ -22,13 +22,16 @@ namespace eVekilApplication.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public IActionResult List()
+        public IActionResult List(int page = 1)
         {
             List<Document> Documents;
             //using (_db)
             //{
-                Documents = _db.Documents.Include(x=>x.Advocate).Include(x=>x.Subcategory).ThenInclude(x=>x.Category).OrderBy(x => x.Date).ToList();
+                Documents = _db.Documents.Skip((page - 1) * 10).Take(10).Include(x=>x.Advocate).Include(x=>x.Subcategory).ThenInclude(x=>x.Category).OrderBy(x => x.Date).ToList();
             //}
+
+            ViewBag.DocumentTotal = Math.Ceiling(_db.Documents.Count() / 10.0);
+            ViewBag.DocumentPage = page;
 
             return View(Documents);
         }
@@ -43,6 +46,7 @@ namespace eVekilApplication.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Add(Document document)
         {
+            
             if (ModelState.IsValid)
             {
                 string filename = "";
@@ -62,6 +66,20 @@ namespace eVekilApplication.Areas.Admin.Controllers
 
                 var categoryid = Int32.Parse(Request.Form["categories"].ToString());
                 Subcategory subc = await _db.Subcategories.Where(x => x.Id == categoryid).FirstOrDefaultAsync();
+
+                var tags = Request.Form["tags"].ToList();
+                if (tags.Count() != 0)
+                {
+                    var count = 0;
+                    foreach (var tag in tags)
+                    {
+                        Tags t = new Tags();
+                        t.Tagname = tags[count];
+                        t.Document = document;
+                        await _db.Tags.AddAsync(t);
+                        count++;
+                    }
+                }
 
                 document.Subcategory = subc;
                 document.Advocate = advocate;
@@ -99,6 +117,18 @@ namespace eVekilApplication.Areas.Admin.Controllers
             Subcategory subcategory =  await _db.Subcategories.Where(s => s.Name == subcategoryName).FirstOrDefaultAsync();
             doc.Subcategory = subcategory;
             doc.SubcategoryId = subcategory.Id;
+
+            List<Tags> docTags = await _db.Tags.Where(t => t.DocumentId == doc.Id).ToListAsync();
+            var tags = Request.Form["tags"].ToList();
+            if (tags.Count() != 0)
+            {
+                var count = 0;
+                foreach (var tag in docTags)
+                {
+                    tag.Tagname = tags[count];
+                    tag.Document = doc;
+                }
+            }
             if(Request.Form["File"].ToString() != "")
             {
                 doc.FileName = doc.File.FileName;

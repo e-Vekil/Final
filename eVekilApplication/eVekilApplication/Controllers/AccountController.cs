@@ -150,7 +150,12 @@ namespace eVekilApplication.Controllers
                             userId = user.Id,
                             token = Token
                         });
-                        var acceptMessage = "E-VAKIL.AZ QEYDIYYAT TESDIQ LINKI" + " " + "https://localhost:44302" + $"{Tokenlink}";
+                        var acceptMessage = 
+$@"Dəyərli {user.UserName} !
+Zəhmət olmasa aşağıdakı linkə klik edərək e-poçtunuzu təsdiq edin:
+https://localhost:44302/{Tokenlink}
+Bizi Seçdiyiniz üçün Təşəkkürlər.Hörmətlə e-vekil.az
+        ";
                         await service.SendMailAsync(user.Email, "E-VAKIL.AZ TESDIQ", acceptMessage);
                         //Email Confirm End
 

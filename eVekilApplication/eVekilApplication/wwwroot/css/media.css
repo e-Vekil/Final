@@ -6,7 +6,17 @@
         background-repeat: no-repeat;
     }
 }
-
+@media only screen  and (max-width:767px){
+    .all-category-title{
+        font-size: 1.6em!important;
+    }
+    .all-category-content{
+        padding:15px!important;
+    }
+    .document-desc-img{
+        display:none!important;
+    }
+}
 @media only screen  and (max-width:650px){
     .navHelper{
         display: none!important;
@@ -193,7 +203,8 @@
         padding-right:0px;
     }
     .document-desc-img{
-        margin:0px 15px!important;
+        /*margin:0px 15px!important;*/
+        max-height:146px!important;
     }
         .document-desc-img i{
             font-size:6.5em!important;

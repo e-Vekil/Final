@@ -231,3 +231,22 @@
         </div>
     </div>
 </section>
+<script>
+    $(window).scroll( //About on scroll fixed menu
+        function About() {
+            var scrollTop = $(window).scrollTop();
+            var listoffsetTop = $(".about-nav").offset().top;
+            if (listoffsetTop - scrollTop <= 98) {
+                $(".about-nav").addClass("fixed");
+            }
+
+            if ($("#About").offset().top - scrollTop >= -137) {
+                $(".about-nav").removeClass("fixed");
+            }
+            var nextElementOffsetTop = $("#About").next().offset().top;
+            if (nextElementOffsetTop - scrollTop < $(".about-nav").innerHeight() + 80) {
+                $(".about-nav").removeClass("fixed");
+            }
+        }
+);
+</script>

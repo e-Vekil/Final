@@ -22,7 +22,7 @@ namespace eVekilApplication.Models
         public string Description { get; set; }
         public DateTime Date { get; set; }
         public string FileName { get; set; }
-
+        public List<Tags> Tags { get; set; }
         [Required]
         [DataType(DataType.Upload)]
         [NotMapped]

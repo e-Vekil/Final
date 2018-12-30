@@ -1,11 +1,11 @@
 ﻿@model DocumentDescViewModel
 @* DOCUMENT INFO *@
-<div class=" col-lg-2 py-3 col-md-2 col-sm-3 col-4 document-desc-img">
+<div class=" col-lg-2 py-3 col-md-2 col-sm-2 col-2 document-desc-img">
     <i class="fas fa-file-alt"></i>
 </div>
-<div class="col-lg-10 document-desc-info">
+<div class="col-lg-10 col-md-10 document-desc-info">
     <header class="col-lg-12">
-        <h3 style="font-weight:bold;">@Model.Document.Name</h3>
+        <h3>@Model.Document.Name</h3>
     </header>
     <div class="col-lg-12 document-desc-price mt-3">
         <p>@Model.Document.Price AZN</p>
@@ -19,7 +19,7 @@
     </div>
 </div>
 @* END DOCUMENT INFO *@
-<div class="col-lg-12 p-0 mt-5 document-desc-features">
+<div class="col-lg-12  mt-5 document-desc-features">
     <header class="col-lg-12 p-0">
         <span class="description active" data-id="1">Sənəd Haqqında</span>
         <span class="review" data-id="2">Şərhlər(@ViewBag.commentCount)</span>
@@ -127,13 +127,13 @@
     <div class="row">
         @foreach (Document document in Model.documents)
         {
-            <div class="col-lg-3 pt-3 similar-document-wrapper col-md-3 col-sm-4">
+            <div class="col-lg-3 pt-3 similar-document-wrapper col-md-4 col-sm-6">
                 <div class="row">
                     <div class="col-6 mx-auto similar-document-img">
-                        <i class="fas fa-file-alt"></i>
+                        <a asp-action="DocumentDesc" asp-controller="Home" asp-route-id="@document.Id"><i class="fas fa-file-alt"></i></a>
                     </div>
                     <div class="col-12 text-center mx-auto similar-document-desc">
-                        <p style="font-weight:bold;">@document.Name</p>
+                        <a asp-action="DocumentDesc" asp-controller="Home" asp-route-id="@document.Id"><p style="font-weight:bold;">@document.Name</p></a>
                     </div>
                 </div>
             </div>

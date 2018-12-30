@@ -547,29 +547,7 @@ $(document).ready(function () {
         $(".confirm").show();
     })
 
-    //About on scroll fixed menu
-    $(window).scroll(function(){
-        var scrollTop = $(window).scrollTop();
-        var listoffsetTop = $(".about-nav").offset().top;
-        if (listoffsetTop - scrollTop <= 98) {
-            $(".about-nav").addClass("fixed");
-        }
-
-        if ($("#About").offset().top - scrollTop >=-137) {
-            $(".about-nav").removeClass("fixed");
-        }
-        var nextElementOffsetTop = $("#About").next().offset().top;
-        if (nextElementOffsetTop - scrollTop < $(".about-nav").innerHeight() + 80) {
-            $(".about-nav").removeClass("fixed");
-        }
-        //if ($("#About").offset().top - scrollTop - 100 <= listoffsetTop) {
-        //    console.log("yes")
-        //}
-        //console.log(listoffsetTop);
-      
-       
-    })
-
+   
     //About on click dynamic scroll with transition
     $(".about-nav a").on('click', function (event) {
         if (this.hash !== "") {
@@ -644,5 +622,43 @@ $(document).ready(function () {
         }
 
     })
+
+
+    ////Dynamic Filter Document
+    //$(".documents-filter .dropdown-item").click(function (e) {
+    //    $(".documents row").empty();
+    //    e.preventDefault();
+    //    var subId = $(this).data("id");
+    //    console.log(subId)
+    //    var page = 
+    //    $.ajax({
+    //        url: '/Home/FilterDocument/' + subId,
+    //        dataType: "json",
+    //        type:"post",
+    //        success: function (response) {
+    //            var item = `<div class="document-item col-lg-6 col-md-6 col-sm-12">
+    //                    <div class="document-info">
+    //                        <div class="document-icon">
+    //                            <a asp-action="DocumentDesc" asp-controller="Home" asp-route-id="@document.Id">
+    //                                <i class="fas fa-file-alt"></i>
+    //                            </a>
+    //                        </div>
+    //                        <div class="document-header">
+    //                            <h3><a asp-action="DocumentDesc" asp-controller="Home" asp-route-id="@document.Id">@document.Name</a></h3>
+    //                        </div>
+    //                        <div class="document-price">
+    //                            <a asp-action="DocumentDesc" asp-controller="Home" asp-route-id="@document.Id">Sənədə baxış</a>
+    //                            <a href="#">
+    //                                <span>
+    //                                    @document.Price AZN
+    //                                </span>
+    //                            </a>
+    //                        </div>
+    //                    </div>
+    //                </div>`;
+    //        }
+
+    //    })
+    //})
    
 })
