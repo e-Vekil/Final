@@ -204,7 +204,7 @@ Bizi Seçdiyiniz üçün Təşəkkürlər.Hörmətlə e-vekil.az
                         Surname = rvm.Register.Surname,
                         Email = rvm.Register.Email,
                         RegisterDate = DateTime.Now
-                    };
+                    }; 
                     var identityResult = await _userManager.CreateAsync(user, rvm.Register.Password);
                     if (identityResult.Succeeded)
                     {
