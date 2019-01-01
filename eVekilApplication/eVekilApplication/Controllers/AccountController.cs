@@ -209,7 +209,7 @@ Bizi Seçdiyiniz üçün Təşəkkürlər.Hörmətlə e-vekil.az
                     if (identityResult.Succeeded)
                     {
                         //Email Confirm
-
+                         
                         string Token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                         string Tokenlink = Url.Action("ConfirmEmail", "Account", new
                         {
