@@ -15,7 +15,7 @@ namespace eVekilApplication.Infrastructure.Email
         {
             _option = option.Value;
         }
-        public async Task SendMailAsync(string toEmail,string Subject,string Message)
+        public async Task SendMailAsync(string toEmail,string Subject,string Message, string FilePath=null)
         {
             using(MailMessage msg = new MailMessage())
             {
@@ -25,6 +25,13 @@ namespace eVekilApplication.Infrastructure.Email
                     msg.To.Add(toEmail);
                     msg.Subject = Subject;
                     msg.Body = Message;
+                    if (FilePath != null)
+                    {
+                        System.Net.Mail.Attachment attachment;
+                        attachment = new System.Net.Mail.Attachment(FilePath);
+                        msg.Attachments.Add(attachment);
+                    }
+                    
                     connect.Credentials = new NetworkCredential(_option.Email,_option.Password);
                     connect.EnableSsl = _option.EnableSSL;
                     await connect.SendMailAsync(msg);

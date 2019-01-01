@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -121,7 +122,7 @@ Zəhmət olmasa aşağıdakı linkə klik şifrənizi dəyişin:
 {resetLink}
 Bizi Seçdiyiniz üçün Təşəkkürlər.Hörmətlə e-vekil.az
         ";
-            await service.SendMailAsync(user.Email, "E-VAKIL.AZ TESDIQ", acceptMessage);
+            await service.SendMailAsync(user.Email, "E-VAKIL.AZ Şifrə bərpası", acceptMessage);
             // see the earlier article
 
             ViewBag.Message = "Password reset link has been sent to your email address!";
@@ -432,7 +433,7 @@ Bizi Seçdiyiniz üçün Təşəkkürlər.Hörmətlə e-vekil.az
 
 
 
-        public async Task<IActionResult> Purchase()
+        public async Task<IActionResult> Purchase([FromServices]EmailService service)
         {
             User user = await _userManager.GetUserAsync(HttpContext.User);
 
@@ -452,6 +453,15 @@ Bizi Seçdiyiniz üçün Təşəkkürlər.Hörmətlə e-vekil.az
                         Price = item.Document.Price,
                         IsCompleted = true
                     };
+
+                    string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", item.Document.FileName);
+
+                    var acceptMessage =
+$@"Dəyərli {user.UserName} !
+Aldiginiz senedler asagidadir.
+";
+            await service.SendMailAsync(user.Email, "E-VAKIL.AZ Şifrə bərpası", acceptMessage, path);
+
 
                     await _db.PurchasedDocuments.AddAsync(PD);
                     await _db.SaveChangesAsync();
