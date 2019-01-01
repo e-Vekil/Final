@@ -740,24 +740,29 @@ li{
 #About {
     background: #1C2331;
 }
+
 section.about .people-img-wrapper {
     padding: 0px 7px;
     height: 100%;
     position: relative;
     cursor: pointer;
 }
-.about-nav li:hover .about-nav-item{
+
+.about-nav li:hover .about-nav-item {
     padding-left: 10px;
     transition: all 0.3s ease-in-out;
     color: #8a1919;
 }
-.about-nav li .about-nav-item{
-    transition:all 0.3s ease-in-out;
+
+.about-nav li .about-nav-item {
+    transition: all 0.3s ease-in-out;
 }
+
 section.about .people-img-wrapper img {
     height: 100%;
     width: 100%;
 }
+
 .people-img-overlay {
     width: 92%;
     height: 100%;
@@ -769,52 +774,64 @@ section.about .people-img-wrapper img {
     transform: translateX(-50%);
     transition: all 0.4s ease-in-out;
 }
-section.about .people:hover .people-img-overlay{
-    opacity:1;
-    transition:all 0.4s ease-in-out;
+
+section.about .people:hover .people-img-overlay {
+    opacity: 1;
+    transition: all 0.4s ease-in-out;
 }
-.people-img-overlay p{
-    color:white!important;
-    margin:0;
+
+.people-img-overlay p {
+    color: white !important;
+    margin: 0;
 }
+
 section.about {
     height: 100%;
     width: 100%;
     padding: 100px 0px;
     background: white;
 }
-section.about ul li {
-    padding: 5px 0px;
-    cursor: pointer;
-}
-    section.about ul li span.active {
-        color: #8a1919 !important;
+
+    section.about ul li {
+        padding: 5px 0px;
+        cursor: pointer;
     }
-    section.about ul li span {
-        color: white;
-        font-size: 30px;
-        font-weight: bold;
-    }
+
         section.about ul li span.active {
-            color: #8a1919;
-            transition: all 0.2s ease-in-out;
+            color: #8a1919 !important;
         }
+
+        section.about ul li span {
+            color: white;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+            section.about ul li span.active {
+                color: #8a1919;
+                transition: all 0.2s ease-in-out;
+            }
+
         section.about ul li:hover span {
             color: white;
             transition: all 0.2s ease-in-out;
         }
-section.about h1{
-    color:white;
-    font-size:5em;
-    font-weight:bold;
-}
+
+    section.about h1 {
+        color: white;
+        font-size: 5em;
+        font-weight: bold;
+    }
+
     section.about span {
         color: #8a1919;
     }
-section.about .about-us p{
-    color:white;
-    font-size:18px;
-}
+
+    section.about .about-us p {
+        color: white;
+        font-size: 18px;
+    }
+
 #about-slider {
     /*height: 500px;
     overflow:hidden;
@@ -822,57 +839,66 @@ section.about .about-us p{
     width: 70%;
     margin-left: 300px;
 }
-#about-slider article{
-    /*max-height:500px;
+
+    #about-slider article {
+        /*max-height:500px;
     position: absolute;
     top: 1000px;
     transition:all 1s ease-in-out;*/
-    /*visibility: hidden;*/
-}
-#about-slider article.active{
-    /*visibility: visible;*/
-    /*display: block!important;   
+        /*visibility: hidden;*/
+    }
+
+        #about-slider article.active {
+            /*visibility: visible;*/
+            /*display: block!important;   
     top: 10px;
     transition:all 1s ease-in-out;*/
+        }
 
-}
-.about-us{
-    margin-top:150px;
+.about-us {
+    margin-top: 150px;
 }
 
 section.about hr {
     display: none;
 }
+
 .about-nav {
     width: 250px;
     position: absolute;
     transition: all 0.3s ease-in-out;
 }
+
     .about-nav.fixed {
         position: fixed;
         z-index: 10;
-        transition:all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
         top: 100px;
     }
-    #about-slider .about-slider-wrapper {
-        width: 100%;
-        transition: all 1s ease-in-out;
-    }
-#about-slider .accordion{
+
+#about-slider .about-slider-wrapper {
+    width: 100%;
+    transition: all 1s ease-in-out;
+}
+
+#about-slider .accordion {
     display: none;
     cursor: pointer;
-    position:relative;
+    position: relative;
 }
-    #about-slider .accordion h3.active{
+
+    #about-slider .accordion h3.active {
         color: #8a1919;
-        transition:all 0.4s ease-in-out;
+        transition: all 0.4s ease-in-out;
     }
+
     #about-slider .accordion h3 {
         font-weight: bold;
         color: white;
         transition: all 0.4s ease-in-out;
-        margin:10px 0px;
+        margin: 10px 0px;
     }
+
     #about-slider .accordion i {
         position: absolute;
         top: 50%;
@@ -882,15 +908,16 @@ section.about hr {
         transition: all 0.4s ease-in-out;
         color: white;
     }
+
         #about-slider .accordion i.active {
             color: #8a1919;
             transition: all 0.4s ease-in-out;
         }
-        /*SECTION CONTACT US*/
-        #ContactUs {
-            /*height:100vh;*/
-            padding: 50px 0px;
-        }
+    /*SECTION CONTACT US*/
+    #ContactUs {
+        /*height:100vh;*/
+        padding: 50px 0px;
+    }
 .contact-header h1 {
     color: black;
     font-size: 5em;

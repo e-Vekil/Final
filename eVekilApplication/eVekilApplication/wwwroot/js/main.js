@@ -208,6 +208,7 @@ $(document).ready(function () {
             event.preventDefault();
             sideBar.classList.remove("open");
             var hash = this.firstElementChild.hash;
+            $(hash).css("display", "block");
             if ($(window).width() > 650) {
                 $('html, body').animate({
                     scrollTop: $(hash).offset().top
@@ -216,13 +217,12 @@ $(document).ready(function () {
                 });
             } else {
                 $('html, body').animate({
-                    scrollTop: $(hash).offset().top-80
+                    scrollTop: $(hash).offset().top-150
                 }, 800, function () {
                     //window.location.hash = hash;
-                    history.replaceState('', 'https://localhost:44343/#main2', + hash);
+                    history.replaceState('', '/', hash);
                 });
             }
-           
         }
     });
 });
@@ -376,7 +376,7 @@ var previcon;
 $(window).scroll(function () {
     var icons = [].slice.call(document.querySelectorAll(".sect"), 0).reverse(); 
     for (var icon of icons) {
-        if (icon.offsetTop - 450 < $(window).scrollTop()) {
+        if (icon.offsetTop - 950 < $(window).scrollTop()) {
             //console.log("Now: " + $(window).scrollTop());
             //console.log("Previous: " + count);
            
@@ -386,18 +386,18 @@ $(window).scroll(function () {
             }
             //console.log(Math.abs(i))
             //console.log(i)
-            if (i == -40) {
+            if (i == -50) {
                 i++;
-            } else if (i == 40) {
+            } else if (i == 50) {
                 i--;
             }
 
             if (count < $(window).scrollTop()) {
-                if (Math.abs(i) < 40) {
+                if (Math.abs(i) < 50) {
                     i--;
                 }
             } else {
-                if (Math.abs(i) < 40) {
+                if (Math.abs(i) < 50) {
                     i++;
                 }
             }
@@ -566,7 +566,6 @@ $(document).ready(function () {
     for (var item of aboutNavListItems) {
         item.addEventListener("click", function (e) {
             for (var span of aboutNavSpans) {
-
                 span.classList.remove("active");
             }
             this.firstElementChild.classList.add("active");
@@ -577,6 +576,31 @@ $(document).ready(function () {
 
     //About dynamic scroll left
 
+    //$(window).scroll(function () {
+    //    var fromtop = document.getElementById("About").offsetTop - $(window).scrollTop();
+    //    console.log(fromtop);
+    //    if (fromtop < 90) {
+    //        $(".about-nav").css("transform", "translateY(" + Math.abs(fromtop) + "px)");
+    //    }
+    //});
+
+
+    $(window).scroll(function () {
+        var fromtop = document.getElementById("About").offsetTop - $(window).scrollTop();
+        var aboutUss = [].slice.call(document.querySelectorAll(".about-us"), 0);
+        var activeIcon = document.querySelector(".about-nav-item.active");
+        for (var aboutUs of aboutUss) {
+            console.log(fromtop + aboutUs.offsetTop);
+                if (fromtop + aboutUs.offsetTop > -500) {
+                    if (aboutUs.id != activeIcon.attributes[2].value) {
+                        console.log("girid")
+                        activeIcon.classList.remove("active");
+                        document.querySelector(".about-nav-item" + "." + aboutUs.id).classList.add("active");
+                    }
+                    break;
+                } 
+            }
+    });
 
     //$(window).scroll(function () {
     //    var aboutUss = [].slice.call(document.querySelectorAll(".about-us"), 0).reverse();
@@ -617,7 +641,6 @@ $(document).ready(function () {
                     element.classList.add("active");
                     $(this).children("i").addClass("active");
                 }
-                
             }
         }
 
