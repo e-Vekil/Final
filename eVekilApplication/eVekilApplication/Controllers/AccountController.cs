@@ -199,7 +199,7 @@ Bizi Seçdiyiniz üçün Təşəkkürlər.Hörmətlə e-vekil.az
                 { 
                     User user = new User() 
                     {
-                        UserName = rvm.Register.Surname.ToLower(),                 /*!!!!!1!!!*/
+                        UserName = rvm.Register.Surname.ToLower(),                 /*!!!!!1!!!*/ 
                         Name = rvm.Register.Name,
                         Surname = rvm.Register.Surname,
                         Email = rvm.Register.Email,
