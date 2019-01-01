@@ -67,8 +67,9 @@ namespace eVekilApplication.Areas.Admin.Controllers
                 var categoryid = Int32.Parse(Request.Form["categories"].ToString());
                 Subcategory subc = await _db.Subcategories.Where(x => x.Id == categoryid).FirstOrDefaultAsync();
 
-                var tags = Request.Form["tags"].ToList();
-                if (tags.Count() != 0)
+                List<string> tags = document.Tags.Split(',').ToList();
+
+                if (tags != null)
                 {
                     var count = 0;
                     foreach (var tag in tags)
@@ -81,10 +82,25 @@ namespace eVekilApplication.Areas.Admin.Controllers
                     }
                 }
 
+                //var tags = Request.Form["tags"].ToList();
+                //if (tags.Count() != 0)
+                //{
+                //    var count = 0;
+                //    foreach (var tag in tags)
+                //    {
+                //        Tags t = new Tags();
+                //        t.Tagname = tags[count];
+                //        t.Document = document;
+                //        await _db.Tags.AddAsync(t);
+                //        count++;
+                //    }
+                //}
+
                 document.Subcategory = subc;
                 document.Advocate = advocate;
                 document.FileName = filename;
                 document.Date = DateTime.Now;
+                
 
                 await _db.Documents.AddAsync(document);
                 await _db.SaveChangesAsync();
@@ -108,67 +124,96 @@ namespace eVekilApplication.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(Document doc)
         {
-            Document document;
+            Document document = await _db.Documents.FindAsync(doc.Id);
             string advocateName = Request.Form["advocates"].ToString();
             Advocate advocate =  await _db.Advocates.Where(x => x.Email == advocateName).FirstOrDefaultAsync();
-            doc.Advocate = advocate;
-            doc.AdvocateId = advocate.Id;
-            string subcategoryName = Request.Form["Categories"].ToString();
-            Subcategory subcategory =  await _db.Subcategories.Where(s => s.Name == subcategoryName).FirstOrDefaultAsync();
-            doc.Subcategory = subcategory;
-            doc.SubcategoryId = subcategory.Id;
+            document.Advocate = advocate;
+            document.AdvocateId = advocate.Id;
+            int subcategoryName = Int32.Parse(Request.Form["Categories"].ToString());
+            Subcategory subcategory =  await _db.Subcategories.Where(s => s.Id == subcategoryName).FirstOrDefaultAsync();
+            document.Subcategory = subcategory;
+            document.SubcategoryId = subcategory.Id;
 
-            List<Tags> docTags = await _db.Tags.Where(t => t.DocumentId == doc.Id).ToListAsync();
-            var tags = Request.Form["tags"].ToList();
-            if (tags.Count() != 0)
-            {
-                var count = 0;
-                foreach (var tag in docTags)
-                {
-                    tag.Tagname = tags[count];
-                    tag.Document = doc;
-                }
-            }
-            if(Request.Form["File"].ToString() != "")
+            //List<Tags> docTags = await _db.Tags.Where(t => t.DocumentId == doc.Id).ToListAsync();
+            //var tags = Request.Form["tags"].ToList();
+            //if (tags.Count() != 0)
+            //{
+            //    var count = 0;
+            //    foreach (var tag in docTags)
+            //    {
+            //        tag.Tagname = tags[count];
+            //        tag.Document = doc;
+            //    }
+            //}
+
+           
+
+            if (Request.Form.Files.Count != 0)
             {
                 doc.FileName = doc.File.FileName;
             }
-            if (ModelState.IsValid)
-            {
+
+            //if (ModelState.IsValid)
+            //{
                 //using (_db)
                 //{
-                    document = await _db.Documents.FindAsync(doc.Id);
-                    if (document.File!=null)
+                    if (doc.File!=null)
                     {
                         document.File = doc.File;
                     }
                     if (document != null)
                     {
-                        if (document.File.ContentType == "application/vnd.openxmlformats-officedocument.wordprocessingml.document" || document.File.ContentType == "application/msword")
+                        if (Request.Form.Files.Count != 0)
                         {
-                            string deletedFileName = Path.Combine(Directory.GetCurrentDirectory(),"wwwroot","uploads", Request.Form["DeletedFile"].ToString());
-                            if(Request.Form["File"].ToString() != null)
+                            if (doc.File.ContentType == "application/vnd.openxmlformats-officedocument.wordprocessingml.document" || doc.File.ContentType == "application/msword")
                             {
-                                if (!System.IO.File.Exists(deletedFileName))
+                                string deletedFileName = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", Request.Form["DeletedFile"].ToString());
+                                if (Request.Form.Count != 0)
                                 {
-                                    string newfilename = Guid.NewGuid() + doc.FileName;
-
-                                    string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", newfilename);
-
-                                    using (FileStream fs = new FileStream(path, FileMode.Create))
+                                    if (System.IO.File.Exists(deletedFileName))
                                     {
-                                        await document.File.CopyToAsync(fs);
+                                        System.IO.File.Delete(deletedFileName);
+                                    }
+                                    if (!System.IO.File.Exists(deletedFileName))
+                                    {
+                                        string newfilename = Guid.NewGuid() + doc.FileName;
+                                        document.FileName = newfilename;
+
+                                        string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", newfilename);
+
+                                        using (FileStream fs = new FileStream(path, FileMode.Create))
+                                        {
+                                            await document.File.CopyToAsync(fs);
+                                        }
                                     }
                                 }
                             }
-
                         }
+                        
                         document.Name = doc.Name;
                         document.Price = doc.Price;
-                        document.FileName = doc.File.FileName;
-                        document.File = doc.File;
+                        document.Description = doc.Description;
 
-                       await  _db.SaveChangesAsync();
+                        List<string> tags = doc.Tags.Split(',').ToList();
+
+                        if (doc.Tags.Length > document.Tags.Length)
+                        {
+                            foreach (var tag in tags)
+                            {
+                                Tags tdb = await _db.Tags.Where(x => x.Tagname == tag).FirstOrDefaultAsync();
+                                if(tdb == null)
+                                {
+                                    Tags t = new Tags();
+                                    t.Tagname = tag;
+                                    t.Document = doc;
+                                    await _db.Tags.AddAsync(t);
+                                }
+                            }
+
+                            document.Tags = doc.Tags;
+                        }
+
+                        await  _db.SaveChangesAsync();
                     }
                     else
                     {
@@ -178,12 +223,12 @@ namespace eVekilApplication.Areas.Admin.Controllers
                 //}
 
                 return RedirectToAction(nameof(List));
-            }
-            else
-            {
-                ModelState.AddModelError("", "Something is wrong");
-                return View();
-            }
+            //}
+            //else
+            //{
+            //    ModelState.AddModelError("", "Something is wrong");
+            //    return View();
+            //}
 
             
         }

@@ -21,6 +21,15 @@ namespace eVekilApplication.Components
         {
             HomeViewModel hm = new HomeViewModel();
                 var categories = await _db.Categories.ToListAsync();
+                foreach (var category in categories)
+                {
+                    List<string> descriptions = category.Description.Split('/').ToList();
+                    if (descriptions.Count > 1)
+                    {
+                        category.Description1 = descriptions[0];
+                        category.Description2 = descriptions[1];
+                    }
+            }
                 var subcategories = await _db.Subcategories.Include(s=>s.Category).ToListAsync();
                 hm.Categories = categories;
                 hm.Subcategories = subcategories;

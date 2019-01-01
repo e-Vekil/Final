@@ -30,7 +30,16 @@
                         </ul>
                     </div>
                     <div class=" mx-auto category-text">
-                        <p> @category.Description</p>
+                        @if (category.Description1 != null)
+                        {
+                            <p> @category.Description1</p>
+                            <p> @category.Description2</p>
+                        }
+                        else
+                        {
+                            <p> @category.Description</p>
+                        }
+
                     </div>
                     <div class="download-button d-flex align-items-center col-lg-12">
                         <a asp-action="Document" asp-controller="Home" asp-route-id="@category.Id" asp-route-subId="0">

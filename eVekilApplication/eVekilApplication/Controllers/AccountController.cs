@@ -62,6 +62,72 @@ namespace eVekilApplication.Controllers
             return View();
         }
 
+        [AllowAnonymous]
+        public IActionResult ResetPassword(string token)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public IActionResult ResetPassword
+                (ResetPasswordViewModel obj)
+        {
+            User user = _userManager.FindByNameAsync(obj.UserName).Result;
+
+            IdentityResult result = _userManager.ResetPasswordAsync
+                      (user, obj.Token, obj.Password).Result;
+            if (result.Succeeded)
+            {   
+                ViewBag.Message = "Password reset successful!";
+                return View("Registration");
+            }
+            else
+            {
+                ViewBag.Message = "Error while resetting the password!";
+                return View("Registration");
+            }
+        }
+
+        [AllowAnonymous]
+        public async Task<IActionResult> SendPasswordResetLink(string username, [FromServices]EmailService service)
+        {
+
+            if (username == null)
+            {
+                ViewBag.Message = "Xahis edirik username daxil edin!";
+                return View("ChangePassword");
+            }
+
+            User user = _userManager.FindByNameAsync(username).Result;
+
+            if (user == null || !(_userManager.IsEmailConfirmedAsync(user).Result))
+            {
+                ViewBag.Message = "Error while resetting your password!";
+                return View("Registration");
+            }
+
+            var token = _userManager.GeneratePasswordResetTokenAsync(user).Result;
+
+            var resetLink = Url.Action("ResetPassword",
+                            "Account", new { token = token },
+                             protocol: HttpContext.Request.Scheme);
+
+            // code to email the above link
+
+            var acceptMessage =
+$@"Dəyərli {user.UserName} !
+Zəhmət olmasa aşağıdakı linkə klik şifrənizi dəyişin:
+{resetLink}
+Bizi Seçdiyiniz üçün Təşəkkürlər.Hörmətlə e-vekil.az
+        ";
+            await service.SendMailAsync(user.Email, "E-VAKIL.AZ TESDIQ", acceptMessage);
+            // see the earlier article
+
+            ViewBag.Message = "Password reset link has been sent to your email address!";
+            return View("Registration");
+
+        }
 
 
         [HttpGet]
