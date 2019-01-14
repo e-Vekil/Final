@@ -40,16 +40,53 @@ namespace eVekilApplication.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task LoginGoogle()
+        public  IActionResult ExternalLogin(string provider)
         {
-            await HttpContext.ChallengeAsync("Google", new AuthenticationProperties() { RedirectUri = "/Account/Home" });
+            return  Challenge(new AuthenticationProperties() { RedirectUri = "/Account/ExternalLoginCallback" }, provider);
         }
 
-        [HttpGet]
         [AllowAnonymous]
-        public IActionResult SignIn()
+        public async Task<IActionResult> ExternalLoginCallBack()
         {
-            return Challenge(new AuthenticationProperties() { RedirectUri = "/Account/ExternalLoginCallback" }, "Facebook");
+
+            var authInfo = await _signInManager.GetExternalLoginInfoAsync();
+            if (authInfo == null)
+            {
+                return RedirectToAction("Registration", "Account");
+            }
+
+            var result = await _signInManager.ExternalLoginSignInAsync(authInfo.LoginProvider, authInfo.ProviderKey, true);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Home", "Account");
+            }
+
+            if (result.IsLockedOut)
+            {
+                return Content("Sorry this account LockedOut");
+            }
+            else
+            {
+                var email = authInfo.Principal.FindFirstValue(ClaimTypes.Email);
+                var username = authInfo.Principal.FindFirstValue(ClaimTypes.Name);
+                User user = new User()
+                {
+                    Email = email,
+                    UserName = username
+                };
+                var identityResult = await _userManager.CreateAsync(user);
+                if (identityResult.Succeeded)
+                {
+                    var n = await _userManager.AddLoginAsync(user, authInfo);
+                    if (n.Succeeded)
+                    {
+                        await _signInManager.SignInAsync(user, true);
+                        return RedirectToAction("Home", "Account");
+                    }
+                }
+            }
+
+            return RedirectToAction("Registration", "Account");
         }
 
         [HttpGet]

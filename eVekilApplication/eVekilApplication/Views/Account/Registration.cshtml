@@ -48,8 +48,8 @@
                                 </div>
                             </div>
                             <div class="col-lg-12 d-flex p-0">
-                                <a asp-action="SignInFacebook" asp-controller="Account" id="btnLoginFacebook" class="social-register facebook"> <i class="fab fa-facebook-f"></i>Facebook</a>
-                                <a asp-action="LoginGoogle" asp-controller="Account" class="social-register google"><i class="fab fa-google-plus-g"></i>Google</a>
+                                <a asp-action="LoginExternal" asp-controller="Account" asp-route-provider="Facebook" id="btnLoginFacebook" class="social-register facebook"> <i class="fab fa-facebook-f"></i>Facebook</a>
+                                <a asp-action="LoginExternal" asp-controller="Account" asp-route-provider="Google" id="btnLoginGoogle" class="social-register google"><i class="fab fa-google-plus-g"></i>Google</a>
                             </div>
                         </form>
                     </div>
@@ -209,8 +209,8 @@ else
                                 </div>
                             </div>
                             <div class="col-lg-12 d-flex p-0">
-                                <a asp-action="SignInFacebook" asp-controller="Account" class="social-register facebook"> <i class="fab fa-facebook-f"></i>Facebook</a>
-                                <a asp-action="SignInGoogle" asp-controller="Account" class="social-register google" id="btnLoginGoogle" ><i class="fab fa-google-plus-g"></i>Google</a>
+                                <a asp-action="LoginExternal" asp-controller="Account" asp-route-provider="Facebook" id="btnLoginFacebook" class="social-register facebook"> <i class="fab fa-facebook-f"></i>Facebook</a>
+                                <a asp-action="LoginExternal" asp-controller="Account" asp-route-provider="Google" id="btnLoginGoogle" class="social-register google"><i class="fab fa-google-plus-g"></i>Google</a>
                             </div>
                         </form>
                     </div>
