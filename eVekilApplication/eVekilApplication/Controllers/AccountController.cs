@@ -19,7 +19,7 @@ using System.Threading.Tasks;
 
 namespace eVekilApplication.Controllers
 {
-    [Authorize(Roles = "User")]
+    //[Authorize(Roles = "User")]
     public class AccountController:Controller
     {
         private readonly UserManager<User> _userManager;
@@ -35,6 +35,21 @@ namespace eVekilApplication.Controllers
             _db = db;
             _authenticationSchemeProvider = authenticationSchemeProvider;
 
+        }
+
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task LoginGoogle()
+        {
+            await HttpContext.ChallengeAsync("Google", new AuthenticationProperties() { RedirectUri = "/Account/Home" });
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult SignIn()
+        {
+            return Challenge(new AuthenticationProperties() { RedirectUri = "/Account/ExternalLoginCallback" }, "Facebook");
         }
 
         [HttpGet]
@@ -55,10 +70,112 @@ namespace eVekilApplication.Controllers
         }
 
 
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IActionResult> Registration(RegistrationViewModel rvm, [FromServices]EmailService service)
+        {
+            if (rvm.Login != null)
+            {
+                if (ModelState.IsValid)
+                {
+                    User user = await _userManager.FindByEmailAsync(rvm.Login.Email);
+                    if (user != null)
+                    {
+                        if (user.EmailConfirmed)
+                        {
+                            var userRole = await _userManager.IsInRoleAsync(user, "Admin");
+                            var result = await _signInManager.PasswordSignInAsync(user, rvm.Login.Password, rvm.Login.IsRemmember, true);
+                            if (result.Succeeded)
+                            {
+                                HttpContext.Session.SetString("id", user.Id);
+                                HttpContext.Session.SetString("name", user.UserName);
+                                HttpContext.Session.SetString("isLoged", "true");
+
+                                if (userRole)
+                                {
+                                    return RedirectToAction("Index", "Home", new { area = "Admin" });
+                                }
+                                else
+                                {
+                                    HttpContext.Session.SetString("id", user.Id);
+                                    HttpContext.Session.SetString("name", user.UserName);
+                                    HttpContext.Session.SetString("isLoged", "true");
+                                    HttpContext.Session.Remove("emailConfirmed");
+                                    HttpContext.Session.Remove("isSended");
+                                    return RedirectToAction("Home", "Account", new { area = "" });
+                                }
+                            }
+                            return View();
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("", "Email təsdiq olunmayıb");
+                        }
+
+                    }
+
+                }
+                return View();
+            }
+            else if (rvm.Register != null)
+            {
+                ViewBag.Info = "Register";
+                if (ModelState.IsValid)
+                {
+                    User user = new User()
+                    {
+                        UserName = rvm.Register.Surname.ToLower(),                 /*!!!!!1!!!*/
+                        Name = rvm.Register.Name,
+                        Surname = rvm.Register.Surname,
+                        Email = rvm.Register.Email,
+                        RegisterDate = DateTime.Now
+                    };
+                    var identityResult = await _userManager.CreateAsync(user, rvm.Register.Password);
+                    if (identityResult.Succeeded)
+                    {
+                        //Email Confirm
+
+                        string Token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                        string Tokenlink = Url.Action("ConfirmEmail", "Account", new
+                        {
+                            userId = user.Id,
+                            token = Token
+                        });
+                        var acceptMessage =
+$@"Dəyərli {user.UserName} !
+Zəhmət olmasa aşağıdakı linkə klik edərək e-poçtunuzu təsdiq edin:
+https://localhost:44302/{Tokenlink}
+Bizi Seçdiyiniz üçün Təşəkkürlər.Hörmətlə e-vekil.az
+        ";
+                        await service.SendMailAsync(user.Email, "E-VAKIL.AZ TESDIQ", acceptMessage);
+                        //Email Confirm End
+
+                        HttpContext.Session.SetString("isSended", "true");
+                        HttpContext.Session.SetString("email", user.Email);
+                        await _userManager.AddToRoleAsync(user, "user");
+                        var message = $@"{user.Name} {user.Surname} {user.RegisterDate} tarixində saytdan qeydiyyatdan keçmişdir.";
+                        await service.SendMailAsync("ibrahimxanlimurad@hotmail.com", "USER REGISTER", message);
+                        return RedirectToAction("Registration", "Account");
+                    }
+                    else
+                    {
+                        return View();
+                    }
+
+                }
+
+                return View();
+
+            }
+            else
+            {
+                return Content("Nəisə səhv getdi.");
+            }
+        }
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> ChangePassword()
+        public IActionResult ChangePassword()
         {
             return View();
         }
@@ -130,124 +247,7 @@ Bizi Seçdiyiniz üçün Təşəkkürlər.Hörmətlə e-vekil.az
 
         }
 
-
-        [HttpGet]
-        [AllowAnonymous]
-        public IActionResult SignIn(string provider)
-        {
-            return Challenge(new AuthenticationProperties {RedirectUri ="/" }, provider);
-        }
-
-        [HttpGet]
-        [AllowAnonymous]
-        public async Task LoginGoogle()
-        {
-            await HttpContext.ChallengeAsync("Google", new AuthenticationProperties() { RedirectUri = "/Account/Home" });
-        }
-
-
-        [HttpPost]
-        [AllowAnonymous]
-        public async Task<IActionResult> Registration(RegistrationViewModel rvm, [FromServices]EmailService service)
-        {
-            if (rvm.Login != null)
-            {
-                if (ModelState.IsValid) 
-                {
-                    User user = await _userManager.FindByEmailAsync(rvm.Login.Email);
-                    if (user != null)
-                    {
-                        if (user.EmailConfirmed)
-                        {
-                            var userRole = await _userManager.IsInRoleAsync(user, "Admin");
-                            var result = await _signInManager.PasswordSignInAsync(user, rvm.Login.Password, rvm.Login.IsRemmember, true);
-                            if (result.Succeeded)
-                            {
-                                HttpContext.Session.SetString("id", user.Id);
-                                HttpContext.Session.SetString("name", user.UserName);
-                                HttpContext.Session.SetString("isLoged", "true");
-
-                                if (userRole)
-                                {
-                                    return RedirectToAction("Index", "Home", new { area = "Admin" });
-                                }
-                                else
-                                {
-                                    HttpContext.Session.SetString("id", user.Id);
-                                    HttpContext.Session.SetString("name", user.UserName);
-                                    HttpContext.Session.SetString("isLoged", "true");
-                                    HttpContext.Session.Remove("emailConfirmed");
-                                    HttpContext.Session.Remove("isSended");
-                                    return RedirectToAction("Home", "Account", new { area = "" });
-                                }
-                            }
-                            return View();
-                        }
-                        else
-                        {
-                            ModelState.AddModelError("", "Email təsdiq olunmayıb");
-                        }
-                    
-                    }
-
-                }
-                return View();
-            }
-            else if (rvm.Register != null)
-            {
-                ViewBag.Info = "Register";
-                if (ModelState.IsValid)
-                { 
-                    User user = new User() 
-                    {
-                        UserName = rvm.Register.Surname.ToLower(),                 /*!!!!!1!!!*/ 
-                        Name = rvm.Register.Name,
-                        Surname = rvm.Register.Surname,
-                        Email = rvm.Register.Email,
-                        RegisterDate = DateTime.Now
-                    }; 
-                    var identityResult = await _userManager.CreateAsync(user, rvm.Register.Password);
-                    if (identityResult.Succeeded)
-                    {
-                        //Email Confirm
-                         
-                        string Token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                        string Tokenlink = Url.Action("ConfirmEmail", "Account", new
-                        {
-                            userId = user.Id,
-                            token = Token
-                        });
-                        var acceptMessage = 
-$@"Dəyərli {user.UserName} !
-Zəhmət olmasa aşağıdakı linkə klik edərək e-poçtunuzu təsdiq edin:
-https://localhost:44302/{Tokenlink}
-Bizi Seçdiyiniz üçün Təşəkkürlər.Hörmətlə e-vekil.az
-        ";
-                        await service.SendMailAsync(user.Email, "E-VAKIL.AZ TESDIQ", acceptMessage);
-                        //Email Confirm End
-
-                        HttpContext.Session.SetString("isSended", "true");
-                        HttpContext.Session.SetString("email", user.Email);
-                        await _userManager.AddToRoleAsync(user, "user");
-                        var message = $@"{user.Name} {user.Surname} {user.RegisterDate} tarixində saytdan qeydiyyatdan keçmişdir.";
-                        await service.SendMailAsync("ibrahimxanlimurad@hotmail.com", "USER REGISTER", message);
-                        return RedirectToAction("Registration", "Account");
-                    }
-                    else
-                    {
-                        return View();
-                    }
-
-                }
-
-                return View();
-
-            }
-            else
-            {
-                return Content("Nəisə səhv getdi.");
-            }
-        }
+     
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> ConfirmEmail(string userId,string token)
@@ -430,8 +430,6 @@ Bizi Seçdiyiniz üçün Təşəkkürlər.Hörmətlə e-vekil.az
                 return View(Downloads);
             }
         }
-
-
 
         public async Task<IActionResult> Purchase([FromServices]EmailService service)
         {

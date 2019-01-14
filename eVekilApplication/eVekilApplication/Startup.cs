@@ -48,14 +48,15 @@ namespace eVekilApplication
                 options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             })
-                .AddFacebook(facebookOptions=> {
+                .AddFacebook(facebookOptions =>
+                {
                     facebookOptions.AppId = "359770388182038";
                     facebookOptions.AppSecret = "e0d86dae757f12cccfacd46a0adae9c1";
                 })
                 .AddGoogle(googleOptions =>
                 {
-                    googleOptions.ClientId = "64365837343-02dl1ff838pkuvvm66fpjmnvmvfo15t6.apps.googleusercontent.com";
-                    googleOptions.ClientSecret = "8P_jEWGF7pYS1NYg-xBbc_E4";
+                    googleOptions.ClientId = "177816636510-nvalbuipf8tqg2ve95ilmhoe4ac268df.apps.googleusercontent.com";
+                    googleOptions.ClientSecret = "VCY1WWSMB5fxxhf3sTyWH9E5";
                 })
                    .AddCookie();
             services.Configure<EmailServiceOption>((option) => {
@@ -103,7 +104,10 @@ namespace eVekilApplication
                 options.SlidingExpiration = true;
             });
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc(options => {
+                options.SslPort = 44300;
+                options.Filters.Add(new RequireHttpsAttribute());
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

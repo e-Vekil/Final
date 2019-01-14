@@ -20,7 +20,6 @@ namespace eVekilApplication.Areas.Admin.Controllers
             _db = db;
         }
 
-
         [HttpGet]
         public async Task<IActionResult> List()
         {

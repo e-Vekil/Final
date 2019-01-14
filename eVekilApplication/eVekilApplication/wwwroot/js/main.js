@@ -647,6 +647,13 @@ $(document).ready(function () {
     })
 
 
+
+    //function checkLoginState() {
+    //    FB.getLoginStatus(function (response) {
+    //        statusChangeCallback(response);
+    //    });
+    //}
+
     ////Dynamic Filter Document
     //$(".documents-filter .dropdown-item").click(function (e) {
     //    $(".documents row").empty();
