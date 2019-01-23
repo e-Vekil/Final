@@ -5,15 +5,19 @@ var w = $(window).width();
 // ON SCROLL NAVBAR FIXED
 var navBarWrapper = document.querySelector(".nav-bar-wrapper");
 var navBarHeader = document.querySelector(".nav-bar-wrapper .header");
+var serachMenu = document.querySelector("#search-menu");
 window.addEventListener("scroll", function () {
 
     if (document.body.scrollTop > 20 || this.document.documentElement.scrollTop > 20) {
         navBarWrapper.classList.add("scroll-design");
         navBarHeader.classList.add("scroll-design");
+        serachMenu.classList.add("scroll-design");
+
     }
     else {
         navBarWrapper.classList.remove("scroll-design");
         navBarHeader.classList.remove("scroll-design");
+        serachMenu.classList.remove("scroll-design");
     }
 
 })
@@ -508,11 +512,8 @@ var searchBox = document.querySelector(".search-wrapper .search");
 
 for (var icon of iconsOfSearch) {
     icon.addEventListener("click", function () {
-        console.log("clicked");
         if (this.nextElementSibling && this.nextElementSibling.classList.contains("searchIcon") && this.classList.contains("in")) {
-            console.log("girdi")
             this.classList.remove("in");
-            console.log("1den kecdi");
             this.classList.add("out");
             this.nextElementSibling.classList.add("in");
             this.nextElementSibling.classList.remove("out");
@@ -595,10 +596,8 @@ $(document).ready(function () {
         var aboutUss = [].slice.call(document.querySelectorAll(".about-us"), 0);
         var activeIcon = document.querySelector(".about-nav-item.active");
         for (var aboutUs of aboutUss) {
-            console.log(fromtop + aboutUs.offsetTop);
                 if (fromtop + aboutUs.offsetTop > -500) {
                     if (aboutUs.id != activeIcon.attributes[2].value) {
-                        console.log("girid")
                         activeIcon.classList.remove("active");
                         document.querySelector(".about-nav-item" + "." + aboutUs.id).classList.add("active");
                     }
@@ -700,8 +699,37 @@ $(document).ready(function () {
 
     ////Search
 
-    //$("#search").change(function () {
-    //    console.log("changed")
-    //})
+    $("#search").keyup(function () {
+        if ($('#search-menu')[0].hasChildNodes()){
+            $("#search-menu").removeClass("active");
+        }
+
+       
+        $("#search-menu").empty();
+        var word = $(this).val();
+        $.ajax({
+            url: "/Home/Search/" + word,
+            type:"post",
+            success: function (response) {
+                if (response.status == 200) {
+                    for (var i = 0; i < response.data.length; i++) {
+                        var listItem = `<li><a href="/Home/DocumentDesc/`+response.data[i].id+`">` + response.data[i].name + `</a></li>`;
+                        $("#search-menu").append(listItem);
+                        $("#search-menu").addClass("active");
+                    }
+                }
+            }
+        })
+    })
+
+
+    $(".search-wrapper i").click(function () {
+        if (!$("#search").hasClass("active")) {
+            $("#search-menu").removeClass("active");
+            $("#search-menu").empty();
+            $("#search").empty();
+        }
+    })
+   
    
 })

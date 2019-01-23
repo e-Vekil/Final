@@ -30,7 +30,7 @@ namespace eVekilApplication.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Document(int id,int subId,int page=1)
+        public async Task<IActionResult> Document(int id, int subId, int page = 1)
         {
             DocumentViewModel dm = new DocumentViewModel();
             if ((id == 0 && subId != 0) || (id != 0 && subId != 0))
@@ -44,10 +44,10 @@ namespace eVekilApplication.Controllers
                 ViewBag.FilterName = sub.Name;
                 ViewBag.DocumentCount = dm.Documents.Count();
             }
-            else if(id !=0 && subId == 0)
+            else if (id != 0 && subId == 0)
             {
                 dm.Documents = await _db.Documents.Where(d => d.Subcategory.CategoryId == id).Skip((page - 1) * 6).Take(6).Include(d => d.Advocate).Include(d => d.Subcategory).ThenInclude(d => d.Category).ToListAsync();
-                dm.Subcategories = await _db.Subcategories.Where(s=>s.CategoryId == id).OrderBy(x => x.Name).ToListAsync();
+                dm.Subcategories = await _db.Subcategories.Where(s => s.CategoryId == id).OrderBy(x => x.Name).ToListAsync();
                 dm.Category = await _db.Categories.Where(c => c.Id == id).FirstOrDefaultAsync();
                 ViewBag.Total = Math.Ceiling(_db.Documents.Where(d => d.Subcategory.CategoryId == id).Count() / 6.0);
                 ViewBag.SubId = 0;
@@ -66,13 +66,13 @@ namespace eVekilApplication.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> SendReview(Comment cm,[FromServices]EmailService service)
+        public async Task<IActionResult> SendReview(Comment cm, [FromServices]EmailService service)
         {
             User user = await _userManager.GetUserAsync(HttpContext.User);
             if (user == null) return Content("Siz daxil olmamısınız!");
 
             int documentId = Convert.ToInt32(Request.Form["DocumentId"]);
-            Document doc =  await _db.Documents.Where(d => d.Id == documentId).Include(d => d.Advocate).Include(d => d.Subcategory).ThenInclude(d => d.Category).FirstOrDefaultAsync();
+            Document doc = await _db.Documents.Where(d => d.Id == documentId).Include(d => d.Advocate).Include(d => d.Subcategory).ThenInclude(d => d.Category).FirstOrDefaultAsync();
             Comment comment = new Comment();
             comment.Document = doc;
             comment.DocumentId = documentId;
@@ -94,8 +94,8 @@ namespace eVekilApplication.Controllers
                 var message = $@"Istifadəçi : {HttpContext.Session.GetString("name")} 
 Sənədin Adı:{doc.Name} 
  Comment:{comment.Text}";
-                await service.SendMailAsync("ibrahimxanlimurad@hotmail.com","NEW COMMENT", message);
-                return RedirectToAction("DocumentDesc",new { id = doc.Id });
+                await service.SendMailAsync("ibrahimxanlimurad@hotmail.com", "NEW COMMENT", message);
+                return RedirectToAction("DocumentDesc", new { id = doc.Id });
             }
             else
             {
@@ -106,7 +106,7 @@ Sənədin Adı:{doc.Name}
         }
 
 
-        [HttpGet    ]
+        [HttpGet]
         public async Task<IActionResult> DeleteReview(int id)
         {
             try
@@ -129,7 +129,7 @@ Sənədin Adı:{doc.Name}
         public async Task<IActionResult> AddToShoppingCard(int id)
         {
             User user = await _userManager.GetUserAsync(HttpContext.User);
-            Document doc = await _db.Documents.Include(x=>x.Advocate).Include(x=>x.Subcategory).Where(x => x.Id == id).FirstOrDefaultAsync();
+            Document doc = await _db.Documents.Include(x => x.Advocate).Include(x => x.Subcategory).Where(x => x.Id == id).FirstOrDefaultAsync();
 
             if (user == null)
             {
@@ -174,12 +174,22 @@ Sənədin Adı:{doc.Name}
 
 
         [HttpPost]
-        public async JsonResult Search(string word)
+        public async Task<JsonResult> Search(string id)
         {
+
+            if (id == null)
+            {
+                return Json(new { status = 400 });
+            }
+
+            var document = await _db.Documents.Where(d => d.Name.StartsWith(id) || d.Name.Contains(id) || d.Subcategory.Name.Contains(id)).ToListAsync();
             return Json(new
             {
-                reponse = 200,
-                data = word
+                status = 200,
+                data = document.Select(d=> new {
+                    d.Name,
+                    d.Id
+                })
             });
         }
     }

@@ -199,7 +199,6 @@ li{
     width: 250px;
     height: 50px;
     background: white;
-    border-radius: 20px;
     position: absolute;
     top: 120%;
     visibility:hidden;
@@ -207,6 +206,38 @@ li{
     outline:none;
     border:none;
     padding:15px 15px;
+    transition:all 0.3s ease-in-out;
+}
+.search-menu {
+    position: absolute;
+    top: 132%;
+    right: 5%;
+    background: #fff;
+    width: 250px;
+    overflow: auto;
+    height: 200px;
+    display:none;
+    z-index:5;
+}
+.search-menu.active{
+    display:block;
+}
+.search-menu.scroll-design{
+    top:162%;
+}
+.search-menu li {
+    line-height: 1.4;
+    cursor: pointer;
+    padding: 3px 9px;
+    transition: all 0.3s ease-in-out;
+    border-bottom:1px solid #ccc;
+}
+
+.search-menu li a{
+    color:black;
+}
+.search-menu li:hover {
+    background:#ccc;
     transition:all 0.3s ease-in-out;
 }
 .ogin-register-wrapper{
