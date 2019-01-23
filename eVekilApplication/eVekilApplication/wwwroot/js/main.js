@@ -376,13 +376,18 @@ var previcon;
 $(window).scroll(function () {
     var icons = [].slice.call(document.querySelectorAll(".sect"), 0).reverse(); 
     for (var icon of icons) {
-        if (icon.offsetTop - 950 < $(window).scrollTop()) {
+        if (icon.offsetTop - 650 < $(window).scrollTop()) {
+            //console.log("faefaeea: " + icon.offsetTop);
             //console.log("Now: " + $(window).scrollTop());
             //console.log("Previous: " + count);
            
             if (icon != previcon) {
+                if (count > $(window).scrollTop()) {
+                    i = -50;
+                } else {
+                    i = -14;
+                }
                 //console.log($("#" + icon.id + " h1.category-title"));
-                i = 0;
             }
             //console.log(Math.abs(i))
             //console.log(i)

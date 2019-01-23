@@ -42,7 +42,7 @@ namespace eVekilApplication.Controllers
         [AllowAnonymous]
         public  IActionResult ExternalLogin(string provider)
         {
-            return  Challenge(new AuthenticationProperties() { RedirectUri = "/Account/ExternalLoginCallback" }, provider);
+            return Challenge(new AuthenticationProperties() { RedirectUri = "/Account/ExternalLoginCallback" }, provider);
         }
 
         [AllowAnonymous]
@@ -142,15 +142,27 @@ namespace eVekilApplication.Controllers
                                     return RedirectToAction("Home", "Account", new { area = "" });
                                 }
                             }
+                            else
+                            {
+                                ModelState.AddModelError("", "İstifadəçi adı və ya şifrə yanlışdır");
+                            }
                             return View();
                         }
                         else
                         {
-                            ModelState.AddModelError("", "Email təsdiq olunmayıb");
+                            ModelState.AddModelError("", "İstifadəçi adı və ya şifrə yanlışdır");
                         }
 
                     }
+                    else
+                    {
+                        ModelState.AddModelError("", "İstifadəçi adı və ya şifrə yanlışdır");
+                    }
 
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Email təsdiq olunmayıb");
                 }
                 return View();
             }
@@ -161,7 +173,7 @@ namespace eVekilApplication.Controllers
                 {
                     User user = new User()
                     {
-                        UserName = rvm.Register.Surname.ToLower(),                 /*!!!!!1!!!*/
+                        UserName = rvm.Register.Username,                 /*!!!!!1!!!*/
                         Name = rvm.Register.Name,
                         Surname = rvm.Register.Surname,
                         Email = rvm.Register.Email,
@@ -177,11 +189,14 @@ namespace eVekilApplication.Controllers
                         {
                             userId = user.Id,
                             token = Token
-                        });
+                        }, protocol: HttpContext.Request.Scheme);
+
+
+
                         var acceptMessage =
 $@"Dəyərli {user.UserName} !
 Zəhmət olmasa aşağıdakı linkə klik edərək e-poçtunuzu təsdiq edin:
-https://localhost:44302/{Tokenlink}
+{Tokenlink}
 Bizi Seçdiyiniz üçün Təşəkkürlər.Hörmətlə e-vekil.az
         ";
                         await service.SendMailAsync(user.Email, "E-VAKIL.AZ TESDIQ", acceptMessage);
@@ -196,6 +211,10 @@ Bizi Seçdiyiniz üçün Təşəkkürlər.Hörmətlə e-vekil.az
                     }
                     else
                     {
+                        foreach (var error in identityResult.Errors)
+                        {
+                            ViewBag.Message += error.Description + "\n";
+                        }
                         return View();
                     }
 
@@ -218,7 +237,7 @@ Bizi Seçdiyiniz üçün Təşəkkürlər.Hörmətlə e-vekil.az
         }
 
         [AllowAnonymous]
-        public IActionResult ResetPassword(string token)
+        public IActionResult ResetPassword(string token, string Id)
         {
             return View();
         }
@@ -228,20 +247,28 @@ Bizi Seçdiyiniz üçün Təşəkkürlər.Hörmətlə e-vekil.az
         public IActionResult ResetPassword
                 (ResetPasswordViewModel obj)
         {
-            User user = _userManager.FindByNameAsync(obj.UserName).Result;
+            if (ModelState.IsValid)
+            {
+                User user = _userManager.FindByIdAsync(obj.Id).Result;
 
-            IdentityResult result = _userManager.ResetPasswordAsync
-                      (user, obj.Token, obj.Password).Result;
-            if (result.Succeeded)
-            {   
-                ViewBag.Message = "Password reset successful!";
-                return View("Registration");
+                IdentityResult result = _userManager.ResetPasswordAsync
+                          (user, obj.Token, obj.Password).Result;
+                if (result.Succeeded)
+                {
+                    ViewBag.Message = "Password reset successful!";
+                    return View("Registration");
+                }
+                else
+                {
+                    ViewBag.Message = "Error while resetting the password!";
+                    return View("Registration");
+                }
             }
             else
             {
-                ViewBag.Message = "Error while resetting the password!";
-                return View("Registration");
+                return View();
             }
+            
         }
 
         [AllowAnonymous]
@@ -250,11 +277,11 @@ Bizi Seçdiyiniz üçün Təşəkkürlər.Hörmətlə e-vekil.az
 
             if (username == null)
             {
-                ViewBag.Message = "Xahis edirik username daxil edin!";
+                ViewBag.Message = "Xahis edirik hesabınıza bağlı olan elektron ünvanınızı daxil edin!";
                 return View("ChangePassword");
             }
 
-            User user = _userManager.FindByNameAsync(username).Result;
+            User user = _userManager.FindByEmailAsync(username).Result;
 
             if (user == null || !(_userManager.IsEmailConfirmedAsync(user).Result))
             {
@@ -265,7 +292,7 @@ Bizi Seçdiyiniz üçün Təşəkkürlər.Hörmətlə e-vekil.az
             var token = _userManager.GeneratePasswordResetTokenAsync(user).Result;
 
             var resetLink = Url.Action("ResetPassword",
-                            "Account", new { token = token },
+                            "Account", new { token = token, Id = user.Id },
                              protocol: HttpContext.Request.Scheme);
 
             // code to email the above link
@@ -304,7 +331,7 @@ Bizi Seçdiyiniz üçün Təşəkkürlər.Hörmətlə e-vekil.az
             {
                 HttpContext.Session.Clear();
                 HttpContext.Session.SetString("emailConfirmed","true");
-                return RedirectToAction("Home", "Account");
+                return RedirectToAction("Registration", "Account");
             }
             else
             {
@@ -441,7 +468,9 @@ Bizi Seçdiyiniz üçün Təşəkkürlər.Hörmətlə e-vekil.az
                         user.Name = rvm.Name;
                         user.Surname = rvm.Surname;
                         user.UserName = rvm.Username;
+                        user.NormalizedUserName = rvm.Username.ToUpper();
                         user.Email = rvm.Email;
+                        user.NormalizedEmail = rvm.Email.ToUpper();
 
                         await _db.SaveChangesAsync();
                         return RedirectToAction(nameof(Home));

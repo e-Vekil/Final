@@ -55,8 +55,8 @@ namespace eVekilApplication
                 })
                 .AddGoogle(googleOptions =>
                 {
-                    googleOptions.ClientId = "177816636510-nvalbuipf8tqg2ve95ilmhoe4ac268df.apps.googleusercontent.com";
-                    googleOptions.ClientSecret = "VCY1WWSMB5fxxhf3sTyWH9E5";
+                    googleOptions.ClientId = "64365837343-02dl1ff838pkuvvm66fpjmnvmvfo15t6.apps.googleusercontent.com";
+                    googleOptions.ClientSecret = "8P_jEWGF7pYS1NYg-xBbc_E4";
                 })
                    .AddCookie();
             services.Configure<EmailServiceOption>((option) => {
@@ -105,7 +105,7 @@ namespace eVekilApplication
             });
 
             services.AddMvc(options => {
-                options.SslPort = 44300;
+                //options.SslPort = 44300;
                 options.Filters.Add(new RequireHttpsAttribute());
             }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
@@ -121,6 +121,7 @@ namespace eVekilApplication
             else
                 app.UseDeveloperExceptionPage();
 
+            app.UseHttpsRedirection();
             app.UseSession();
             app.UseStaticFiles();
             app.UseAuthentication();
