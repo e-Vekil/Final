@@ -194,24 +194,28 @@ namespace eVekilApplication.Areas.Admin.Controllers
                         document.Price = doc.Price;
                         document.Description = doc.Description;
 
-                        List<string> tags = doc.Tags.Split(',').ToList();
-
-                        if (doc.Tags.Length > document.Tags.Length)
+                        if (doc.Tags != null)
                         {
-                            foreach (var tag in tags)
-                            {
-                                Tags tdb = await _db.Tags.Where(x => x.Tagname == tag).FirstOrDefaultAsync();
-                                if(tdb == null)
-                                {
-                                    Tags t = new Tags();
-                                    t.Tagname = tag;
-                                    t.Document = doc;
-                                    await _db.Tags.AddAsync(t);
-                                }
-                            }
+                            List<string> tags = doc.Tags.Split(',').ToList();
 
-                            document.Tags = doc.Tags;
+                            if (doc.Tags.Length > document.Tags.Length)
+                            {
+                                foreach (var tag in tags)
+                                {
+                                    Tags tdb = await _db.Tags.Where(x => x.Tagname == tag).FirstOrDefaultAsync();
+                                    if (tdb == null)
+                                    {
+                                        Tags t = new Tags();
+                                        t.Tagname = tag;
+                                        t.Document = doc;
+                                        await _db.Tags.AddAsync(t);
+                                    }
+                                }
+
+                                document.Tags = doc.Tags;
+                            }
                         }
+                        
 
                         await  _db.SaveChangesAsync();
                     }

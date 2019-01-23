@@ -15,6 +15,9 @@ namespace eVekilApplication.Models.ViewModels
         [DataType(DataType.Text)]
         public string Surname { get; set; }
         [Required]
+        [DataType(DataType.Text)]
+        public string Username { get; set; }
+        [Required]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
         [Required]
