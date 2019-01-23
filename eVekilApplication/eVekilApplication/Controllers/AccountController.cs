@@ -49,7 +49,7 @@ namespace eVekilApplication.Controllers
         public async Task<IActionResult> ExternalLoginCallBack()
         {
 
-            var authInfo = await _signInManager.GetExternalLoginInfoAsync();
+            var authInfo = await    _signInManager.GetExternalLoginInfoAsync();
             if (authInfo == null)
             {
                 return RedirectToAction("Registration", "Account");

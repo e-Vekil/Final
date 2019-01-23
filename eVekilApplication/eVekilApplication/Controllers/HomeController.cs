@@ -182,15 +182,33 @@ Sənədin Adı:{doc.Name}
                 return Json(new { status = 400 });
             }
 
-            var document = await _db.Documents.Where(d => d.Name.StartsWith(id) || d.Name.Contains(id) || d.Subcategory.Name.Contains(id)).ToListAsync();
+
+            var document = await _db.Documents.Where(d => d.Name.StartsWith(id)).ToListAsync();
+            if (document.Count() == 0)
+            {
+                document = await _db.Documents.Where(d => d.Name.Contains(id)).ToListAsync();
+
+                if(document.Count() == 0)
+                {
+                    document = await _db.Documents.Where(d => d.Subcategory.Name.Contains(id)).ToListAsync();
+                }
+                else
+                {
+                    return Json(new { status = 400 });
+                }
+
+               
+            }
+
             return Json(new
             {
                 status = 200,
-                data = document.Select(d=> new {
+                data = document.Select(d => new {
                     d.Name,
                     d.Id
                 })
             });
+
         }
     }
 }
