@@ -171,5 +171,16 @@ Sənədin Adı:{doc.Name}
                 return RedirectToAction(nameof(Index));
             }
         }
+
+
+        [HttpPost]
+        public async JsonResult Search(string word)
+        {
+            return Json(new
+            {
+                reponse = 200,
+                data = word
+            });
+        }
     }
 }

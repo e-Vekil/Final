@@ -690,5 +690,13 @@ $(document).ready(function () {
 
     //    })
     //})
+
+
+
+    ////Search
+
+    //$("#search").change(function () {
+    //    console.log("changed")
+    //})
    
 })
