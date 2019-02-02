@@ -55,8 +55,8 @@ namespace eVekilApplication
                 })
                 .AddGoogle(googleOptions =>
                 {
-                    googleOptions.ClientId = "64365837343-02dl1ff838pkuvvm66fpjmnvmvfo15t6.apps.googleusercontent.com";
-                    googleOptions.ClientSecret = "8P_jEWGF7pYS1NYg-xBbc_E4";
+                    googleOptions.ClientId = "177816636510-nvalbuipf8tqg2ve95ilmhoe4ac268df.apps.googleusercontent.com";
+                    googleOptions.ClientSecret = "VCY1WWSMB5fxxhf3sTyWH9E5";
                 })
                    .AddCookie();
             services.Configure<EmailServiceOption>((option) => {

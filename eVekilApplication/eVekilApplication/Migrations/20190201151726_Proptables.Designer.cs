@@ -10,14 +10,14 @@ using eVekilApplication.Data;
 namespace eVekilApplication.Migrations
 {
     [DbContext(typeof(EvekilDb))]
-    [Migration("20190101115525_DocumentTagColumnAdded")]
-    partial class DocumentTagColumnAdded
+    [Migration("20190201151726_Proptables")]
+    partial class Proptables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.1-rtm-30846")
+                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -129,11 +129,15 @@ namespace eVekilApplication.Migrations
 
                     b.Property<string>("FileName");
 
+                    b.Property<bool>("IsTemplate");
+
                     b.Property<string>("Name");
 
                     b.Property<int>("Price");
 
                     b.Property<int>("SubcategoryId");
+
+                    b.Property<string>("Tags");
 
                     b.HasKey("Id");
 
@@ -163,13 +167,15 @@ namespace eVekilApplication.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("PropertyId");
+                    b.Property<int>("DocumentId");
 
-                    b.Property<int>("ProperyId");
+                    b.Property<int>("PropertyId");
 
                     b.Property<int>("SubcategoryId");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DocumentId");
 
                     b.HasIndex("PropertyId");
 
@@ -188,9 +194,7 @@ namespace eVekilApplication.Migrations
 
                     b.Property<int>("PropertyId");
 
-                    b.Property<int>("UserId");
-
-                    b.Property<string>("UserId1");
+                    b.Property<string>("UserId");
 
                     b.Property<string>("Value");
 
@@ -200,7 +204,7 @@ namespace eVekilApplication.Migrations
 
                     b.HasIndex("PropertyId");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("PropertyValues");
                 });
@@ -493,9 +497,15 @@ namespace eVekilApplication.Migrations
 
             modelBuilder.Entity("eVekilApplication.Models.PropertySubcategory", b =>
                 {
+                    b.HasOne("eVekilApplication.Models.Document", "Document")
+                        .WithMany()
+                        .HasForeignKey("DocumentId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("eVekilApplication.Models.Property", "Property")
                         .WithMany()
-                        .HasForeignKey("PropertyId");
+                        .HasForeignKey("PropertyId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("eVekilApplication.Models.Subcategory", "Subcategory")
                         .WithMany()
@@ -517,7 +527,7 @@ namespace eVekilApplication.Migrations
 
                     b.HasOne("eVekilApplication.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("eVekilApplication.Models.PurchasedDocument", b =>
@@ -555,7 +565,7 @@ namespace eVekilApplication.Migrations
             modelBuilder.Entity("eVekilApplication.Models.Tags", b =>
                 {
                     b.HasOne("eVekilApplication.Models.Document", "Document")
-                        .WithMany("Tags")
+                        .WithMany()
                         .HasForeignKey("DocumentId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

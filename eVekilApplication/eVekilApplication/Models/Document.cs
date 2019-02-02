@@ -23,6 +23,7 @@ namespace eVekilApplication.Models
         public DateTime Date { get; set; }
         public string FileName { get; set; }
         public string Tags { get; set; }
+        //public bool IsTemplate { get; set; }
         [Required]
         [DataType(DataType.Upload)]
         [NotMapped]

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace eVekilApplication.Migrations
 {
-    public partial class DocumentTagColumnAdded : Migration
+    public partial class Proptables : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -42,21 +42,21 @@ namespace eVekilApplication.Migrations
                 name: "AspNetUsers",
                 columns: table => new
                 {
-                    AccessFailedCount = table.Column<int>(nullable: false),
-                    EmailConfirmed = table.Column<bool>(nullable: false),
-                    LockoutEnabled = table.Column<bool>(nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(nullable: false),
                     Id = table.Column<string>(nullable: false),
                     UserName = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
                     Email = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<bool>(nullable: false),
                     PasswordHash = table.Column<string>(nullable: true),
                     SecurityStamp = table.Column<string>(nullable: true),
                     ConcurrencyStamp = table.Column<string>(nullable: true),
                     PhoneNumber = table.Column<string>(nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
+                    LockoutEnabled = table.Column<bool>(nullable: false),
+                    AccessFailedCount = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     Surname = table.Column<string>(nullable: true),
                     RegisterDate = table.Column<DateTime>(nullable: false),
@@ -265,7 +265,9 @@ namespace eVekilApplication.Migrations
                     SubcategoryId = table.Column<int>(nullable: false),
                     Description = table.Column<string>(nullable: true),
                     Date = table.Column<DateTime>(nullable: false),
-                    FileName = table.Column<string>(nullable: true)
+                    FileName = table.Column<string>(nullable: true),
+                    Tags = table.Column<string>(nullable: true),
+                    IsTemplate = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -278,33 +280,6 @@ namespace eVekilApplication.Migrations
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Documents_Subcategories_SubcategoryId",
-                        column: x => x.SubcategoryId,
-                        principalTable: "Subcategories",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "PropertySubcategories",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    PropertyId = table.Column<int>(nullable: true),
-                    ProperyId = table.Column<int>(nullable: false),
-                    SubcategoryId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PropertySubcategories", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_PropertySubcategories_Properties_PropertyId",
-                        column: x => x.PropertyId,
-                        principalTable: "Properties",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_PropertySubcategories_Subcategories_SubcategoryId",
                         column: x => x.SubcategoryId,
                         principalTable: "Subcategories",
                         principalColumn: "Id",
@@ -342,13 +317,45 @@ namespace eVekilApplication.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "PropertySubcategories",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    PropertyId = table.Column<int>(nullable: false),
+                    SubcategoryId = table.Column<int>(nullable: false),
+                    DocumentId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PropertySubcategories", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PropertySubcategories_Documents_DocumentId",
+                        column: x => x.DocumentId,
+                        principalTable: "Documents",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PropertySubcategories_Properties_PropertyId",
+                        column: x => x.PropertyId,
+                        principalTable: "Properties",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PropertySubcategories_Subcategories_SubcategoryId",
+                        column: x => x.SubcategoryId,
+                        principalTable: "Subcategories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "PropertyValues",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    UserId1 = table.Column<string>(nullable: true),
-                    UserId = table.Column<int>(nullable: false),
+                    UserId = table.Column<string>(nullable: true),
                     PropertyId = table.Column<int>(nullable: false),
                     DocumentId = table.Column<int>(nullable: false),
                     Value = table.Column<string>(nullable: true)
@@ -369,8 +376,8 @@ namespace eVekilApplication.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_PropertyValues_AspNetUsers_UserId1",
-                        column: x => x.UserId1,
+                        name: "FK_PropertyValues_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -522,6 +529,11 @@ namespace eVekilApplication.Migrations
                 column: "SubcategoryId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_PropertySubcategories_DocumentId",
+                table: "PropertySubcategories",
+                column: "DocumentId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_PropertySubcategories_PropertyId",
                 table: "PropertySubcategories",
                 column: "PropertyId");
@@ -542,9 +554,9 @@ namespace eVekilApplication.Migrations
                 column: "PropertyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PropertyValues_UserId1",
+                name: "IX_PropertyValues_UserId",
                 table: "PropertyValues",
-                column: "UserId1");
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PurchasedDocuments_DocumentId",

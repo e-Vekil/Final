@@ -6,7 +6,8 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="wwwroot\uploads\" />
+    <Folder Include="wwwroot\images\lawyers\" />
+    <Folder Include="wwwroot\uploads\Templates\" />
   </ItemGroup>
 
   <ItemGroup>

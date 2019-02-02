@@ -54,7 +54,6 @@ namespace eVekilApplication.Controllers
             {
                 return RedirectToAction("Registration", "Account");
             }
-
             var result = await _signInManager.ExternalLoginSignInAsync(authInfo.LoginProvider, authInfo.ProviderKey, true);
             if (result.Succeeded)
             {
