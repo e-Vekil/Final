@@ -127,7 +127,7 @@ namespace eVekilApplication.Migrations
 
                     b.Property<string>("FileName");
 
-                    b.Property<bool>("IsTemplate");
+                    b.Property<bool>("IsTemplated");
 
                     b.Property<string>("Name");
 
@@ -169,15 +169,11 @@ namespace eVekilApplication.Migrations
 
                     b.Property<int>("PropertyId");
 
-                    b.Property<int>("SubcategoryId");
-
                     b.HasKey("Id");
 
                     b.HasIndex("DocumentId");
 
                     b.HasIndex("PropertyId");
-
-                    b.HasIndex("SubcategoryId");
 
                     b.ToTable("PropertySubcategories");
                 });
@@ -503,11 +499,6 @@ namespace eVekilApplication.Migrations
                     b.HasOne("eVekilApplication.Models.Property", "Property")
                         .WithMany()
                         .HasForeignKey("PropertyId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("eVekilApplication.Models.Subcategory", "Subcategory")
-                        .WithMany()
-                        .HasForeignKey("SubcategoryId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

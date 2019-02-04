@@ -10,8 +10,8 @@ using eVekilApplication.Data;
 namespace eVekilApplication.Migrations
 {
     [DbContext(typeof(EvekilDb))]
-    [Migration("20190201151726_Proptables")]
-    partial class Proptables
+    [Migration("20190204122819_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -128,8 +128,6 @@ namespace eVekilApplication.Migrations
                     b.Property<string>("Description");
 
                     b.Property<string>("FileName");
-
-                    b.Property<bool>("IsTemplate");
 
                     b.Property<string>("Name");
 

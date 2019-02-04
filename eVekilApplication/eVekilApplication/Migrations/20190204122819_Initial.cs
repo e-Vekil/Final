@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace eVekilApplication.Migrations
 {
-    public partial class Proptables : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -266,8 +266,7 @@ namespace eVekilApplication.Migrations
                     Description = table.Column<string>(nullable: true),
                     Date = table.Column<DateTime>(nullable: false),
                     FileName = table.Column<string>(nullable: true),
-                    Tags = table.Column<string>(nullable: true),
-                    IsTemplate = table.Column<bool>(nullable: false)
+                    Tags = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
