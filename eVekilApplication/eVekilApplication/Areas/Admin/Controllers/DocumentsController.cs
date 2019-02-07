@@ -87,17 +87,25 @@ namespace eVekilApplication.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 string filename = "";
-
-                if (document.File.ContentType == "application/vnd.openxmlformats-officedocument.wordprocessingml.document" || document.File.ContentType == "application/msword")
-                {
-                    filename = Guid.NewGuid() + document.File.FileName;
-                    string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", filename);
-                    using (FileStream fs = new FileStream(path, FileMode.Create))
+               
+                    if (document.File.ContentType == "application/vnd.openxmlformats-officedocument.wordprocessingml.document" || document.File.ContentType == "application/msword")
                     {
-                        document.File.CopyTo(fs);
+                    if (!document.IsTemplated)
+                    {
+                        filename = Guid.NewGuid() + document.File.FileName;
                     }
+                    else
+                    {
+                        filename = "Sablon" + Guid.NewGuid() + document.File.FileName;
+                    }
+                    string  path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", filename);
+                    using (FileStream fs = new FileStream(path, FileMode.Create))
+                        {
+                            document.File.CopyTo(fs);
+                        }
 
-                }
+                    }
+               
                 var advocatename = Request.Form["advocates"].ToString();
                 Advocate advocate = await _db.Advocates.Where(x => x.Email == advocatename).FirstOrDefaultAsync();
 
@@ -118,27 +126,10 @@ namespace eVekilApplication.Areas.Admin.Controllers
                         count++;
                     }
                 }
-
-                //var tags = Request.Form["tags"].ToList();
-                //if (tags.Count() != 0)
-                //{
-                //    var count = 0;
-                //    foreach (var tag in tags)
-                //    {
-                //        Tags t = new Tags();
-                //        t.Tagname = tags[count];
-                //        t.Document = document;
-                //        await _db.Tags.AddAsync(t);
-                //        count++;
-                //    }
-                //}
-
                 document.Subcategory = subc;
                 document.Advocate = advocate;
                 document.FileName = filename;
                 document.Date = DateTime.Now;
-                
-
                 await _db.Documents.AddAsync(document);
                 await _db.SaveChangesAsync();
 

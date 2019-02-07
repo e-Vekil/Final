@@ -38,9 +38,9 @@
                         <label class="col-md-12">Advocates</label>
                         <div class="col-md-12">
                             @*<select name="advocates" class="form-control form-control-line">
-                                <option value="@Model.Advocate.Email">@Model.Advocate.Name</option>
-                                <option value="nihad@hgn.az">Nihad Eliyev</option>
-                            </select>*@
+                    <option value="@Model.Advocate.Email">@Model.Advocate.Name</option>
+                    <option value="nihad@hgn.az">Nihad Eliyev</option>
+                </select>*@
                             <vc:advocates></vc:advocates>
 
                         </div>
@@ -49,12 +49,18 @@
                         <label class="col-md-12">Subcategory</label>
                         <div class="col-md-12">
                             @*<select name="categories" class="form-control form-control-line">
-                                <option value="1">Emr</option>
-                            </select>*@
+                    <option value="1">Emr</option>
+                </select>*@
                             <vc:subcategories></vc:subcategories>
                         </div>
                     </div>
-
+                    <div class="form-group">
+                        <label asp-for="IsTemplated" class="col-md-12"></label>
+                        <div class="col-md-12">
+                            <input asp-for="IsTemplated" type="checkbox" class="form-control form-control-line">
+                            <span asp-validation-for="IsTemplated"></span>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label asp-for="File" class="col-md-12"></label>
                         <div class="col-md-12">
