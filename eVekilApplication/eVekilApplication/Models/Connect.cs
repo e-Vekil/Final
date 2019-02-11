@@ -19,10 +19,13 @@ namespace eVekilApplication.Models
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
         [Required]
+        [DataType(DataType.PhoneNumber)]
+        public int Phone { get; set; }
+        [Required]
         public string Text { get; set; }
         public DateTime SendDate { get; set; }
         public string Reply { get; set; }
-        public DateTime ReplyDate { get; set; }
+        public DateTime? ReplyDate { get; set; }
         public bool Status { get; set; }
     }
 }

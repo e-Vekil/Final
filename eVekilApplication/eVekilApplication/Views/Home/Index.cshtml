@@ -94,7 +94,7 @@
                                 Yükləmək istədiyiniz sənədlər barədə məlumatı oxuduqdan sonra səbətinizə əlavə edin.
                                 Səbətinizdəki sənədin alınması üçün www.e-vekil.az səhifəsi ilə Sizin aranızda alğı-satqı müqaviləsi şərtləri ilə tanış olaraq razılığınızı bildirməyiniz tələb edilir.
                                 Alğı-satqı müqaviləsinin şərtləri ilə razılaşdıqdan sonra müvafiq düyməni sıxmaqla sizi <a href="http://goldenpay.az/default.html" style="color:#8a1919;">GoldenPay</a> səhifəsinə
-                                 yönləndirilirsiniz.
+                                yönləndirilirsiniz.
                                 GoldenPay  səhifəsi sizin daxil etdiyiniz kart məlumatlarının təhlükəsizliyinə təminat verir.
                                 Ödəniş uğurla həyata keçirildikdən sonra siz yenidən www.e-vekil.az səhifəsinə qaytarılırsınız
                                 və yüklədiyiniz sənədi səhifənin yuxarı sağ küncündə istifadəçi adınıza tiklamaqla “Mənim hesabım” bölməsindən yükləyə bilərsiniz.
@@ -124,7 +124,7 @@
                 <div class="col-12 p-0 accordion" data-id="4"> <h3>Vəkillər</h3><i class="fas fa-angle-down"></i></div>
                 <article class="about-us" id="People" data-name="4">
                     <div class="row">
-                        <div class="col-lg-9 people-images">
+                        <div class="col-lg-10 people-images">
                             <h3>Komandamız ilə tanış olun:</h3>
                             <div class="row">
                                 <div class="col-lg-4 p-0 people my-1 col-md-4 col-sm-4">
@@ -178,7 +178,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-3">
+                        <div class="col-lg-2">
                         </div>
                     </div>
                 </article>
@@ -193,42 +193,7 @@
                 <h1>BİZİMLƏ <span>ƏLAQƏ</span></h1>
             </header>
             <div class="contact-content col-lg-12">
-                <form action="/" method="post">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label for="Name">Ad</label>
-                                <input type="text" class="form-control" id="Name" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="Soyad">Soyad</label>
-                                <input type="text" class="form-control" id="Name" required>
-                            </div>
-
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label for="Phone">Telefon</label>
-                                <input type="tel" pattern="[0-9]{3}[0-9]{3}[0-9]{2}[0-9]{2}" class="form-control" id="Phone" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="Email">Email</label>
-                                <input type="email" class="form-control" id="Email" required>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label for="Question">Sualınız</label>
-                                <textarea class="form-control" id="Question" rows="4" required></textarea>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="form-group">
-                                <button type="submit" style="background:#8a1919; color:white;" class="btn btn-danger">Göndər</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
+                <vc:connect></vc:connect>
             </div>
         </div>
     </div>
@@ -337,7 +302,7 @@
 </div>
 
 
-<!-- Ramil Pənahov 
+<!-- Ramil Pənahov
 <div class="modal fade ramilpenahov modal-lawyers" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -391,7 +356,6 @@
 </div>
 
     -->
-
 <!-- Hesen Nesibov -->
 <div class="modal fade hesennesibov modal-lawyers" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -486,7 +450,41 @@
     </div>
 </div>
 
+@if (Context.Session.GetString("isSend") == "true")
+{
+
+    <!-- Modal  Email was send-->
+    <div class="modal shown fade" style="display:block:!important;" id="connectModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Diqqət!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Mesajınız müvəffəqiyətlə göndərildi</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Bağla</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
 <script>
+    $("#connectModal button").click(function () {
+        $.ajax({
+            url: "/Connection/ConnectModal",
+            type: "post"
+            //success: function (response) {
+
+            //}
+        })
+    })
     $(window).scroll( //About on scroll fixed menu
         function About() {
             var scrollTop = $(window).scrollTop();

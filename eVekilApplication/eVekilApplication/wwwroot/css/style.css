@@ -845,13 +845,13 @@ section.about .people-img-wrapper {
 }
 
 section.about .people-img-wrapper img {
-    height: 100%;
+    height: 85%;
     width: 100%;
 }
 
 .people-img-overlay {
-    width: 93%;
-    height: 100%;
+    width: 94%;
+    height: 85%;
     background: #d82533;
     opacity: 0;
     position: absolute;

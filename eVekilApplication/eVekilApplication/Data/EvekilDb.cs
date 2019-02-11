@@ -19,6 +19,7 @@ namespace eVekilApplication.Data
         public virtual DbSet<Document> Documents { get; set; }
         public virtual DbSet<Property> Properties { get; set; }
         public virtual DbSet<Comment> Comments { get; set; }
+        public virtual DbSet<Connect> Connects { get; set; }
         public virtual DbSet<CreatedDocument> CreatedDocuments { get; set; }
         public virtual DbSet<PropertySubcategory> PropertySubcategories { get; set; }
         public virtual DbSet<PropertyValue> PropertyValues { get; set; }

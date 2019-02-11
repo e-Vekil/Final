@@ -104,8 +104,6 @@ Sənədin Adı:{doc.Name}
 
             }
         }
-
-
         [HttpGet]
         public async Task<IActionResult> DeleteReview(int id)
         {
@@ -122,9 +120,6 @@ Sənədin Adı:{doc.Name}
                 return RedirectToAction(nameof(DocumentDesc));
             }
         }
-
-
-
         [HttpGet]
         public async Task<IActionResult> AddToShoppingCard(int id)
         {
@@ -209,6 +204,51 @@ Sənədin Adı:{doc.Name}
                 })
             });
 
+        }
+
+        public async Task<IActionResult> ConnectUs(Connect connect, [FromServices]EmailService service)
+        {
+            HttpContext.Session.SetString("isSend", "false");
+            connect.Reply = String.Empty;
+            connect.ReplyDate = DateTime.Now;
+            if (ModelState.IsValid)
+            {
+                    Connect con = new Connect();
+                    con.Name = connect.Name;
+                    con.Surname = connect.Surname;
+                    con.SendDate = DateTime.Now;
+                    con.ReplyDate = null;
+                    con.Status = connect.Status;
+                    con.Text = connect.Text;
+                    con.Reply = connect.Reply;
+                    con.Email = connect.Email;
+
+
+                var message = $@"Ad:{connect.Name} 
+Soyad:{connect.Surname}
+Email:{connect.Email}
+Telefon:{connect.Phone}
+Sual:{connect.Text}";
+                await service.SendMailAsync("tarlanru@code.edu.az", "Bizimle Elaqe", message);
+
+                    HttpContext.Session.SetString("isSend", "true");
+                    await _db.Connects.AddAsync(con);
+                    await _db.SaveChangesAsync();
+                //}
+                //catch(Exception exp)
+                //{
+                //    ModelState.AddModelError("", "Xəta Baş verdi");
+                //}
+
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public JsonResult ConnectModal()
+        {
+            HttpContext.Session.SetString("isSend", "false");
+            return Json(new { status = 200 });
         }
     }
 }

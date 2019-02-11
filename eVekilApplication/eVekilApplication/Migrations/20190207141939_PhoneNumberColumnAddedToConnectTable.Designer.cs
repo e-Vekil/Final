@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using eVekilApplication.Data;
 
 namespace eVekilApplication.Migrations
 {
     [DbContext(typeof(EvekilDb))]
-    partial class EvekilDbModelSnapshot : ModelSnapshot
+    [Migration("20190207141939_PhoneNumberColumnAddedToConnectTable")]
+    partial class PhoneNumberColumnAddedToConnectTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -100,7 +102,7 @@ namespace eVekilApplication.Migrations
 
                     b.Property<string>("Reply");
 
-                    b.Property<DateTime?>("ReplyDate");
+                    b.Property<DateTime>("ReplyDate");
 
                     b.Property<DateTime>("SendDate");
 
