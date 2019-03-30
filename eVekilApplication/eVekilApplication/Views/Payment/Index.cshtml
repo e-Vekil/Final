@@ -1,0 +1,56 @@
+﻿@{ Layout = null;}
+@model PaymentModel
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Payment</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <form asp-controller="Payment" asp-action="Checkout" method="post">
+                    <div class="form-group">
+                        <label asp-for="TransactionId">Tranzaksiya nömrəsi</label>
+                        <input type="text" id="transactionId" asp-for="TransactionId" class="form-control" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Name">İstifadəçi Adı </label>
+                        <input asp-for="Name" type="text" id="merchant" class="form-control" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Surname">İstifadəçi Soyadı </label>
+                        <input asp-for="Surname" type="text" id="merchant" class="form-control" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="document">Sənədin(lərin) adı(ları)</label>
+                        <select class="form-control" asp-for="Documents" multiple>
+                            @foreach (var item in Model.Documents)
+                            {
+                                <option value="@item.Id">@item.Name</option>
+                            }
+                        </select>
+                      
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TotalPrice">Qiymət</label>
+                        <input type="text" asp-for="TotalPrice" class="form-control" disabled id="price">
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-primary" value="Checkout">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
