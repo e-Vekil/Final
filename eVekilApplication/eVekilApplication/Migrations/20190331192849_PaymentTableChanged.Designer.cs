@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using eVekilApplication.Data;
 
 namespace eVekilApplication.Migrations
 {
     [DbContext(typeof(EvekilDb))]
-    partial class EvekilDbModelSnapshot : ModelSnapshot
+    [Migration("20190331192849_PaymentTableChanged")]
+    partial class PaymentTableChanged
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,9 +46,7 @@ namespace eVekilApplication.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Key");
-
-                    b.Property<string>("Value");
+                    b.Property<string>("Name");
 
                     b.HasKey("Id");
 

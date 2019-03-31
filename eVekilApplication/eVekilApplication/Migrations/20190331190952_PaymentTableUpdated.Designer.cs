@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using eVekilApplication.Data;
 
 namespace eVekilApplication.Migrations
 {
     [DbContext(typeof(EvekilDb))]
-    partial class EvekilDbModelSnapshot : ModelSnapshot
+    [Migration("20190331190952_PaymentTableUpdated")]
+    partial class PaymentTableUpdated
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,21 +38,6 @@ namespace eVekilApplication.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Advocates");
-                });
-
-            modelBuilder.Entity("eVekilApplication.Models.CardType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Key");
-
-                    b.Property<string>("Value");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("CardTypes");
                 });
 
             modelBuilder.Entity("eVekilApplication.Models.Category", b =>
@@ -204,11 +191,9 @@ namespace eVekilApplication.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CartTypeId");
+                    b.Property<string>("CartType");
 
                     b.Property<DateTime>("Date");
-
-                    b.Property<string>("PaymentKey");
 
                     b.Property<bool>("Status");
 
@@ -219,8 +204,6 @@ namespace eVekilApplication.Migrations
                     b.Property<string>("UserId");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CartTypeId");
 
                     b.HasIndex("UserId");
 
@@ -595,11 +578,6 @@ namespace eVekilApplication.Migrations
 
             modelBuilder.Entity("eVekilApplication.Models.Payment", b =>
                 {
-                    b.HasOne("eVekilApplication.Models.CardType", "CartType")
-                        .WithMany()
-                        .HasForeignKey("CartTypeId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("eVekilApplication.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");

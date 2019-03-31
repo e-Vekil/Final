@@ -28,5 +28,7 @@ namespace eVekilApplication.Data
         public virtual DbSet<Tags> Tags { get; set; }
         public virtual DbSet<Payment> Payments { get; set; }
         public virtual DbSet <PaymentDocument> PaymentDocuments { get; set; }
+        public virtual DbSet<CardType> CardTypes { get; set; }
+
     }
 }

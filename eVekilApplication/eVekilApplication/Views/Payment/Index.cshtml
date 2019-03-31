@@ -19,31 +19,56 @@
         <div class="row">
             <div class="col-12">
                 <form asp-controller="Payment" asp-action="Checkout" method="post">
+                    <div asp-validation-summary="ModelOnly"></div>
                     <div class="form-group">
                         <label asp-for="TransactionId">Tranzaksiya nömrəsi</label>
-                        <input type="text" id="transactionId" asp-for="TransactionId" class="form-control" disabled>
+                        <input type="text" id="transactionId" asp-for="TransactionId" disabled class="form-control">
                     </div>
                     <div class="form-group">
                         <label asp-for="Name">İstifadəçi Adı </label>
-                        <input asp-for="Name" type="text" id="merchant" class="form-control" disabled>
+                        <input asp-for="Name" type="text" id="merchant" disabled class="form-control">
                     </div>
                     <div class="form-group">
                         <label asp-for="Surname">İstifadəçi Soyadı </label>
-                        <input asp-for="Surname" type="text" id="merchant" class="form-control" disabled>
+                        <input asp-for="Surname" type="text" id="merchant" disabled class="form-control">
                     </div>
                     <div class="form-group">
                         <label for="document">Sənədin(lərin) adı(ları)</label>
-                        <select class="form-control" asp-for="Documents" multiple>
+                        <select class="form-control" asp-for="Documents" disabled multiple>
                             @foreach (var item in Model.Documents)
                             {
-                                <option value="@item.Id">@item.Name</option>
+                                <option value="@item.Id" selected>@item.Name</option>
                             }
                         </select>
-                      
+
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CardType.Value">Kartın növü</label>
+                        <select asp-for="CardType.Key" class="form-control" id="Cards">
+                            @{
+                                var count = 0;
+                            }
+                            @foreach (var item in Model.CardTypes)
+                            {
+                                if (count == 0)
+                                {
+                                    <option value="@item.Key" selected>@item.Value</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.Key" >@item.Value</option>
+                                }
+                                count++;
+                            }
+                        </select>
                     </div>
                     <div class="form-group">
                         <label asp-for="TotalPrice">Qiymət</label>
-                        <input type="text" asp-for="TotalPrice" class="form-control" disabled id="price">
+                        <input type="text" asp-for="TotalPrice" class="form-control" readonly id="TotalPrice">
+                    </div>
+                    <div class="form-group">
+                        <label id="valyuta">Valyuta</label>
+                        <input type="text" class="form-control" id="valyuta" disabled value="AZN">
                     </div>
                     <div class="form-group">
                         <input type="submit" class="btn btn-primary" value="Checkout">
